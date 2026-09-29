@@ -1,17 +1,17 @@
 import { NextResponse, type NextRequest } from "next/server";
 
-// Old Wix path -> new path
-const REDIRECTS: Record<string, string> = {
-  "/home": "/",
-  "/coming-soon-03": "/",
-  // No id="reviews" on the homepage yet, so this points at "/" for now.
-  "/เสียงจากผู้ใช้จริง": "/",
-  "/service-page/psychiatry-consultation": "/",
-  "/service-page/psychology-consultation": "/",
-};
+import { WIX_REDIRECTS } from "@/lib/redirects";
+
+// 308 = permanent. Search engines treat it the same as 301 (ranking signals
+// pass to the target); unlike 301 it also preserves the request method.
+const PERMANENT = 308;
+
+function stripTrailingSlash(path: string): string {
+  return path.length > 1 && path.endsWith("/") ? path.slice(0, -1) : path;
+}
 
 export function proxy(req: NextRequest) {
-  const { pathname } = req.nextUrl;
+  const pathname = stripTrailingSlash(req.nextUrl.pathname);
 
   // Handles Thai/encoded slugs. Crawlers do hit malformed escape sequences,
   // and decodeURIComponent throws on those — fall back to the raw pathname.
@@ -22,20 +22,20 @@ export function proxy(req: NextRequest) {
     // keep the raw pathname
   }
 
-  // 1. Exact matches (check raw + decoded)
-  const target = REDIRECTS[pathname] ?? REDIRECTS[decoded];
+  // 1. Exact old -> new mappings (check raw + decoded)
+  const target = WIX_REDIRECTS[pathname] ?? WIX_REDIRECTS[decoded];
   if (target) {
-    return NextResponse.redirect(new URL(target, req.url), 308);
+    return NextResponse.redirect(new URL(target, req.url), PERMANENT);
   }
 
-  // 2. Any remaining old Wix blog post -> blog index
+  // 2. Unmapped old Wix blog post -> blog index (soft-404 risk: map it above)
   if (decoded.startsWith("/post/")) {
-    return NextResponse.redirect(new URL("/blog", req.url), 308);
+    return NextResponse.redirect(new URL("/blog", req.url), PERMANENT);
   }
 
-  // 3. Any remaining old Wix service page -> homepage (NOT /blog)
+  // 3. Unmapped old Wix service page -> homepage (NOT /blog)
   if (decoded.startsWith("/service-page/")) {
-    return NextResponse.redirect(new URL("/", req.url), 308);
+    return NextResponse.redirect(new URL("/", req.url), PERMANENT);
   }
 
   return NextResponse.next();
