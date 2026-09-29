@@ -20,6 +20,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
+  // TODO: add /privacy and /terms here once their `robots: { index: false }`
+  // is removed (sitemaps must not list noindex pages).
   return [
     {
       url: SITE_URL,
