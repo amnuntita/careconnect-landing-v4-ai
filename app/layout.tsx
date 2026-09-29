@@ -45,10 +45,10 @@ export const metadata: Metadata = {
     description: SITE_DESCRIPTION,
     locale: "th_TH",
   },
+  // Only the card type: Next.js fills twitter:title/description/image from
+  // each page's openGraph, so pages don't inherit the homepage tagline.
   twitter: {
     card: "summary_large_image",
-    title: SITE_TAGLINE,
-    description: SITE_DESCRIPTION,
   },
   robots: {
     index: true,
