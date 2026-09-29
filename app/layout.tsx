@@ -32,10 +32,14 @@ export const metadata: Metadata = {
   },
   description: SITE_DESCRIPTION,
   applicationName: SITE_NAME,
-  alternates: { canonical: "/" },
+  // No `alternates.canonical` or `openGraph.url` here: they would be inherited
+  // by every page that forgets to set its own. Each page sets its canonical.
+  //
+  // TODO: add the social share image. Drop a 1200×630 JPG/PNG at
+  // app/opengraph-image.jpg (optional alt text in app/opengraph-image.alt.txt);
+  // Next.js detects it automatically and emits og:image / twitter:image.
   openGraph: {
     type: "website",
-    url: "/",
     siteName: SITE_NAME,
     title: SITE_TAGLINE,
     description: SITE_DESCRIPTION,
