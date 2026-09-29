@@ -1,5 +1,8 @@
 import Image from "next/image";
 
+import { JsonLdScript } from "@/components/JsonLd";
+import { SITE_URL } from "@/lib/site";
+
 type PT = {
   name: string;
   license: string;
@@ -39,9 +42,62 @@ const PTS: PT[] = [
   },
 ];
 
+// Structured data for the people shown in this section. Uses only what the
+// cards display. No CareConnect roles: the page doesn't state them.
+// TODO: supply the doctor's medical licence number and her role at
+// CareConnect, then add them here (and on the card).
+const doctorJsonLd = {
+  "@type": "Person",
+  "@id": `${SITE_URL}/#dr-jiraporn`,
+  honorificPrefix: "พญ.",
+  name: "จิราภรณ์ ตั้งกฤษณขจร",
+  jobTitle: "แพทย์",
+  image: `${SITE_URL}/images/staff/DR_Jiraporn.jpg`,
+  knowsAbout: "เวชศาสตร์ฟื้นฟู",
+  alumniOf: [
+    {
+      "@type": "CollegeOrUniversity",
+      name: "มหาวิทยาลัยศรีนครินทรวิโรฒ",
+      alternateName: "มศว",
+    },
+    { "@type": "CollegeOrUniversity", name: "จุฬาลงกรณ์มหาวิทยาลัย" },
+  ],
+  hasCredential: {
+    "@type": "EducationalOccupationalCredential",
+    credentialCategory: "degree",
+    name: "แพทยศาสตรบัณฑิต",
+    recognizedBy: {
+      "@type": "CollegeOrUniversity",
+      name: "มหาวิทยาลัยศรีนครินทรวิโรฒ",
+    },
+  },
+  worksFor: {
+    "@type": "Hospital",
+    name: "โรงพยาบาลสมเด็จพระบรมราชเทวี ณ ศรีราชา",
+  },
+};
+
+const ptJsonLd = PTS.map((p) => ({
+  "@type": "Person",
+  name: p.name,
+  jobTitle: "นักกายภาพบำบัด",
+  image: `${SITE_URL}/images/staff/${p.photo}`,
+  hasCredential: {
+    "@type": "EducationalOccupationalCredential",
+    credentialCategory: "license",
+    identifier: p.license,
+  },
+}));
+
 export function Team() {
   return (
     <section id="team" className="cream">
+      <JsonLdScript
+        data={{
+          "@context": "https://schema.org",
+          "@graph": [doctorJsonLd, ...ptJsonLd],
+        }}
+      />
       <div className="wrap">
         <div className="section-head">
           <div>
