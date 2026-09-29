@@ -34,6 +34,15 @@ export const POST_SLUGS_QUERY = defineQuery(`
   }
 `);
 
+// Person fields for post bylines and medical review.
+const authorFields = /* groq */ `
+  name,
+  credentials,
+  licenseNumber,
+  photo,
+  bio
+`;
+
 // A single post by slug — full body for the article page.
 export const POST_QUERY = defineQuery(`
   *[_type == "post" && slug.current == $slug][0] {
@@ -46,7 +55,10 @@ export const POST_QUERY = defineQuery(`
     coverImage,
     body,
     "category": category->title,
-    seo
+    seo,
+    "author": author->{ ${authorFields} },
+    "reviewedBy": reviewedBy->{ ${authorFields} },
+    reviewedAt
   }
 `);
 

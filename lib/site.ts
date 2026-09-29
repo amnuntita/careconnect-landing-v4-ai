@@ -73,6 +73,10 @@ export const REVIEW_LINKS: { google: string | null; facebook: string | null } = 
   facebook: null,
 };
 
+// Shown at the end of every blog post. Edit the wording here.
+export const MEDICAL_DISCLAIMER =
+  "เนื้อหานี้เป็นข้อมูลความรู้ทั่วไป ไม่สามารถใช้แทนคำแนะนำ การวินิจฉัย หรือการรักษาจากแพทย์ผู้ดูแลของคุณได้";
+
 // Provinces served. `label` is the short form used in copy; `name` is the
 // official province name used in structured data.
 export const PROVINCES_SERVED: { label: string; name: string }[] = [

@@ -10,6 +10,7 @@ import {
   SITE_URL,
   TELEPHONE,
 } from "@/lib/site";
+import type { Author } from "@/sanity/lib/types";
 
 // Stable @ids so nodes on different pages can reference each other.
 export const ORGANIZATION_ID = `${SITE_URL}/#organization`;
@@ -154,6 +155,27 @@ export function SiteJsonLd({
   );
 }
 
+function personJsonLd(person: Author) {
+  return {
+    "@type": "Person",
+    name: person.name,
+    ...(person.credentials ? { jobTitle: person.credentials } : {}),
+    ...(person.bio ? { description: person.bio } : {}),
+    ...(person.licenseNumber
+      ? {
+          hasCredential: {
+            "@type": "EducationalOccupationalCredential",
+            credentialCategory: "license",
+            identifier: person.licenseNumber,
+          },
+        }
+      : {}),
+  };
+}
+
+// Blog post structured data as a @graph: the BlogPosting plus the page it
+// lives on. With a medical reviewer, the page is a MedicalWebPage carrying
+// reviewedBy/lastReviewed; otherwise a plain WebPage.
 export function BlogPostingJsonLd({
   title,
   description,
@@ -161,6 +183,9 @@ export function BlogPostingJsonLd({
   datePublished,
   dateModified,
   imageUrl,
+  author,
+  reviewedBy,
+  reviewedAt,
 }: {
   title: string;
   description?: string;
@@ -168,30 +193,52 @@ export function BlogPostingJsonLd({
   datePublished: string;
   dateModified?: string;
   imageUrl?: string;
+  author?: Author | null;
+  reviewedBy?: Author | null;
+  reviewedAt?: string | null;
 }) {
   const url = `${SITE_URL}/blog/${slug}`;
-  const data = {
-    "@context": "https://schema.org",
+  const pageId = `${url}#webpage`;
+  const articleId = `${url}#article`;
+
+  const organization = {
+    "@type": "Organization",
+    "@id": ORGANIZATION_ID,
+    name: SITE_NAME,
+    url: SITE_URL,
+    logo: { "@type": "ImageObject", url: LOGO_URL },
+  };
+
+  const article = {
     "@type": "BlogPosting",
+    "@id": articleId,
     headline: title,
     ...(description ? { description } : {}),
     ...(imageUrl ? { image: imageUrl } : {}),
     datePublished,
     dateModified: dateModified ?? datePublished,
     inLanguage: "th-TH",
-    mainEntityOfPage: { "@type": "WebPage", "@id": url },
+    mainEntityOfPage: { "@id": pageId },
     url,
-    author: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
-    publisher: {
-      "@type": "Organization",
-      name: SITE_NAME,
-      url: SITE_URL,
-      logo: {
-        "@type": "ImageObject",
-        url: LOGO_URL,
-      },
-    },
+    author: author ? personJsonLd(author) : organization,
+    publisher: organization,
   };
 
-  return <JsonLdScript data={data} />;
+  const page = {
+    "@type": reviewedBy ? "MedicalWebPage" : "WebPage",
+    "@id": pageId,
+    url,
+    name: title,
+    inLanguage: "th-TH",
+    isPartOf: { "@id": WEBSITE_ID },
+    mainEntity: { "@id": articleId },
+    ...(reviewedBy ? { reviewedBy: personJsonLd(reviewedBy) } : {}),
+    ...(reviewedBy && reviewedAt ? { lastReviewed: reviewedAt } : {}),
+  };
+
+  return (
+    <JsonLdScript
+      data={{ "@context": "https://schema.org", "@graph": [article, page] }}
+    />
+  );
 }

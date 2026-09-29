@@ -22,6 +22,7 @@ export default defineConfig({
           .items([
             S.documentTypeListItem("post").title("บทความ"),
             S.documentTypeListItem("category").title("หมวดหมู่"),
+            S.documentTypeListItem("author").title("ผู้เขียน / ผู้ตรวจสอบ"),
             S.divider(),
             // Settings as a single (singleton) document.
             S.listItem()
