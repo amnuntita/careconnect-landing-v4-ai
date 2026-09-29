@@ -13,7 +13,7 @@ export function Hero() {
         <div className="hero-copy">
           <p className="badge">
             <span className="dot" aria-hidden="true"></span>
-            <span>เปิดให้บริการใน &gt;10 จังหวัดทั่วประเทศ</span>
+            <span>เปิดให้บริการมากกว่า 10 จังหวัดทั่วประเทศ</span>
           </p>
 
           <h1 className="h1">

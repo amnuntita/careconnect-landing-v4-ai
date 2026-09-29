@@ -8,7 +8,7 @@ export function OrganizationJsonLd() {
     url: SITE_URL,
     logo: `${SITE_URL}/images/CareConnect%20Logo.png`,
     description:
-      "บริการกายภาพบำบัดและกิจกรรมบำบัดที่บ้านใน &gt;10 จังหวัดทั่วประเทศ วางแผนรายเคสโดยแพทย์เวชศาสตร์ฟื้นฟู",
+      "บริการกายภาพบำบัดและกิจกรรมบำบัดที่บ้านครอบคลุมมากกว่า 10 จังหวัดทั่วประเทศ วางแผนรายเคสโดยแพทย์เวชศาสตร์ฟื้นฟู",
     telephone: "+66-2-114-7168",
     areaServed: [
       { "@type": "AdministrativeArea", name: "กรุงเทพมหานคร" },

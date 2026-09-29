@@ -21,7 +21,7 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com";
 const SITE_NAME = "CareConnect";
 const SITE_TAGLINE = "CareConnect — กายภาพบำบัดที่บ้าน";
 const SITE_DESCRIPTION =
-  "บริการกายภาพบำบัดและกิจกรรมบำบัดที่บ้านใน &gt;10 จังหวัดทั่วประเทศ ดูแลโดยทีมสหสาขาวิชาชีพ วางแผนรายเคสโดยแพทย์เวชศาสตร์ฟื้นฟู";
+  "บริการกายภาพบำบัดและกิจกรรมบำบัดที่บ้านครอบคลุมมากกว่า 10 จังหวัดทั่วประเทศ ดูแลโดยทีมสหสาขาวิชาชีพ วางแผนรายเคสโดยแพทย์เวชศาสตร์ฟื้นฟู";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
