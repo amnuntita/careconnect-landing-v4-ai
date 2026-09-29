@@ -1,4 +1,4 @@
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com";
+import { SITE_URL } from "@/lib/site";
 
 export function OrganizationJsonLd() {
   const data = {

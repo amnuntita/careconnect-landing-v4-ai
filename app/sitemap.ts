@@ -1,10 +1,9 @@
 import type { MetadataRoute } from "next";
 
+import { SITE_URL } from "@/lib/site";
 import { client } from "@/sanity/lib/client";
 import { POST_SLUGS_QUERY } from "@/sanity/lib/queries";
 import type { PostSlug } from "@/sanity/lib/types";
-
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   let posts: PostSlug[] = [];

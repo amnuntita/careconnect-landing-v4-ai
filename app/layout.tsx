@@ -1,6 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { IBM_Plex_Sans_Thai, Sarabun } from "next/font/google";
 import { GoogleTagManager } from "@next/third-parties/google";
+
+import { SITE_NAME, SITE_URL } from "@/lib/site";
+
 import "./globals.css";
 
 const ibmPlexSansThai = IBM_Plex_Sans_Thai({
@@ -17,8 +20,6 @@ const sarabun = Sarabun({
   display: "swap",
 });
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com";
-const SITE_NAME = "CareConnect";
 const SITE_TAGLINE = "CareConnect — กายภาพบำบัดที่บ้าน";
 const SITE_DESCRIPTION =
   "บริการกายภาพบำบัดและกิจกรรมบำบัดที่บ้านครอบคลุมมากกว่า 10 จังหวัดทั่วประเทศ ดูแลโดยทีมสหสาขาวิชาชีพ วางแผนรายเคสโดยแพทย์เวชศาสตร์ฟื้นฟู";
