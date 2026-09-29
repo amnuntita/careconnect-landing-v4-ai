@@ -1,5 +1,7 @@
 import Image from "next/image";
 
+import { FAMILIES_SERVED, YEARS_OF_OPERATION } from "@/lib/site";
+
 const REVIEWS = [1, 2, 3, 4, 5, 6, 7, 8];
 
 export function SocialProof() {
@@ -8,11 +10,11 @@ export function SocialProof() {
       <div className="wrap">
         <div className="stats">
           <div className="stat">
-            <p className="num">100+</p>
+            <p className="num">{FAMILIES_SERVED}+</p>
             <p className="label">
-              ประสบการณ์ดูแลคนไข้
+              ครอบครัวที่เราดูแล
               <br />
-              กว่า 100 ครอบครัว
+              ในช่วง {YEARS_OF_OPERATION} ปี
             </p>
           </div>
           
