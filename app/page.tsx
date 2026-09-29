@@ -5,7 +5,7 @@ import { BottomCTA } from "@/components/BottomCTA";
 import { Conditions } from "@/components/Conditions";
 import { Footer } from "@/components/Footer";
 import { Hero } from "@/components/Hero";
-import { OrganizationJsonLd, WebSiteJsonLd } from "@/components/JsonLd";
+import { SiteJsonLd } from "@/components/JsonLd";
 import { LeadForm } from "@/components/LeadForm";
 import { Navbar } from "@/components/Navbar";
 import { Pricing } from "@/components/Pricing";
@@ -42,8 +42,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      <OrganizationJsonLd />
-      <WebSiteJsonLd />
+      <SiteJsonLd pageName={TITLE} pageDescription={DESCRIPTION} />
       <Navbar />
       <main>
         <Hero />

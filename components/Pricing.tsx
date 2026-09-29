@@ -1,53 +1,11 @@
+import { formatPrice, PACKAGES } from "@/lib/packages";
+
 import { CheckIcon } from "./Icons";
 
 const RISK = [
   "ผ่อนชำระได้",
   "ไม่ผูกมัดการต่อคอร์ส",
   "ออกใบรับรองแพทย์ได้",
-];
-
-type Package = {
-  tier: string;
-  name: string;
-  target: string;
-  price: string;
-  sub: string;
-  badge?: string;
-  special?: boolean;
-};
-
-const PACKAGES: Package[] = [
-  {
-    tier: "TRIAL",
-    name: "ทดลองครั้งแรก",
-    target: "ผู้ที่ต้องการทดลองใช้บริการครั้งแรก (เฉพาะคนไข้ใหม่)",
-    price: "1,290",
-    sub: "บาท / ชั่วโมง",
-  },
-  {
-    tier: "HEAD START",
-    name: "ทดลอง 5 ครั้ง",
-    target: "ผู้ที่ต้องการทดลองใช้บริการระยะสั้น 5 ครั้ง",
-    price: "8,450",
-    sub: "บาท / 5 ครั้ง · 1,690/ครั้ง",
-  },
-  {
-    tier: "STANDARD",
-    name: "มาตรฐาน",
-    target: "ฟื้นฟูต่อเนื่องเพื่อผลลัพธ์ที่ชัดเจน 10 ครั้ง",
-    price: "15,900",
-    sub: "บาท / 10 ครั้ง · 1,590/ครั้ง",
-    //badge: "ยอดนิยม",
-  },
-  {
-    tier: "GOLDEN PERIOD",
-    name: "ฟื้นฟูเข้มข้น",
-    target:
-      "คนไข้ที่เพิ่งออกจากโรงพยาบาล ต้องการฟื้นฟูเข้มข้น 30 ครั้ง",
-    price: "ราคาพิเศษ",
-    sub: "ติดต่อสอบถามทีมงาน",
-    special: true,
-  },
 ];
 
 export function Pricing() {
@@ -103,12 +61,12 @@ export function Pricing() {
                   </td>
                   <td className="pkg-cell-target">{p.target}</td>
                   <td className="pkg-cell-price">
-                    <p className={`price${p.special ? " special" : ""}`}>
-                      {p.special ? (
-                        <span>{p.price}</span>
+                    <p className={`price${p.price === null ? " special" : ""}`}>
+                      {p.price === null ? (
+                        <span>{p.priceLabel}</span>
                       ) : (
                         <>
-                          {p.price} <span className="unit">บาท</span>
+                          {formatPrice(p.price)} <span className="unit">บาท</span>
                         </>
                       )}
                     </p>

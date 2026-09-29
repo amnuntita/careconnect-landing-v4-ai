@@ -1,36 +1,155 @@
-import { SITE_URL } from "@/lib/site";
+import { formatPrice, PACKAGES } from "@/lib/packages";
+import {
+  COMPANY_REGISTRATION_NUMBER,
+  FACILITY_REGISTRATION_NUMBER,
+  LEGAL_NAME,
+  LOGO_URL,
+  PROVINCES_SERVED,
+  SAME_AS,
+  SITE_NAME,
+  SITE_URL,
+  TELEPHONE,
+} from "@/lib/site";
 
-export function OrganizationJsonLd() {
-  const data = {
-    "@context": "https://schema.org",
-    "@type": "MedicalBusiness",
-    name: "CareConnect",
+// Stable @ids so nodes on different pages can reference each other.
+export const ORGANIZATION_ID = `${SITE_URL}/#organization`;
+export const WEBSITE_ID = `${SITE_URL}/#website`;
+
+const SERVICE_DESCRIPTION =
+  "บริการกายภาพบำบัดและกิจกรรมบำบัดที่บ้านครอบคลุมมากกว่า 10 จังหวัดทั่วประเทศ วางแผนรายเคสโดยแพทย์เวชศาสตร์ฟื้นฟู";
+
+// Renders JSON-LD, escaping "<" so string values can't close the <script>
+// tag (per the Next.js JSON-LD guide).
+export function JsonLdScript({ data }: { data: object }) {
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify(data).replace(/</g, "\\u003c"),
+      }}
+    />
+  );
+}
+
+const areaServed = PROVINCES_SERVED.map((p) => ({
+  "@type": "AdministrativeArea",
+  name: p.name,
+}));
+
+// Homepage structured data as a single @graph: the business, the website, the
+// homepage itself, and the home physiotherapy service with its priced
+// packages. No AggregateRating/Review: self-served reviews are ineligible.
+export function SiteJsonLd({
+  pageName,
+  pageDescription,
+}: {
+  pageName: string;
+  pageDescription: string;
+}) {
+  const identifier = [
+    {
+      "@type": "PropertyValue",
+      name: "เลขทะเบียนนิติบุคคล",
+      value: COMPANY_REGISTRATION_NUMBER,
+    },
+    ...(FACILITY_REGISTRATION_NUMBER
+      ? [
+          {
+            "@type": "PropertyValue",
+            name: "เลขทะเบียนสถานพยาบาล (กระทรวงสาธารณสุข)",
+            value: FACILITY_REGISTRATION_NUMBER,
+          },
+        ]
+      : []),
+  ];
+
+  const organization = {
+    // "Physiotherapy" is a schema.org MedicalBusiness subtype. It replaces
+    // MedicalBusiness + medicalSpecialty: medicalSpecialty is not a property
+    // of MedicalBusiness, and "PhysicalTherapy"/"Rehabilitation" are not
+    // MedicalSpecialty values.
+    "@type": "Physiotherapy",
+    "@id": ORGANIZATION_ID,
+    name: SITE_NAME,
+    legalName: LEGAL_NAME,
     url: SITE_URL,
-    logo: `${SITE_URL}/images/CareConnect%20Logo.png`,
-    description:
-      "บริการกายภาพบำบัดและกิจกรรมบำบัดที่บ้านครอบคลุมมากกว่า 10 จังหวัดทั่วประเทศ วางแผนรายเคสโดยแพทย์เวชศาสตร์ฟื้นฟู",
-    telephone: "+66-2-114-7168",
-    areaServed: [
-      { "@type": "AdministrativeArea", name: "กรุงเทพมหานคร" },
-      { "@type": "AdministrativeArea", name: "นนทบุรี" },
-      { "@type": "AdministrativeArea", name: "ปทุมธานี" },
-      { "@type": "AdministrativeArea", name: "สมุทรปราการ" },
-      { "@type": "AdministrativeArea", name: "นครปฐม" },
-    ],
+    logo: LOGO_URL,
+    image: LOGO_URL,
+    description: SERVICE_DESCRIPTION,
+    telephone: TELEPHONE,
     address: {
       "@type": "PostalAddress",
       addressCountry: "TH",
       addressRegion: "กรุงเทพมหานคร",
     },
-    medicalSpecialty: ["PhysicalTherapy", "Rehabilitation"],
-    // TODO: add sameAs once social URLs are confirmed
-    // sameAs: ["https://line.me/R/ti/p/@careconnect", "https://facebook.com/..."],
+    areaServed,
+    identifier,
+    ...(SAME_AS.length ? { sameAs: SAME_AS } : {}),
+  };
+
+  const website = {
+    "@type": "WebSite",
+    "@id": WEBSITE_ID,
+    name: SITE_NAME,
+    url: SITE_URL,
+    inLanguage: "th-TH",
+    publisher: { "@id": ORGANIZATION_ID },
+  };
+
+  const webpage = {
+    "@type": "WebPage",
+    "@id": `${SITE_URL}/#webpage`,
+    url: `${SITE_URL}/`,
+    name: pageName,
+    description: pageDescription,
+    inLanguage: "th-TH",
+    isPartOf: { "@id": WEBSITE_ID },
+    about: { "@id": ORGANIZATION_ID },
+  };
+
+  // Offers only for packages with a published price ("ราคาพิเศษ" has none).
+  const offers = PACKAGES.flatMap((p) =>
+    p.price === null
+      ? []
+      : [
+          {
+            "@type": "Offer",
+            name: `${p.name} (${p.tier})`,
+            description: `${p.target} · ${formatPrice(p.price)} ${p.sub}`,
+            url: `${SITE_URL}/#pricing`,
+            price: p.price,
+            priceCurrency: "THB",
+            priceSpecification: {
+              "@type": "UnitPriceSpecification",
+              price: p.price,
+              priceCurrency: "THB",
+              referenceQuantity: {
+                "@type": "QuantitativeValue",
+                value: p.sessions,
+                unitText: "ครั้ง",
+              },
+            },
+          },
+        ],
+  );
+
+  const service = {
+    "@type": "Service",
+    "@id": `${SITE_URL}/#home-physiotherapy`,
+    name: "กายภาพบำบัดที่บ้าน",
+    serviceType: "กายภาพบำบัดที่บ้าน",
+    description: SERVICE_DESCRIPTION,
+    provider: { "@id": ORGANIZATION_ID },
+    areaServed,
+    offers,
   };
 
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+    <JsonLdScript
+      data={{
+        "@context": "https://schema.org",
+        "@graph": [organization, website, webpage, service],
+      }}
     />
   );
 }
@@ -62,39 +181,17 @@ export function BlogPostingJsonLd({
     inLanguage: "th-TH",
     mainEntityOfPage: { "@type": "WebPage", "@id": url },
     url,
-    author: { "@type": "Organization", name: "CareConnect", url: SITE_URL },
+    author: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
     publisher: {
       "@type": "Organization",
-      name: "CareConnect",
+      name: SITE_NAME,
       url: SITE_URL,
       logo: {
         "@type": "ImageObject",
-        url: `${SITE_URL}/images/CareConnect%20Logo.png`,
+        url: LOGO_URL,
       },
     },
   };
 
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
-    />
-  );
-}
-
-export function WebSiteJsonLd() {
-  const data = {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: "CareConnect",
-    url: SITE_URL,
-    inLanguage: "th-TH",
-  };
-
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
-    />
-  );
+  return <JsonLdScript data={data} />;
 }
