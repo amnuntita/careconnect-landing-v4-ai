@@ -66,6 +66,13 @@ export const SAME_AS: string[] = [
   LINE_URL,
 ].filter((url): url is string => Boolean(url));
 
+// Public review pages linked under the reviews section. Rendered only when set.
+export const REVIEW_LINKS: { google: string | null; facebook: string | null } = {
+  google: GOOGLE_BUSINESS_PROFILE_URL,
+  // TODO: supply the Facebook reviews/recommendations URL for the page.
+  facebook: null,
+};
+
 // Provinces served. `label` is the short form used in copy; `name` is the
 // official province name used in structured data.
 export const PROVINCES_SERVED: { label: string; name: string }[] = [
