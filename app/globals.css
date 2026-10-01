@@ -1735,3 +1735,139 @@ section:nth-of-type(even) .section-head .eyebrow {
     padding-bottom: 76px;
   }
 }
+
+/* ============ Long-form landing pages (/stroke-rehab-at-home) ============ */
+/* Jump-link targets land below the sticky navbar. */
+.longform [id] {
+  scroll-margin-top: 96px;
+}
+.longform .h1 {
+  margin-bottom: 0.6em;
+}
+.longform .lede {
+  margin-bottom: 1.2em;
+}
+.longform-offer {
+  font-size: 20px;
+}
+.longform-flow {
+  font-weight: 600;
+  background: var(--cream);
+  border-radius: 12px;
+  padding: 14px 18px;
+}
+/* Buttons inside prose keep button styling, not link styling. */
+.post-body a.btn {
+  color: white;
+  text-decoration: none;
+}
+.longform-cta {
+  margin: 0 0 1.2em;
+}
+.longform-toc {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 18px 22px;
+  margin: 1.6em 0 2em;
+  background: white;
+}
+.longform-toc__label {
+  font-weight: 700;
+  margin: 0 0 0.4em !important;
+}
+.longform-toc ol {
+  margin: 0 !important;
+}
+.longform-byline p {
+  margin: 0 0 0.3em;
+}
+
+/* Tables scroll horizontally inside their own box on narrow screens. */
+.scroll-table {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  margin: 0 0 1.4em;
+  background: white;
+}
+.data-table {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 680px;
+  font-size: 15px;
+  line-height: 1.55;
+}
+.data-table th,
+.data-table td {
+  text-align: left;
+  vertical-align: top;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--line);
+}
+.data-table thead th {
+  background: var(--cream);
+  font-weight: 700;
+}
+.data-table tbody th {
+  font-weight: 600;
+}
+
+/* FAQ accordion: native <details>, answers stay in the HTML. */
+.faq-list {
+  display: grid;
+  gap: 10px;
+  margin: 0 0 1.6em;
+}
+.faq-item {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: white;
+}
+.faq-item summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 16px 48px 16px 20px;
+  position: relative;
+}
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+.faq-item summary::after {
+  content: "+";
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 22px;
+  color: var(--muted);
+}
+.faq-item[open] summary::after {
+  content: "−";
+}
+.faq-item summary h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.5;
+}
+.faq-answer {
+  padding: 0 20px 4px;
+}
+
+/* Always-on sticky CTA bar (desktop too). Page reserves room for it. */
+@media (min-width: 880px) {
+  .sticky-cta.sticky-cta--always {
+    display: flex;
+    justify-content: center;
+  }
+  .sticky-cta--always .sticky-cta__primary {
+    flex: 0 1 420px;
+  }
+  .sticky-cta--always .sticky-cta__line {
+    flex: 0 0 auto;
+  }
+  body:has(.sticky-cta--always) {
+    padding-bottom: 80px;
+  }
+}

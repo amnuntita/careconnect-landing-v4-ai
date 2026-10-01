@@ -89,7 +89,7 @@ const ptJsonLd = PTS.map((p) => ({
   },
 }));
 
-export function Team() {
+export function Team({ showHeading = true }: { showHeading?: boolean } = {}) {
   return (
     <section id="team" className="cream">
       <JsonLdScript
@@ -99,16 +99,18 @@ export function Team() {
         }}
       />
       <div className="wrap">
-        <div className="section-head">
-          <div>
-            <span className="eyebrow">ทีมของเรา</span>
-            <h2 className="h2" style={{ marginTop: 10 }}>
-              นำโดยแพทย์เวชศาสตร์ฟื้นฟู
-              <br />
-              ดูแลโดยทีมมืออาชีพ
-            </h2>
+        {showHeading ? (
+          <div className="section-head">
+            <div>
+              <span className="eyebrow">ทีมของเรา</span>
+              <h2 className="h2" style={{ marginTop: 10 }}>
+                นำโดยแพทย์เวชศาสตร์ฟื้นฟู
+                <br />
+                ดูแลโดยทีมมืออาชีพ
+              </h2>
+            </div>
           </div>
-        </div>
+        ) : null}
 
         <article className="doctor-card">
           <Image
