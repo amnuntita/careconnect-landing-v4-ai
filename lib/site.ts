@@ -38,6 +38,10 @@ function resolveSiteUrl(): string {
 
 export const SITE_URL = resolveSiteUrl();
 
+// Stable JSON-LD @ids so nodes on different pages can reference each other.
+export const ORGANIZATION_ID = `${SITE_URL}/#organization`;
+export const WEBSITE_ID = `${SITE_URL}/#website`;
+
 export const LOGO_URL = `${SITE_URL}/images/CareConnect%20Logo.png`;
 
 export const TELEPHONE = "+66-2-114-7168";
@@ -46,13 +50,27 @@ export const TELEPHONE = "+66-2-114-7168";
 export const FAMILIES_SERVED = 400;
 export const YEARS_OF_OPERATION = 3;
 
-// Legal entity, as shown in the footer.
-export const LEGAL_NAME = "CareConnect Co., Ltd.";
+// Legal entity. CareConnect is the trade name of services operated by this
+// company, which owns and operates the licensed clinic below.
+export const LEGAL_NAME = "บริษัท บางกอกดิจิทัลเฮลท์ จำกัด";
 export const COMPANY_REGISTRATION_NUMBER = "0125567028210";
 
-// สถานพยาบาล registration number (Ministry of Public Health).
-// TODO: supply the facility registration number. Stays out of JSON-LD while null.
-export const FACILITY_REGISTRATION_NUMBER: string | null = null;
+// The licensed facility (สถานพยาบาล, Ministry of Public Health).
+export const CLINIC_NAME = "เวชการคลีนิกเวชกรรม";
+export const FACILITY_REGISTRATION_NUMBER: string | null = "12101007245";
+
+// Registered office (HQ). This is NOT the service area — see PROVINCES_SERVED.
+export const ADDRESS = {
+  streetAddress: "32 ถนนเรวดี",
+  subdistrict: "ตำบลตลาดขวัญ",
+  district: "อำเภอเมืองนนทบุรี",
+  province: "นนทบุรี",
+  postalCode: "11000",
+};
+export const ADDRESS_TEXT = `${ADDRESS.streetAddress} ${ADDRESS.subdistrict} ${ADDRESS.district} จังหวัด${ADDRESS.province} ${ADDRESS.postalCode}`;
+
+export const TELEPHONE_DISPLAY = "02-114-7168";
+export const EMAIL = "sales@careconnectth.org";
 
 export const FACEBOOK_URL: string | null = "https://www.facebook.com/bcareconnect";
 export const GOOGLE_BUSINESS_PROFILE_URL: string | null =

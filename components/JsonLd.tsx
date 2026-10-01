@@ -4,17 +4,15 @@ import {
   FACILITY_REGISTRATION_NUMBER,
   LEGAL_NAME,
   LOGO_URL,
+  ORGANIZATION_ID,
   PROVINCES_SERVED,
   SAME_AS,
   SITE_NAME,
   SITE_URL,
   TELEPHONE,
+  WEBSITE_ID,
 } from "@/lib/site";
 import type { Author } from "@/sanity/lib/types";
-
-// Stable @ids so nodes on different pages can reference each other.
-export const ORGANIZATION_ID = `${SITE_URL}/#organization`;
-export const WEBSITE_ID = `${SITE_URL}/#website`;
 
 const SERVICE_DESCRIPTION =
   "บริการกายภาพบำบัดและกิจกรรมบำบัดที่บ้านครอบคลุมมากกว่า 10 จังหวัดทั่วประเทศ วางแผนรายเคสโดยแพทย์เวชศาสตร์ฟื้นฟู";
