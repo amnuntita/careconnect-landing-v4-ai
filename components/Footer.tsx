@@ -2,8 +2,10 @@ import Image from "next/image";
 
 import {
   ADDRESS_TEXT,
+  CLINIC_NAME,
   COMPANY_REGISTRATION_NUMBER,
   EMAIL,
+  FACILITY_REGISTRATION_NUMBER,
   LEGAL_NAME,
   PROVINCES_SERVED,
 } from "@/lib/site";
@@ -79,6 +81,10 @@ export function Footer() {
         <div className="bottom">
           <p>© {new Date().getFullYear()} {LEGAL_NAME} — สงวนสิทธิ์ทุกประการ</p>
           <p>เลขทะเบียนนิติบุคคล: {COMPANY_REGISTRATION_NUMBER}</p>
+          <p>
+            {CLINIC_NAME} ใบอนุญาตประกอบกิจการสถานพยาบาลเลขที่{" "}
+            {FACILITY_REGISTRATION_NUMBER}
+          </p>
         </div>
       </div>
     </footer>

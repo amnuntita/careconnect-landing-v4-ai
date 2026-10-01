@@ -1,6 +1,9 @@
 import { formatPrice, PACKAGES, perSessionLabel } from "@/lib/packages";
 import {
+  ADDRESS,
+  CLINIC_NAME,
   COMPANY_REGISTRATION_NUMBER,
+  EMAIL,
   FACILITY_REGISTRATION_NUMBER,
   LEGAL_NAME,
   LOGO_URL,
@@ -50,15 +53,11 @@ export function SiteJsonLd({
       name: "เลขทะเบียนนิติบุคคล",
       value: COMPANY_REGISTRATION_NUMBER,
     },
-    ...(FACILITY_REGISTRATION_NUMBER
-      ? [
-          {
-            "@type": "PropertyValue",
-            name: "เลขทะเบียนสถานพยาบาล (กระทรวงสาธารณสุข)",
-            value: FACILITY_REGISTRATION_NUMBER,
-          },
-        ]
-      : []),
+    {
+      "@type": "PropertyValue",
+      name: `ใบอนุญาตประกอบกิจการสถานพยาบาล (${CLINIC_NAME})`,
+      value: FACILITY_REGISTRATION_NUMBER,
+    },
   ];
 
   const organization = {
@@ -75,10 +74,15 @@ export function SiteJsonLd({
     image: LOGO_URL,
     description: SERVICE_DESCRIPTION,
     telephone: TELEPHONE,
+    email: EMAIL,
+    // Registered office (HQ). The service area is areaServed, not this.
     address: {
       "@type": "PostalAddress",
+      streetAddress: `${ADDRESS.streetAddress} ${ADDRESS.subdistrict}`,
+      addressLocality: ADDRESS.district,
+      addressRegion: ADDRESS.province,
+      postalCode: ADDRESS.postalCode,
       addressCountry: "TH",
-      addressRegion: "กรุงเทพมหานคร",
     },
     areaServed,
     identifier,

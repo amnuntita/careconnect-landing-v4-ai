@@ -57,7 +57,7 @@ export const COMPANY_REGISTRATION_NUMBER = "0125567028210";
 
 // The licensed facility (สถานพยาบาล, Ministry of Public Health).
 export const CLINIC_NAME = "เวชการคลีนิกเวชกรรม";
-export const FACILITY_REGISTRATION_NUMBER: string | null = "12101007245";
+export const FACILITY_REGISTRATION_NUMBER = "12101007245";
 
 // Registered office (HQ). This is NOT the service area — see PROVINCES_SERVED.
 export const ADDRESS = {
