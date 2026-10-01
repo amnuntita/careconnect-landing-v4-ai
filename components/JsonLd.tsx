@@ -14,8 +14,7 @@ import {
 } from "@/lib/site";
 import type { Author } from "@/sanity/lib/types";
 
-const SERVICE_DESCRIPTION =
-  "บริการกายภาพบำบัดและกิจกรรมบำบัดที่บ้านครอบคลุมมากกว่า 10 จังหวัดทั่วประเทศ วางแผนรายเคสโดยแพทย์เวชศาสตร์ฟื้นฟู";
+const SERVICE_DESCRIPTION = `บริการกายภาพบำบัดและกิจกรรมบำบัดที่บ้านครอบคลุม ${PROVINCES_SERVED.length} จังหวัดทั่วประเทศ วางแผนรายเคสโดยแพทย์เวชศาสตร์ฟื้นฟู`;
 
 // Renders JSON-LD, escaping "<" so string values can't close the <script>
 // tag (per the Next.js JSON-LD guide).

@@ -5,6 +5,7 @@ import {
   COMPANY_REGISTRATION_NUMBER,
   EMAIL,
   LEGAL_NAME,
+  PROVINCES_SERVED,
 } from "@/lib/site";
 
 export function Footer() {
@@ -24,7 +25,7 @@ export function Footer() {
             </a>
             <p className="blurb">
               บริการกายภาพบำบัดและกิจกรรมบำบัดที่บ้าน
-               ครอบคลุมมากกว่า 10 จังหวัดทั่วประเทศ ดูแลโดยนักกายภาพบำบัดวิชาชีพ
+               ครอบคลุม {PROVINCES_SERVED.length} จังหวัดทั่วประเทศ ดูแลโดยนักกายภาพบำบัดวิชาชีพ
               ภายใต้การกำกับของแพทย์เวชศาสตร์ฟื้นฟู
             </p>
           </div>

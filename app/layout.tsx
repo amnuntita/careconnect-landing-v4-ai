@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { IBM_Plex_Sans_Thai, Sarabun } from "next/font/google";
 import { GoogleTagManager } from "@next/third-parties/google";
 
-import { SITE_NAME, SITE_URL } from "@/lib/site";
+import { PROVINCES_SERVED, SITE_NAME, SITE_URL } from "@/lib/site";
 
 import "./globals.css";
 
@@ -21,8 +21,7 @@ const sarabun = Sarabun({
 });
 
 const SITE_TAGLINE = "CareConnect — กายภาพบำบัดที่บ้าน";
-const SITE_DESCRIPTION =
-  "บริการกายภาพบำบัดและกิจกรรมบำบัดที่บ้านครอบคลุมมากกว่า 10 จังหวัดทั่วประเทศ ดูแลโดยทีมสหสาขาวิชาชีพ วางแผนรายเคสโดยแพทย์เวชศาสตร์ฟื้นฟู";
+const SITE_DESCRIPTION = `บริการกายภาพบำบัดและกิจกรรมบำบัดที่บ้านครอบคลุม ${PROVINCES_SERVED.length} จังหวัดทั่วประเทศ ดูแลโดยทีมสหสาขาวิชาชีพ วางแผนรายเคสโดยแพทย์เวชศาสตร์ฟื้นฟู`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
