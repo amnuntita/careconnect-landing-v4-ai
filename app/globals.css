@@ -1879,3 +1879,10 @@ section:nth-of-type(even) .section-head .eyebrow {
   padding: 0 4px;
   border-radius: 4px;
 }
+
+/* Doctor card without a photo: single column at every width. */
+@media (min-width: 720px) {
+  .doctor-card.doctor-card--no-photo {
+    grid-template-columns: 1fr;
+  }
+}

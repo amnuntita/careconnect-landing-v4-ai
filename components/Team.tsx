@@ -1,6 +1,12 @@
 import Image from "next/image";
 
 import { JsonLdScript } from "@/components/JsonLd";
+import {
+  displayName,
+  PHYSICIANS,
+  physicianJsonLd,
+  type Physician,
+} from "@/lib/physicians";
 import { SITE_URL } from "@/lib/site";
 
 type PT = {
@@ -42,41 +48,7 @@ const PTS: PT[] = [
   },
 ];
 
-// Structured data for the people shown in this section. Uses only what the
-// cards display. No CareConnect roles: the page doesn't state them.
-// TODO: supply the doctor's medical licence number and her role at
-// CareConnect, then add them here (and on the card).
-const doctorJsonLd = {
-  "@type": "Person",
-  "@id": `${SITE_URL}/#dr-jiraporn`,
-  honorificPrefix: "พญ.",
-  name: "จิราภรณ์ ตั้งกฤษณขจร",
-  jobTitle: "แพทย์",
-  image: `${SITE_URL}/images/staff/DR_Jiraporn.jpg`,
-  knowsAbout: "เวชศาสตร์ฟื้นฟู",
-  alumniOf: [
-    {
-      "@type": "CollegeOrUniversity",
-      name: "มหาวิทยาลัยศรีนครินทรวิโรฒ",
-      alternateName: "มศว",
-    },
-    { "@type": "CollegeOrUniversity", name: "จุฬาลงกรณ์มหาวิทยาลัย" },
-  ],
-  hasCredential: {
-    "@type": "EducationalOccupationalCredential",
-    credentialCategory: "degree",
-    name: "แพทยศาสตรบัณฑิต",
-    recognizedBy: {
-      "@type": "CollegeOrUniversity",
-      name: "มหาวิทยาลัยศรีนครินทรวิโรฒ",
-    },
-  },
-  worksFor: {
-    "@type": "Hospital",
-    name: "โรงพยาบาลสมเด็จพระบรมราชเทวี ณ ศรีราชา",
-  },
-};
-
+// Doctor JSON-LD comes from lib/physicians.ts (shared with other pages).
 const ptJsonLd = PTS.map((p) => ({
   "@type": "Person",
   name: p.name,
@@ -89,13 +61,48 @@ const ptJsonLd = PTS.map((p) => ({
   },
 }));
 
+// Card bullets as shown on the page (only for doctors that have them).
+const CARD_DETAILS: Record<string, React.ReactNode> = {
+  "dr-jiraporn": (
+    <ul>
+      <li><b>แพทยศาสตร์บัณฑิต</b>, มศว</li>
+      <li><b>เวชศาสตร์ฟื้นฟู</b>, จุฬาลงกรณ์มหาวิทยาลัย</li>
+      <li>ปัจจุบันทำงานที่โรงพยาบาลสมเด็จพระบรมราชเทวี ณ ศรีราชา</li>
+    </ul>
+  ),
+};
+
+function DoctorCard({ doc }: { doc: Physician }) {
+  return (
+    <article className={`doctor-card${doc.photo ? "" : " doctor-card--no-photo"}`}>
+      {/* Missing photo (TODO in lib/physicians.ts): text-only card, no empty box. */}
+      {doc.photo ? (
+        <Image
+          className="doctor-photo"
+          src={doc.photo}
+          alt={displayName(doc)}
+          width={440}
+          height={440}
+          sizes="(max-width: 720px) 100vw, 220px"
+        />
+      ) : null}
+      <div>
+        <p className="role">{doc.title}</p>
+        <h3 className="dname">{displayName(doc)}</h3>
+        <p className="dtitle">ใบอนุญาตประกอบวิชาชีพเวชกรรม {doc.license}</p>
+        {CARD_DETAILS[doc.id] ?? null}
+      </div>
+    </article>
+  );
+}
+
 export function Team({ showHeading = true }: { showHeading?: boolean } = {}) {
   return (
     <section id="team" className="cream">
       <JsonLdScript
         data={{
           "@context": "https://schema.org",
-          "@graph": [doctorJsonLd, ...ptJsonLd],
+          "@graph": [...PHYSICIANS.map(physicianJsonLd), ...ptJsonLd],
         }}
       />
       <div className="wrap">
@@ -112,27 +119,9 @@ export function Team({ showHeading = true }: { showHeading?: boolean } = {}) {
           </div>
         ) : null}
 
-        <article className="doctor-card">
-          <Image
-            className="doctor-photo"
-            src="/images/staff/DR_Jiraporn.jpg"
-            alt="พญ. จิราภรณ์ ตั้งกฤษณขจร"
-            width={440}
-            height={440}
-            sizes="(max-width: 720px) 100vw, 220px"
-          />
-          <div>
-            <p className="role">แพทย์</p>
-            <h3 className="dname">พญ. จิราภรณ์ ตั้งกฤษณขจร</h3>
-           
-              <ul>
-                <li><b>แพทยศาสตร์บัณฑิต</b>, มศว</li>
-                <li><b>เวชศาสตร์ฟื้นฟู</b>, จุฬาลงกรณ์มหาวิทยาลัย</li>
-                <li>ปัจจุบันทำงานที่โรงพยาบาลสมเด็จพระบรมราชเทวี ณ ศรีราชา</li>
-              </ul>
-            
-          </div>
-        </article>
+        {PHYSICIANS.map((doc) => (
+          <DoctorCard key={doc.id} doc={doc} />
+        ))}
 
         <h3 className="h3">ตัวอย่าง Profile นักกายภาพของเรา</h3>
         <ul className="pt-grid">
