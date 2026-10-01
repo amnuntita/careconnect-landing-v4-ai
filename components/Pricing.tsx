@@ -1,4 +1,10 @@
-import { formatPrice, PACKAGES } from "@/lib/packages";
+import {
+  BALANCE,
+  DEPOSIT,
+  formatPrice,
+  PACKAGES,
+  perSessionLabel,
+} from "@/lib/packages";
 
 import { CheckIcon } from "./Icons";
 
@@ -49,9 +55,8 @@ export function Pricing() {
             </thead>
             <tbody>
               {PACKAGES.map((p) => (
-                <tr key={p.tier}>
+                <tr key={p.name}>
                   <td className="pkg-cell-program">
-                    <span className="tier">{p.tier}</span>
                     <div className="pname">
                       {p.name}
                       {p.badge && (
@@ -61,21 +66,26 @@ export function Pricing() {
                   </td>
                   <td className="pkg-cell-target">{p.target}</td>
                   <td className="pkg-cell-price">
-                    <p className={`price${p.price === null ? " special" : ""}`}>
-                      {p.price === null ? (
-                        <span>{p.priceLabel}</span>
-                      ) : (
-                        <>
-                          {formatPrice(p.price)} <span className="unit">บาท</span>
-                        </>
-                      )}
+                    <p className="price">
+                      {formatPrice(p.price)} <span className="unit">บาท</span>
                     </p>
-                    <small>{p.sub}</small>
+                    <small>{perSessionLabel(p)}</small>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
+        </div>
+        {/* The deposit is explanatory copy only, never a separate Offer. */}
+        <div className="pkg-deposit" style={{ marginTop: 20 }}>
+          <p>
+            <strong>เริ่มก่อนเพียง {formatPrice(DEPOSIT)} บาท</strong>
+          </p>
+          <p>ครอบคลุมการประเมินโดยแพทย์และการฝึกที่บ้านครั้งแรก</p>
+          <p>
+            หากต้องการฝึกต่อ จึงชำระส่วนที่เหลือ {formatPrice(BALANCE)} บาท
+            เพื่อรับบริการต่อจนครบ 10 ครั้ง โดยสามารถแบ่งชำระได้ตามเงื่อนไขของบริการ
+          </p>
         </div>
       </div>
     </section>

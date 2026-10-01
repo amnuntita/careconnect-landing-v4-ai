@@ -1,4 +1,4 @@
-import { formatPrice, PACKAGES } from "@/lib/packages";
+import { formatPrice, PACKAGES, perSessionLabel } from "@/lib/packages";
 import {
   COMPANY_REGISTRATION_NUMBER,
   FACILITY_REGISTRATION_NUMBER,
@@ -106,31 +106,26 @@ export function SiteJsonLd({
     about: { "@id": ORGANIZATION_ID },
   };
 
-  // Offers only for packages with a published price ("ราคาพิเศษ" has none).
-  const offers = PACKAGES.flatMap((p) =>
-    p.price === null
-      ? []
-      : [
-          {
-            "@type": "Offer",
-            name: `${p.name} (${p.tier})`,
-            description: `${p.target} · ${formatPrice(p.price)} ${p.sub}`,
-            url: `${SITE_URL}/#pricing`,
-            price: p.price,
-            priceCurrency: "THB",
-            priceSpecification: {
-              "@type": "UnitPriceSpecification",
-              price: p.price,
-              priceCurrency: "THB",
-              referenceQuantity: {
-                "@type": "QuantitativeValue",
-                value: p.sessions,
-                unitText: "ครั้ง",
-              },
-            },
-          },
-        ],
-  );
+  // One Offer per package. The 1,500 THB deposit (lib/packages DEPOSIT) is
+  // part of the package price, not a separate Offer.
+  const offers = PACKAGES.map((p) => ({
+    "@type": "Offer",
+    name: p.name,
+    description: `${p.target} · ${formatPrice(p.price)} ${perSessionLabel(p)}`,
+    url: `${SITE_URL}/#pricing`,
+    price: p.price,
+    priceCurrency: "THB",
+    priceSpecification: {
+      "@type": "UnitPriceSpecification",
+      price: p.price,
+      priceCurrency: "THB",
+      referenceQuantity: {
+        "@type": "QuantitativeValue",
+        value: p.sessions,
+        unitText: "ครั้ง",
+      },
+    },
+  }));
 
   const service = {
     "@type": "Service",

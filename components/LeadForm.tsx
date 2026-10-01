@@ -1,6 +1,8 @@
 "use client";
 
 import { useId, useState } from "react";
+import { DEPOSIT, formatPrice } from "@/lib/packages";
+
 import { AlertIcon, ArrowIcon, CheckIcon, LineIcon } from "./Icons";
 
 const CONDITION_OPTIONS = [
@@ -93,7 +95,9 @@ export function LeadForm() {
             <span className="eyebrow">เริ่มต้นฟื้นฟูตั้งแต่วันนี้</span>
             <h2 className="h2">ทดลองทำกายภาพ</h2>
             <p className="lede form-lede">
-              ทีมงานจะโทรกลับเพื่อยืนยันวันและเวลานัดหมายอีกครั้ง ราคาพิเศษ 1,290 บาทสำหรับลูกค้าใหม่
+              ทีมงานจะโทรกลับเพื่อยืนยันวันและเวลานัดหมายอีกครั้ง
+              เริ่มต้นด้วยการประเมินโดยแพทย์และการฝึกที่บ้านครั้งแรก{" "}
+              {formatPrice(DEPOSIT)} บาท
             </p>
             <p className="form-desc">
              ปรึกษาแพทย์เพื่อวางแผน และทดลองทำกายภาพบำบัดครั้งแรก
