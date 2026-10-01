@@ -1871,3 +1871,11 @@ section:nth-of-type(even) .section-head .eyebrow {
     padding-bottom: 80px;
   }
 }
+
+/* Unresolved values in draft legal pages (e.g. "[วันที่]"). */
+.todo-placeholder {
+  background: #fff3c4;
+  color: inherit;
+  padding: 0 4px;
+  border-radius: 4px;
+}

@@ -1,5 +1,12 @@
 import Image from "next/image";
 
+import {
+  ADDRESS_TEXT,
+  COMPANY_REGISTRATION_NUMBER,
+  EMAIL,
+  LEGAL_NAME,
+} from "@/lib/site";
+
 export function Footer() {
   return (
     <footer className="site-footer">
@@ -38,6 +45,14 @@ export function Footer() {
                   Facebook: CareConnect กายภาพบำบัดที่บ้าน
                 </a>
               </li>
+              <li>
+                <a href={`mailto:${EMAIL}`}>อีเมล: {EMAIL}</a>
+              </li>
+              <li>
+                {LEGAL_NAME}
+                <br />
+                {ADDRESS_TEXT}
+              </li>
             </ul>
           </div>
 
@@ -61,8 +76,8 @@ export function Footer() {
         </div>
 
         <div className="bottom">
-          <p>© {new Date().getFullYear()} CareConnect Co., Ltd. — สงวนสิทธิ์ทุกประการ</p>
-          <p>เลขทะเบียนนิติบุคคล: 0125567028210</p>
+          <p>© {new Date().getFullYear()} {LEGAL_NAME} — สงวนสิทธิ์ทุกประการ</p>
+          <p>เลขทะเบียนนิติบุคคล: {COMPANY_REGISTRATION_NUMBER}</p>
         </div>
       </div>
     </footer>

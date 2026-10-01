@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
 
-import { LegalPage, PendingSection } from "@/components/LegalPage";
-import { COMPANY_REGISTRATION_NUMBER, LEGAL_NAME, SITE_NAME } from "@/lib/site";
+import { LegalPage } from "@/components/LegalPage";
+import { POLICY_BLOCKS, POLICY_META, type PolicyBlock } from "@/lib/privacy-policy";
+import { EMAIL, SITE_NAME, TELEPHONE_DISPLAY } from "@/lib/site";
 
-// DRAFT skeleton, not legal text. Everything here is limited to what the code
-// actually does (see app/api/lead/route.ts, components/LeadForm.tsx,
-// app/layout.tsx). TODO: legal review of the whole page before publishing.
+// The real customer privacy policy (content in lib/privacy-policy.ts, verbatim
+// from the draft). TODO: legal review — the draft must be approved by legal
+// counsel before publishing. Unresolved [..] values render as placeholders.
 
-const TITLE = "นโยบายความเป็นส่วนตัว";
+const TITLE = POLICY_META.h1;
 const DESCRIPTION =
-  "นโยบายความเป็นส่วนตัวของ CareConnect: ข้อมูลที่เราเก็บจากแบบฟอร์ม วัตถุประสงค์การใช้ และสิทธิของเจ้าของข้อมูลส่วนบุคคล";
+  "นโยบายคุ้มครองข้อมูลส่วนบุคคลสำหรับลูกค้าของ CareConnect ตามพระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -27,91 +28,121 @@ export const metadata: Metadata = {
   robots: { index: false, follow: true },
 };
 
+// Wrap unresolved "[...]" values so they stand out as placeholders.
+function withPlaceholders(text: string) {
+  return text.split(/(\[[^\]]+\])/).map((part, i) =>
+    part.startsWith("[") && part.endsWith("]") ? (
+      <mark key={i} className="todo-placeholder">
+        {part}
+      </mark>
+    ) : (
+      part
+    ),
+  );
+}
+
+// Make the phone number and email in the contact lines clickable.
+function contactLine(line: string) {
+  if (line.endsWith(TELEPHONE_DISPLAY)) {
+    const label = line.slice(0, -TELEPHONE_DISPLAY.length);
+    return (
+      <>
+        {label}
+        <a href={`tel:${TELEPHONE_DISPLAY}`}>{TELEPHONE_DISPLAY}</a>
+      </>
+    );
+  }
+  if (line.endsWith(EMAIL)) {
+    const label = line.slice(0, -EMAIL.length);
+    return (
+      <>
+        {label}
+        <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+      </>
+    );
+  }
+  return line;
+}
+
+function renderBlock(block: PolicyBlock, key: number) {
+  switch (block.t) {
+    case "updated":
+      return (
+        <p key={key} className="small">
+          {withPlaceholders(block.text)}
+        </p>
+      );
+    case "h2":
+      return (
+        <h2 key={key} className="h2">
+          {block.text}
+        </h2>
+      );
+    case "h3":
+      return (
+        <h3 key={key} className="h3">
+          {block.text}
+        </h3>
+      );
+    case "p":
+      return <p key={key}>{withPlaceholders(block.text)}</p>;
+    case "ul":
+      return (
+        <ul key={key}>
+          {block.items.map((item) => (
+            <li key={item}>{withPlaceholders(item)}</li>
+          ))}
+        </ul>
+      );
+    case "table":
+      return (
+        <div key={key} className="scroll-table" tabIndex={0} role="region" aria-label={block.head.join(" / ")}>
+          <table className="data-table">
+            <thead>
+              <tr>
+                {block.head.map((h) => (
+                  <th key={h} scope="col">
+                    {h}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {block.rows.map((row) => (
+                <tr key={row[0]}>
+                  {row.map((cell, i) =>
+                    i === 0 ? (
+                      <th key={i} scope="row">
+                        {cell}
+                      </th>
+                    ) : (
+                      <td key={i}>{cell}</td>
+                    ),
+                  )}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      );
+    case "contact":
+      return (
+        <p key={key}>
+          {block.lines.map((line, i) => (
+            <span key={line}>
+              {i > 0 ? <br /> : null}
+              {contactLine(line)}
+            </span>
+          ))}
+        </p>
+      );
+  }
+}
+
 export default function PrivacyPage() {
   return (
     <LegalPage title={TITLE}>
-      <h2 className="h2">ผู้ควบคุมข้อมูลส่วนบุคคล</h2>
-      <p>
-        {LEGAL_NAME} (เลขทะเบียนนิติบุคคล {COMPANY_REGISTRATION_NUMBER})
-      </p>
-      {/* TODO: legal review — registered address and DPO contact (if appointed). */}
-
-      <h2 className="h2">ข้อมูลที่เราเก็บรวบรวม</h2>
-      <p>เมื่อคุณส่งแบบฟอร์มขอรับคำปรึกษาบนเว็บไซต์ เราจะได้รับข้อมูลดังนี้</p>
-      <ul>
-        <li>กลุ่มอาการของคนไข้</li>
-        <li>จังหวัด และเขต / อำเภอ</li>
-        <li>ชื่อผู้ติดต่อ</li>
-        <li>เบอร์โทรศัพท์</li>
-        <li>เวลาที่ต้องการปรึกษาคุณหมอ</li>
-        <li>อาการเบื้องต้นของคนไข้ และระยะเวลาที่เป็น</li>
-        <li>วันและเวลาที่ส่งแบบฟอร์ม</li>
-      </ul>
-      {/* TODO: legal review — condition/symptom fields are health data
-          (sensitive personal data under PDPA s.26). Confirm the legal basis
-          and whether explicit consent must be collected on the form. */}
-
-      <h2 className="h2">วัตถุประสงค์ในการใช้ข้อมูล</h2>
-      <ul>
-        <li>ติดต่อกลับเพื่อให้ข้อมูลเกี่ยวกับบริการและนัดหมาย</li>
-        <li>ตรวจสอบว่าที่อยู่ของคนไข้อยู่ในพื้นที่ให้บริการ</li>
-        <li>เตรียมข้อมูลเบื้องต้นสำหรับการปรึกษากับทีมของเรา</li>
-      </ul>
-      {/* TODO: legal review — confirm purposes and legal basis for each. */}
-
-      <h2 className="h2">การจัดเก็บข้อมูล</h2>
-      <p>
-        ข้อมูลจากแบบฟอร์มจะถูกบันทึกลงในระบบ Google Sheets ที่บริษัทใช้งาน
-      </p>
-      {/* TODO: legal review — who can access the sheet, security measures,
-          and cross-border transfer wording (Google stores data outside Thailand). */}
-
-      <h2 className="h2">การติดต่อผ่าน LINE</h2>
-      <p>
-        หากคุณเลือกติดต่อเราผ่าน LINE Official Account ข้อมูลที่คุณส่งในแชต LINE
-        จะอยู่ภายใต้การให้บริการของ LINE และนโยบายความเป็นส่วนตัวของ LINE ด้วย
-      </p>
-      {/* TODO: legal review — how chat data is used/retained on our side. */}
-
-      <h2 className="h2">คุกกี้และเครื่องมือวิเคราะห์</h2>
-      <p>
-        เว็บไซต์นี้ใช้ Google Tag Manager
-        ในการจัดการแท็กสำหรับวัดผลการใช้งานเว็บไซต์
-        ซึ่งอาจมีการใช้คุกกี้หรือเทคโนโลยีที่คล้ายกัน
-      </p>
-      {/* TODO: legal review — list the tags actually configured in container
-          GTM-PK9DP4KB (e.g. analytics / ads pixels), the cookies they set, and
-          whether a cookie consent banner is required. Not knowable from code. */}
-
-      <h2 className="h2">ระยะเวลาการเก็บรักษาข้อมูล</h2>
-      {/* TODO: legal review — retention period for leads and patient records. */}
-      <PendingSection />
-
-      <h2 className="h2">สิทธิของเจ้าของข้อมูลส่วนบุคคล</h2>
-      <p>
-        ภายใต้พระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 คุณมีสิทธิ
-      </p>
-      <ul>
-        <li>ขอเข้าถึงและขอรับสำเนาข้อมูลส่วนบุคคลของคุณ</li>
-        <li>ขอแก้ไขข้อมูลให้ถูกต้องและเป็นปัจจุบัน</li>
-        <li>ขอให้ลบ ทำลาย หรือระงับการใช้ข้อมูล</li>
-        <li>คัดค้านการเก็บรวบรวม ใช้ หรือเปิดเผยข้อมูล</li>
-        <li>ขอโอนย้ายข้อมูล</li>
-        <li>ถอนความยินยอมที่เคยให้ไว้</li>
-        <li>ร้องเรียนต่อสำนักงานคณะกรรมการคุ้มครองข้อมูลส่วนบุคคล</li>
-      </ul>
-      {/* TODO: legal review — rights wording, conditions/exceptions, response timeline. */}
-
-      <h2 className="h2">ติดต่อเรา</h2>
-      <p>
-        หากต้องการใช้สิทธิหรือสอบถามเกี่ยวกับข้อมูลส่วนบุคคล ติดต่อได้ที่โทร{" "}
-        <a href="tel:02-114-7168">02-114-7168</a>
-      </p>
-      {/* TODO: legal review — add a dedicated privacy contact email if available. */}
-
-      <h2 className="h2">การปรับปรุงนโยบาย</h2>
-      {/* TODO: legal review — effective date and change-notification process. */}
-      <PendingSection />
+      {POLICY_BLOCKS.map((block, i) => renderBlock(block, i))}
     </LegalPage>
   );
 }
