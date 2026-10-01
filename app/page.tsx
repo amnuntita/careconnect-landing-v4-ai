@@ -12,11 +12,12 @@ import { Pricing } from "@/components/Pricing";
 import { SocialProof } from "@/components/SocialProof";
 import { StickyCTA } from "@/components/StickyCTA";
 import { Team } from "@/components/Team";
-import { SITE_NAME } from "@/lib/site";
+import { PROVINCES_SERVED, SITE_NAME } from "@/lib/site";
 
-const TITLE = `กายภาพบำบัดที่บ้าน ฟื้นฟูผู้ป่วยโรคหลอดเลือดสมอง | ${SITE_NAME}`;
-const DESCRIPTION =
-  "กายภาพบำบัดที่บ้านสำหรับผู้ป่วยโรคหลอดเลือดสมอง (Stroke) และผู้ที่ต้องฟื้นฟูร่างกาย วางแผนรายเคสโดยแพทย์เวชศาสตร์ฟื้นฟู ให้บริการมากกว่า 10 จังหวัด";
+// General home-physiotherapy framing across all six condition groups. Stroke
+// terms are owned by /stroke-rehab-at-home, so the homepage doesn't lead with them.
+const TITLE = `กายภาพบำบัดที่บ้าน วางแผนโดยแพทย์เวชศาสตร์ฟื้นฟู | ${SITE_NAME}`;
+const DESCRIPTION = `กายภาพบำบัดที่บ้านใน ${PROVINCES_SERVED.length} จังหวัด วางแผนโดยแพทย์เวชศาสตร์ฟื้นฟู ดูแลหลังผ่าตัดเข่า สะโพก อุบัติเหตุ ปวดเรื้อรัง ฝึกกลืน ผู้สูงอายุอ่อนแรง และอัมพฤกษ์ อัมพาต`;
 
 export const metadata: Metadata = {
   // `absolute` skips the layout's "%s | CareConnect" template (brand is already in the title).
