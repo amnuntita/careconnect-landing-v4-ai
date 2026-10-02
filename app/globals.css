@@ -1101,7 +1101,7 @@ section:nth-of-type(even) .section-head .eyebrow {
 }
 .pt-card .meta {
   font-size: 14px;
-  color: var(--muted);
+  color: var(--ink-soft); /* was --muted: 3.33:1 on white; now 7.15:1 */
   margin-top: 4px;
   line-height: 1.5;
 }
@@ -1127,11 +1127,11 @@ section:nth-of-type(even) .section-head .eyebrow {
 }
 .pt-grid > .pt-card:nth-child(3n + 2) .tag {
   background: var(--rose-soft);
-  color: var(--rose-deep);
+  color: var(--role-doctor-ink); /* was --rose-deep: 3.88:1; now 5.85:1 */
 }
 .pt-grid > .pt-card:nth-child(3n + 3) .tag {
   background: var(--accent-soft);
-  color: #a8801a;
+  color: var(--decision-ink); /* was #a8801a: 3.16:1; now 6.43:1 */
 }
 
 .team-foot {
@@ -1777,6 +1777,9 @@ section:nth-of-type(even) .section-head .eyebrow {
 .post-body a.btn {
   color: white;
   text-decoration: none;
+}
+.post-body a.btn.ghost {
+  color: var(--ink);
 }
 .longform-cta {
   margin: 0 0 1.2em;

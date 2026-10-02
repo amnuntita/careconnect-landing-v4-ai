@@ -74,7 +74,8 @@ function Cta({ items }: { items: { label: string; kind: "form" | "line" }[] }) {
     <div className="hero-cta-row longform-cta">
       {items.map((item) =>
         item.kind === "line" ? (
-          <a key={item.label} className="btn line" href={LINE_HREF}>
+          // Ghost style: white on LINE green (#06C755) is only 2.26:1.
+          <a key={item.label} className="btn ghost" href={LINE_HREF}>
             <LineIcon /> {item.label}
           </a>
         ) : (
