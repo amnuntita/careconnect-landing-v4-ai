@@ -6,7 +6,8 @@ import { ArrowIcon, LineIcon } from "./Icons";
 
 // Sticky CTA bar used on the homepage and long landing pages, on every
 // viewport. Hides while the lead form (#form) or the footer is on screen so it
-// never covers either. Bottom padding respects safe-area insets.
+// never covers either, and while any element marked data-sticky-hide (e.g. a
+// hero's own CTA row) is visible. Bottom padding respects safe-area insets.
 export function StickyCTABar({
   primaryLabel,
   lineLabel,
@@ -22,6 +23,7 @@ export function StickyCTABar({
     const targets = [
       document.getElementById("form"),
       document.querySelector("footer.site-footer"),
+      ...document.querySelectorAll("[data-sticky-hide]"),
     ].filter((el): el is Element => Boolean(el));
     if (!targets.length) return;
 

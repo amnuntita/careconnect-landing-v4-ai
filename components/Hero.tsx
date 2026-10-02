@@ -19,7 +19,8 @@ export function Hero() {
 
           <p className="hero-area">{area}</p>
 
-          <div className="hero-cta-row">
+          {/* The sticky CTA bar stays hidden while these buttons are on screen. */}
+          <div className="hero-cta-row" data-sticky-hide>
             <a className="btn" href="#form">
               {HERO.ctaPrimary} <ArrowIcon />
             </a>
