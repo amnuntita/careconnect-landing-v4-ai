@@ -3,7 +3,7 @@ import type { Image } from "sanity";
 
 export type SanityImage = Image & { alt?: string };
 
-// Shape returned by POSTS_QUERY / HIGHLIGHTS_QUERY (card projection).
+// Shape returned by POSTS_QUERY / HIGHLIGHTS_QUERY / PINNED_POSTS_QUERY (card projection).
 export type PostCardData = {
   _id: string;
   title: string;

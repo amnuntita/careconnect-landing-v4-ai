@@ -18,9 +18,18 @@ export const POSTS_QUERY = defineQuery(`
   }
 `);
 
-// Latest posts for the landing-page section (featured pinned first).
+// Posts pinned on the homepage by slug (only those that exist are returned;
+// the caller restores the pinned order).
+export const PINNED_POSTS_QUERY = defineQuery(`
+  *[_type == "post" && slug.current in $slugs] {
+    ${cardFields}
+  }
+`);
+
+// Fill for the homepage section: featured first, then newest, skipping the
+// pinned slugs.
 export const HIGHLIGHTS_QUERY = defineQuery(`
-  *[_type == "post" && defined(slug.current)]
+  *[_type == "post" && defined(slug.current) && !(slug.current in $exclude)]
     | order(coalesce(featured, false) desc, publishedAt desc)[0...$limit] {
     ${cardFields}
   }
