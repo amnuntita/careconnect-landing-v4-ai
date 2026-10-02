@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import { JsonLdScript } from "@/components/JsonLd";
+import { TEAM_COPY } from "@/lib/homepage-content";
 import {
   displayName,
   PHYSICIANS,
@@ -87,9 +88,12 @@ function DoctorCard({ doc }: { doc: Physician }) {
         />
       ) : null}
       <div>
-        <p className="role">{doc.title}</p>
-        <h3 className="dname">{displayName(doc)}</h3>
-        <p className="dtitle">ใบอนุญาตประกอบวิชาชีพเวชกรรม {doc.license}</p>
+        <h3 className="dname">
+          {displayName(doc)} (เลข {doc.license})
+        </h3>
+        <p className="dtitle">{doc.title}</p>
+        {/* Practice days/hours: required on-page wherever a physician is shown. */}
+        <p className="dhours">ให้บริการ{doc.hours}</p>
         {CARD_DETAILS[doc.id] ?? null}
       </div>
     </article>
@@ -108,14 +112,7 @@ export function Team({ showHeading = true }: { showHeading?: boolean } = {}) {
       <div className="wrap">
         {showHeading ? (
           <div className="section-head">
-            <div>
-              <span className="eyebrow">ทีมของเรา</span>
-              <h2 className="h2" style={{ marginTop: 10 }}>
-                นำโดยแพทย์เวชศาสตร์ฟื้นฟู
-                <br />
-                ดูแลโดยทีมมืออาชีพ
-              </h2>
-            </div>
+            <h2 className="h2">{TEAM_COPY.heading}</h2>
           </div>
         ) : null}
 
@@ -123,7 +120,7 @@ export function Team({ showHeading = true }: { showHeading?: boolean } = {}) {
           <DoctorCard key={doc.id} doc={doc} />
         ))}
 
-        <h3 className="h3">ตัวอย่าง Profile นักกายภาพของเรา</h3>
+        <h3 className="h3">{TEAM_COPY.ptHeading}</h3>
         <ul className="pt-grid">
           {PTS.map((p) => (
             <li className="pt-card" key={p.name}>
@@ -151,6 +148,7 @@ export function Team({ showHeading = true }: { showHeading?: boolean } = {}) {
             </li>
           ))}
         </ul>
+        <p className="team-quality">{TEAM_COPY.quality}</p>
       </div>
     </section>
   );

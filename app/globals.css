@@ -2496,3 +2496,16 @@ section:nth-of-type(even) .section-head .eyebrow {
 .condition-chip--link::after {
   content: " →";
 }
+
+/* Team: physician practice hours + quality line. */
+.doctor-card .dhours {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--primary-deep);
+  margin: 0 0 14px;
+}
+.team-quality {
+  margin: 20px 0 0;
+  font-size: 15px;
+  color: var(--ink-soft);
+}
