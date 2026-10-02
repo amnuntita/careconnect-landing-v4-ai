@@ -1927,3 +1927,66 @@ section:nth-of-type(even) .section-head .eyebrow {
   line-height: 1.5;
   color: var(--ink-soft);
 }
+
+/* §2 trust strip: 2×2 on mobile, one row on desktop. */
+.trust-strip {
+  padding: 28px 0;
+  border-top: 1px solid var(--line-soft);
+  border-bottom: 1px solid var(--line-soft);
+  background: white;
+}
+.trust-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px 16px;
+}
+@media (min-width: 880px) {
+  .trust-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+.trust-item {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.trust-icon {
+  flex: 0 0 40px;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  color: var(--brand);
+  background: var(--primary-soft);
+}
+.trust-icon svg {
+  width: 20px;
+  height: 20px;
+}
+.trust-title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--ink);
+}
+.trust-detail {
+  margin: 4px 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+.trust-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+}
+.trust-links a {
+  color: var(--primary-deep);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}

@@ -9,9 +9,9 @@ import { SiteJsonLd } from "@/components/JsonLd";
 import { LeadForm } from "@/components/LeadForm";
 import { Navbar } from "@/components/Navbar";
 import { Pricing } from "@/components/Pricing";
-import { SocialProof } from "@/components/SocialProof";
 import { StickyCTA } from "@/components/StickyCTA";
 import { Team } from "@/components/Team";
+import { TrustStrip } from "@/components/TrustStrip";
 import { HOME_META } from "@/lib/homepage-content";
 import { SITE_NAME } from "@/lib/site";
 
@@ -47,7 +47,7 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
-        <SocialProof />
+        <TrustStrip />
         <Conditions />
         <Pricing />
         <LeadForm />
