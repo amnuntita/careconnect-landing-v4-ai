@@ -1,3 +1,5 @@
+import { LINE_ID } from "@/lib/public-facts";
+
 import { ArrowIcon, PhoneIcon } from "./Icons";
 
 export function BottomCTA() {
@@ -44,7 +46,7 @@ export function BottomCTA() {
               [QR LINE OA]
             </div>
             <p style={{ fontWeight: 600, fontSize: 16, margin: 0 }}>
-              Line ID: @careconnect
+              Line ID: {LINE_ID}
             </p>
             <p style={{ fontSize: 13, color: "var(--muted)", margin: 0 }}>
               สแกนเพื่อแอดเพื่อน

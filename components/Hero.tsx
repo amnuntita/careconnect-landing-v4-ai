@@ -24,7 +24,7 @@ export function Hero() {
             <a className="btn" href="#form">
               {HERO.ctaPrimary} <ArrowIcon />
             </a>
-            <a className="btn ghost" href={LINE_URL ?? "#form"}>
+            <a className="btn ghost" href={LINE_URL}>
               <LineIcon />
               {HERO.ctaLine}
             </a>

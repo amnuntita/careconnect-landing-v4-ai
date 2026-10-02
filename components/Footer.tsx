@@ -7,6 +7,8 @@ import {
   EMAIL,
   FACILITY_REGISTRATION_NUMBER,
   LEGAL_NAME,
+  LINE_ID,
+  LINE_URL,
   PROVINCES_SERVED,
 } from "@/lib/site";
 
@@ -39,8 +41,8 @@ export function Footer() {
                 <a href="tel:02-114-7168">โทร: 02-114-7168</a>
               </li>
               <li>
-                <a href="https://lin.ee/S8VPTxqA">
-                  LINE ID: @careconnect (<u>คลิกเพื่อแอดไลน์</u>)
+                <a href={LINE_URL}>
+                  LINE ID: {LINE_ID} (<u>คลิกเพื่อแอดไลน์</u>)
                 </a>
               </li>
               <li>

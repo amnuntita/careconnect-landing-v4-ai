@@ -17,7 +17,7 @@ export function Closing() {
             {CLOSING.ctaForm} <ArrowIcon />
           </a>
           {/* Ghost style: white on LINE green (#06C755) is only 2.25:1. */}
-          <a className="btn ghost" href={LINE_URL ?? "#form"}>
+          <a className="btn ghost" href={LINE_URL}>
             <LineIcon />
             {CLOSING.ctaLine}
           </a>

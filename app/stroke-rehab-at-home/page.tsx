@@ -28,7 +28,7 @@ import { sanityFetch } from "@/sanity/lib/fetch";
 
 const PATH = "/stroke-rehab-at-home";
 const PAGE_URL = `${SITE_URL}${PATH}`;
-const LINE_HREF = LINE_URL ?? "#form";
+const LINE_HREF = LINE_URL;
 
 // "ปรับปรุงข้อมูลล่าสุด" date (YYYY-MM-DD). The line and schema lastReviewed
 // render only once this is set.

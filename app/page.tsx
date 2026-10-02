@@ -74,7 +74,7 @@ export default function Home() {
       <StickyCTABar
         primaryLabel={HERO.ctaPrimary}
         lineLabel={HERO.ctaLine}
-        lineHref={LINE_URL ?? "#form"}
+        lineHref={LINE_URL}
       />
     </>
   );
