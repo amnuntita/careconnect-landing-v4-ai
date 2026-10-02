@@ -2,6 +2,7 @@
 // string is copied verbatim from the reviewed draft. Bracketed instruction lines
 // and the notes section (หมายเหตุสำหรับการแก้ไข) are not included. Prices are
 // tokens filled from lib/packages.ts by fillPrices(), so they can't drift.
+// Post-generation additions are marked inline with a comment.
 
 import { BALANCE, DEPOSIT, formatPrice, MAIN_PACKAGE } from "@/lib/packages";
 
@@ -122,7 +123,9 @@ export const INCLUSIONS = {
         "ประเมิน ตั้งเป้าหมาย และเลือกโปรแกรมร่วมกับครอบครัวผ่าน telemedicine ก่อนเริ่มฝึก",
         "ทบทวนบันทึกหลังการฝึกครั้งแรก และปรับแผนให้ตรงกับสภาพจริงที่บ้าน",
         "พูดคุยกับครอบครัวเพื่อปรับแผน เมื่อมีปัญหาทางการแพทย์หรือความก้าวหน้าไม่เป็นไปตามที่คาด",
-        "ประเมินผลและแนะนำขั้นต่อไปในช่วงท้ายคอร์ส"
+        "ประเมินผลและแนะนำขั้นต่อไปในช่วงท้ายคอร์ส",
+        // Added by request after generation (not in the v4 draft).
+        "ออกใบรับรองแพทย์ได้"
       ]
     },
     {
