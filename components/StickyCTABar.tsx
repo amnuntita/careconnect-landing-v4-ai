@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 
 import { ArrowIcon, LineIcon } from "./Icons";
 
-// Sticky CTA for long landing pages, on every viewport (the homepage's
-// StickyCTA is mobile-only). Hides while the lead form (#form) or the footer is
-// on screen so it never covers either. Bottom padding respects safe-area insets.
+// Sticky CTA bar used on the homepage and long landing pages, on every
+// viewport. Hides while the lead form (#form) or the footer is on screen so it
+// never covers either. Bottom padding respects safe-area insets.
 export function StickyCTABar({
   primaryLabel,
   lineLabel,

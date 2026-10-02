@@ -1746,9 +1746,9 @@ section:nth-of-type(even) .section-head .eyebrow {
     display: none;
   }
 }
-/* Keep the fixed bar from covering the footer at the very bottom on mobile. */
+/* Room for the fixed bar at the bottom on mobile — only on pages that have one. */
 @media (max-width: 879px) {
-  body {
+  body:has(.sticky-cta) {
     padding-bottom: 76px;
   }
 }
@@ -2508,4 +2508,9 @@ section:nth-of-type(even) .section-head .eyebrow {
   margin: 20px 0 0;
   font-size: 15px;
   color: var(--ink-soft);
+}
+
+/* §11 closing. */
+.closing-section {
+  padding-bottom: 0;
 }

@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { BlogHighlights } from "@/components/BlogHighlights";
 import { BottomCTA } from "@/components/BottomCTA";
 import { ConcernCards } from "@/components/ConcernCards";
+import { Closing } from "@/components/Closing";
 import { ConditionLinks } from "@/components/ConditionLinks";
 import { Footer } from "@/components/Footer";
 import { Hero } from "@/components/Hero";
@@ -13,11 +14,11 @@ import { Navbar } from "@/components/Navbar";
 import { Inclusions } from "@/components/Inclusions";
 import { ProcessDiagram } from "@/components/ProcessDiagram";
 import { Programmes } from "@/components/Programmes";
-import { StickyCTA } from "@/components/StickyCTA";
+import { StickyCTABar } from "@/components/StickyCTABar";
 import { Team } from "@/components/Team";
 import { TrustStrip } from "@/components/TrustStrip";
-import { fillPrices, HOME_FAQS, HOME_META } from "@/lib/homepage-content";
-import { SITE_NAME } from "@/lib/site";
+import { fillPrices, HERO, HOME_FAQS, HOME_META } from "@/lib/homepage-content";
+import { LINE_URL, SITE_NAME } from "@/lib/site";
 
 // Meta title/description verbatim from the BOFU homepage draft (v4).
 const TITLE = HOME_META.title;
@@ -61,14 +62,20 @@ export default function Home() {
         <Programmes />
         <Inclusions />
         <ConditionLinks />
-        <LeadForm />
         <Team />
         <HomeFaq />
         <BlogHighlights />
+        <Closing />
+        <LeadForm />
         {/* <BottomCTA /> */}
       </main>
       <Footer />
-      <StickyCTA />
+      {/* Hides over the lead form and the footer, on every viewport. */}
+      <StickyCTABar
+        primaryLabel={HERO.ctaPrimary}
+        lineLabel={HERO.ctaLine}
+        lineHref={LINE_URL ?? "#form"}
+      />
     </>
   );
 }
