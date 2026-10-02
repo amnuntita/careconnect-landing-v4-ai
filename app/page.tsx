@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import { BlogHighlights } from "@/components/BlogHighlights";
 import { BottomCTA } from "@/components/BottomCTA";
+import { ConcernCards } from "@/components/ConcernCards";
 import { Conditions } from "@/components/Conditions";
 import { Footer } from "@/components/Footer";
 import { Hero } from "@/components/Hero";
@@ -48,6 +49,7 @@ export default function Home() {
       <main>
         <Hero />
         <TrustStrip />
+        <ConcernCards />
         <Conditions />
         <Pricing />
         <LeadForm />

@@ -1990,3 +1990,39 @@ section:nth-of-type(even) .section-head .eyebrow {
   text-decoration: underline;
   text-underline-offset: 2px;
 }
+
+/* §3 concern cards: 1 column on mobile, 3 on desktop. */
+.concern-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+@media (min-width: 880px) {
+  .concern-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+.concern-card {
+  background: white;
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--brand);
+  border-radius: 16px;
+  padding: 22px 22px 8px;
+}
+.concern-q {
+  font-family: var(--font-heading), system-ui, sans-serif;
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--ink);
+  margin: 0 0 10px;
+}
+.concern-card p {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--ink-soft);
+  margin: 0 0 14px;
+}
