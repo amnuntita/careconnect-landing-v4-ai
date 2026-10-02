@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { BlogHighlights } from "@/components/BlogHighlights";
 import { BottomCTA } from "@/components/BottomCTA";
 import { ConcernCards } from "@/components/ConcernCards";
-import { Conditions } from "@/components/Conditions";
+import { ConditionLinks } from "@/components/ConditionLinks";
 import { Footer } from "@/components/Footer";
 import { Hero } from "@/components/Hero";
 import { SiteJsonLd } from "@/components/JsonLd";
@@ -55,7 +55,7 @@ export default function Home() {
         <ProcessDiagram />
         <Programmes />
         <Inclusions />
-        <Conditions />
+        <ConditionLinks />
         <LeadForm />
         <Team />
         <BlogHighlights />
