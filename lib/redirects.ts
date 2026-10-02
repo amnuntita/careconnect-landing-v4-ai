@@ -17,6 +17,9 @@ export const WIX_REDIRECTS: Record<string, string> = {
   "/service-page/psychiatry-consultation": "/",
   "/service-page/psychology-consultation": "/",
 
+  // Renamed blog posts (same permanent 308 as the Wix entries).
+  "/blog/golden-period": "/blog/stroke-after-discharge-guide",
+
   // Template (one line per old post):
   // "/post/<old-wix-slug>": "/blog/<new-sanity-slug>",
 };
