@@ -100,7 +100,14 @@ function DoctorCard({ doc }: { doc: Physician }) {
   );
 }
 
-export function Team({ showHeading = true }: { showHeading?: boolean } = {}) {
+export function Team({
+  showHeading = true,
+  showQualityNote = true,
+}: {
+  showHeading?: boolean;
+  // Hide the Care Quality Assurance line where the page copy already has one.
+  showQualityNote?: boolean;
+} = {}) {
   return (
     <section id="team" className="cream">
       <JsonLdScript
@@ -148,7 +155,7 @@ export function Team({ showHeading = true }: { showHeading?: boolean } = {}) {
             </li>
           ))}
         </ul>
-        <p className="team-quality">{TEAM_COPY.quality}</p>
+        {showQualityNote ? <p className="team-quality">{TEAM_COPY.quality}</p> : null}
       </div>
     </section>
   );

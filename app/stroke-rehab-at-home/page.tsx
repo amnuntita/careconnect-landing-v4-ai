@@ -322,7 +322,9 @@ export default async function StrokeRehabPage() {
       <main className="longform-page">
         <article>
           {chunks.map((chunk, i) => {
-            if (chunk === "team") return <Team key={i} showHeading={false} />;
+            // The page copy has its own CQA line, so hide Team's.
+            if (chunk === "team")
+              return <Team key={i} showHeading={false} showQualityNote={false} />;
             if (chunk === "form") return <LeadForm key={i} />;
             if (!chunk.length) return null;
             return (
