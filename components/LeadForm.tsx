@@ -16,6 +16,7 @@ import {
   TIME_OPTIONS,
 } from "@/lib/lead-options";
 import { DEPOSIT, formatPrice } from "@/lib/packages";
+import { LINE_ID, LINE_URL, TELEPHONE_DISPLAY } from "@/lib/public-facts";
 
 import { AlertIcon, ArrowIcon, CheckIcon, LineIcon } from "./Icons";
 
@@ -168,7 +169,9 @@ function BookingSummary({
 }
 
 export function LeadForm() {
-  const [submitted, setSubmitted] = useState(false);
+  // The request as sent, for the success screen's summary (null = form shown).
+  const [submitted, setSubmitted] = useState<LeadValues | null>(null);
+  const [systemError, setSystemError] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
@@ -209,15 +212,14 @@ export function LeadForm() {
       <div className="wrap">
         <div className="form-shell">
           <div className="form-head">
-            <span className="eyebrow">เริ่มต้นฟื้นฟูตั้งแต่วันนี้</span>
-            <h2 className="h2">ทดลองทำกายภาพ</h2>
+            <span className="eyebrow">จองการประเมินและฝึกครั้งแรก</span>
+            <h2 className="h2">จองวันทดลองทำกายภาพ</h2>
             <p className="lede form-lede">
-              ทีมงานจะโทรกลับเพื่อยืนยันวันและเวลานัดหมายอีกครั้ง
-              เริ่มต้นด้วยการประเมินโดยแพทย์และการฝึกที่บ้านครั้งแรก{" "}
-              {formatPrice(DEPOSIT)} บาท
+              ประเมินโดยแพทย์เวชศาสตร์ฟื้นฟูและฝึกครั้งแรกที่บ้าน {formatPrice(DEPOSIT)} บาท
+              ไม่มีข้อผูกมัดในการซื้อคอร์สต่อ
             </p>
             <p className="form-desc">
-             ปรึกษาแพทย์เพื่อวางแผน และทดลองทำกายภาพบำบัดครั้งแรก
+              เลือกวันและเวลาที่สะดวก ทีมงานจะติดต่อกลับเพื่อชำระเงินและยืนยันการจอง
             </p>
           </div>
 
@@ -262,6 +264,7 @@ export function LeadForm() {
 
                 setFieldErrors({});
                 setError("");
+                setSystemError(false);
                 setSubmitting(true);
 
                 try {
@@ -271,11 +274,9 @@ export function LeadForm() {
                     body: JSON.stringify(payload),
                   });
                   if (!res.ok) throw new Error("Request failed");
-                  setSubmitted(true);
+                  setSubmitted(payload);
                 } catch {
-                  setError(
-                    "ระบบขัดข้องชั่วคราว กรุณาติดต่อ 02-114-7168 หรือ LINE: @careconnect",
-                  );
+                  setSystemError(true);
                 } finally {
                   setSubmitting(false);
                 }
@@ -496,12 +497,20 @@ export function LeadForm() {
                 />
               ) : null}
 
-              {error && (
+              {error || systemError ? (
                 <p className="form-error" role="alert">
                   <AlertIcon className="form-error-icon" />
-                  <span>{error}</span>
+                  {systemError ? (
+                    <span>
+                      ระบบขัดข้องชั่วคราว กรุณาโทร{" "}
+                      <a href={`tel:${TELEPHONE_DISPLAY}`}>{TELEPHONE_DISPLAY}</a>{" "}
+                      หรือ<a href={LINE_URL}>ทักทาง LINE {LINE_ID}</a>
+                    </span>
+                  ) : (
+                    <span>{error}</span>
+                  )}
                 </p>
-              )}
+              ) : null}
 
               <button
                 type="submit"
@@ -527,20 +536,45 @@ export function LeadForm() {
               <span className="success-mark" aria-hidden="true">
                 <CheckIcon />
               </span>
-              <h3 className="h2 success-title">ได้รับข้อมูลของคุณแล้ว</h3>
-              <p className="lede" style={{ margin: "0 auto 28px" }}>
-                เจ้าหน้าที่จะติดต่อกลับโดยเร็วที่สุดภายใน 24 ชั่วโมง
+              <h3 className="h2 success-title" tabIndex={-1}>
+                ได้รับคำขอจองของคุณแล้ว
+              </h3>
+              <BookingSummary
+                date={submitted.firstSessionDate}
+                time={submitted.firstSessionTime}
+                district={submitted.district}
+                province={submitted.province}
+              />
+              <p className="success-line">
+                ทีมงานจะติดต่อกลับภายใน 24 ชั่วโมง เพื่อแจ้งช่องทางชำระเงิน{" "}
+                {formatPrice(DEPOSIT)} บาท การจองจะยืนยันเมื่อชำระเงินเรียบร้อย
               </p>
-              <a
-                href="https://line.me/R/ti/p/@careconnect"
-                className="btn lg line form-full-btn"
-              >
-                <LineIcon /> แอด LINE OA เพื่อติดตามสถานะ
+              <div className="success-next">
+                <h4 className="success-next-title">ขั้นตอนต่อไป</h4>
+                <ol>
+                  <li>
+                    ทีมงานติดต่อเพื่อชำระเงินค่าประเมินและฝึกครั้งแรก ยืนยันวันนัด
+                    และนัดเวลาประเมินกับแพทย์
+                  </li>
+                  <li>
+                    แพทย์เวชศาสตร์ฟื้นฟูประเมินผ่าน telemedicine
+                    และเลือกโปรแกรมร่วมกับครอบครัว
+                  </li>
+                  <li>นักกายภาพเข้าประเมินและฝึกครั้งแรกที่บ้านตามวันนัด</li>
+                </ol>
+                <p>
+                  ระหว่างรอ ถ้ามี ให้เตรียมใบสรุปการรักษาจากโรงพยาบาล และรายการยาที่ใช้อยู่
+                  เพื่อให้แพทย์ประเมินได้ละเอียดขึ้น
+                </p>
+              </div>
+              {/* Ghost style: white on LINE green (#06C755) is only 2.26:1. */}
+              <a href={LINE_URL} className="btn lg ghost form-full-btn">
+                <LineIcon /> แอด LINE เพื่อติดตามสถานะ
               </a>
               <button
                 type="button"
                 className="btn ghost form-back-btn"
-                onClick={() => setSubmitted(false)}
+                onClick={() => setSubmitted(null)}
               >
                 กรอกใหม่อีกครั้ง
               </button>
