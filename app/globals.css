@@ -2295,7 +2295,7 @@ section:nth-of-type(even) .section-head .eyebrow {
   color: var(--ink);
 }
 .programme-n {
-  color: var(--brand);
+  color: var(--primary-deep); /* 19px/600 isn't "large text": brand teal fails AA */
 }
 .programme-summary {
   margin: 4px 0 0;
