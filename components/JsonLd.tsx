@@ -43,9 +43,12 @@ const areaServed = PROVINCES_SERVED.map((p) => ({
 export function SiteJsonLd({
   pageName,
   pageDescription,
+  faqs = [],
 }: {
   pageName: string;
   pageDescription: string;
+  // Rendered FAQ items (same array the accordion renders), already filled.
+  faqs?: { q: string; a: string[] }[];
 }) {
   const identifier = [
     {
@@ -146,7 +149,26 @@ export function SiteJsonLd({
     <JsonLdScript
       data={{
         "@context": "https://schema.org",
-        "@graph": [organization, website, webpage, service],
+        "@graph": [
+          organization,
+          website,
+          webpage,
+          service,
+          ...(faqs.length
+            ? [
+                {
+                  "@type": "FAQPage",
+                  "@id": `${SITE_URL}/#faq`,
+                  isPartOf: { "@id": `${SITE_URL}/#webpage` },
+                  mainEntity: faqs.map((f) => ({
+                    "@type": "Question",
+                    name: f.q,
+                    acceptedAnswer: { "@type": "Answer", text: f.a.join("\n\n") },
+                  })),
+                },
+              ]
+            : []),
+        ],
       }}
     />
   );

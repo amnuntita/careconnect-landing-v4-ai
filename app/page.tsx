@@ -6,6 +6,7 @@ import { ConcernCards } from "@/components/ConcernCards";
 import { ConditionLinks } from "@/components/ConditionLinks";
 import { Footer } from "@/components/Footer";
 import { Hero } from "@/components/Hero";
+import { HomeFaq } from "@/components/HomeFaq";
 import { SiteJsonLd } from "@/components/JsonLd";
 import { LeadForm } from "@/components/LeadForm";
 import { Navbar } from "@/components/Navbar";
@@ -15,7 +16,7 @@ import { Programmes } from "@/components/Programmes";
 import { StickyCTA } from "@/components/StickyCTA";
 import { Team } from "@/components/Team";
 import { TrustStrip } from "@/components/TrustStrip";
-import { HOME_META } from "@/lib/homepage-content";
+import { fillPrices, HOME_FAQS, HOME_META } from "@/lib/homepage-content";
 import { SITE_NAME } from "@/lib/site";
 
 // Meta title/description verbatim from the BOFU homepage draft (v4).
@@ -46,7 +47,11 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      <SiteJsonLd pageName={TITLE} pageDescription={DESCRIPTION} />
+      <SiteJsonLd
+        pageName={TITLE}
+        pageDescription={DESCRIPTION}
+        faqs={HOME_FAQS.map((f) => ({ q: f.q, a: f.a.map(fillPrices) }))}
+      />
       <Navbar />
       <main>
         <Hero />
@@ -58,6 +63,7 @@ export default function Home() {
         <ConditionLinks />
         <LeadForm />
         <Team />
+        <HomeFaq />
         <BlogHighlights />
         {/* <BottomCTA /> */}
       </main>
