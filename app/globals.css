@@ -2672,3 +2672,13 @@ section:nth-of-type(even) .section-head .eyebrow {
   text-decoration: underline;
   text-underline-offset: 2px;
 }
+
+/* Lead form honeypot: off-screen (not display:none, which some bots skip). */
+.hp-field {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}

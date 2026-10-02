@@ -47,6 +47,31 @@ export type LeadValues = {
   note: string;
 };
 
+// Where the lead came from. Sent to the Google Sheet only, never to analytics.
+export type LeadSource = {
+  pagePath: string;
+  referrer: string;
+  utm_source: string;
+  utm_medium: string;
+  utm_campaign: string;
+  gclid: string;
+  fbclid: string;
+};
+
+function readSource(): LeadSource {
+  const q = new URLSearchParams(window.location.search);
+  const get = (k: string) => q.get(k) ?? "";
+  return {
+    pagePath: window.location.pathname,
+    referrer: document.referrer,
+    utm_source: get("utm_source"),
+    utm_medium: get("utm_medium"),
+    utm_campaign: get("utm_campaign"),
+    gclid: get("gclid"),
+    fbclid: get("fbclid"),
+  };
+}
+
 function validate(values: LeadValues, minDate: string): FieldErrors {
   const errors: FieldErrors = {};
 
@@ -271,10 +296,21 @@ export function LeadForm() {
                   const res = await fetch("/api/lead", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(payload),
+                    body: JSON.stringify({
+                      ...payload,
+                      ...readSource(),
+                      // Honeypot: empty for people; bots that fill it are dropped.
+                      company: get("company"),
+                    }),
                   });
                   if (!res.ok) throw new Error("Request failed");
                   setSubmitted(payload);
+                  // Conversion event for GTM. Page path only: never any health,
+                  // location or contact details from the form.
+                  window.dataLayer?.push({
+                    event: "generate_lead",
+                    lead_page: window.location.pathname,
+                  });
                 } catch {
                   setSystemError(true);
                 } finally {
@@ -484,6 +520,20 @@ export function LeadForm() {
                   />
                 </div>
               </fieldset>
+
+              {/* Honeypot (spam trap): hidden from people and assistive tech. */}
+              <div className="hp-field" aria-hidden="true">
+                <label>
+                  Company
+                  <input
+                    type="text"
+                    name="company"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    defaultValue=""
+                  />
+                </label>
+              </div>
 
               {/* TODO: PDPA consent checkbox — handled separately */}
 
