@@ -214,13 +214,14 @@ export function LeadForm() {
     () => "",
   );
 
-  const clearFieldError = (key: keyof FieldErrors) =>
-    setFieldErrors((prev) => {
-      if (!prev[key]) return prev;
-      const next = { ...prev };
-      delete next[key];
-      return next;
-    });
+  const clearFieldError = (key: keyof FieldErrors) => {
+    if (!fieldErrors[key]) return;
+    const next = { ...fieldErrors };
+    delete next[key];
+    setFieldErrors(next);
+    // Last field error fixed: drop the "please check the form" banner too.
+    if (Object.keys(next).length === 0) setError("");
+  };
 
   const condId = useId();
   const provId = useId();
