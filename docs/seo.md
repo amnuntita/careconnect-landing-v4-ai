@@ -81,3 +81,8 @@ Check both with `pnpm build && pnpm start`, then run Lighthouse in Chrome DevToo
 - [ ] URL added to [app/sitemap.ts](../app/sitemap.ts)
 - [ ] Relevant JSON-LD added if applicable
 - [ ] Lighthouse run, LCP < 2.5s and CLS < 0.1
+
+## Lead form data
+
+The booking form's Google Sheet columns (A–S), the range env var and the
+analytics rules are documented in [leads.md](./leads.md).
