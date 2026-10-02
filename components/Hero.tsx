@@ -1,5 +1,5 @@
 import { fillPrices, HERO } from "@/lib/homepage-content";
-import { LINE_URL, SAMPLE_PHOTO_CAPTION } from "@/lib/site";
+import { LINE_URL } from "@/lib/site";
 
 import { ArrowIcon, LineIcon } from "./Icons";
 import { HeroSlideshow } from "./HeroSlideshow";
@@ -31,11 +31,11 @@ export function Hero() {
           </div>
         </div>
 
-        <figure className="hero-art">
+        {/* Real CareConnect home visits, published with written consent, so no
+            sample-photo caption (that applies to the stock OG image only). */}
+        <div className="hero-art">
           <HeroSlideshow />
-          {/* Required under every sample/stock photo (all 10 slides are sample photos). */}
-          <figcaption className="photo-caption">{SAMPLE_PHOTO_CAPTION}</figcaption>
-        </figure>
+        </div>
       </div>
     </section>
   );

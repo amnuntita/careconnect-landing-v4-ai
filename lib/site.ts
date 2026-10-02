@@ -92,7 +92,10 @@ export const REVIEW_LINKS: { google: string | null; facebook: string | null } = 
   facebook: "https://www.facebook.com/bcareconnect/reviews",
 };
 
-// Caption required under every sample/stock photo (Thai advertising rules).
+// Caption required with every sample/stock photo (Thai advertising rules).
+// Used by the stock-photo OG image (app/opengraph-image.alt.txt repeats it;
+// keep the two in sync). NOT for the hero photos, which are real CareConnect
+// home visits published with written consent.
 export const SAMPLE_PHOTO_CAPTION =
   "ภาพตัวอย่างที่ใช้ในการประชาสัมพันธ์ ไม่ใช่ผู้ให้บริการหรือผู้รับบริการจริง";
 
