@@ -1,3 +1,7 @@
+// Facts that are safe to import from client components (no env guard).
+export { LINE_ID, LINE_URL, PROVINCES_SERVED, TELEPHONE_DISPLAY } from "@/lib/public-facts";
+import { LINE_URL } from "@/lib/public-facts";
+
 // Single source of truth for site-wide facts used in metadata, JSON-LD and copy.
 // Only confirmed values belong here. Unknown values stay `null` with a TODO so
 // nothing downstream renders them.
@@ -69,13 +73,11 @@ export const ADDRESS = {
 };
 export const ADDRESS_TEXT = `${ADDRESS.streetAddress} ${ADDRESS.subdistrict} ${ADDRESS.district} จังหวัด${ADDRESS.province} ${ADDRESS.postalCode}`;
 
-export const TELEPHONE_DISPLAY = "02-114-7168";
 export const EMAIL = "sales@careconnectth.org";
 
 export const FACEBOOK_URL: string | null = "https://www.facebook.com/bcareconnect";
 export const GOOGLE_BUSINESS_PROFILE_URL: string | null =
   "https://maps.app.goo.gl/oHrjV8fQV5unRYXw6";
-export const LINE_URL: string | null = "https://lin.ee/S8VPTxqA";
 
 // Profiles that represent CareConnect elsewhere (JSON-LD `sameAs`).
 export const SAME_AS: string[] = [
@@ -100,30 +102,3 @@ export const FIRST_ASSESSMENT_WITHIN_HOURS = 24;
 // Shown at the end of every blog post. Edit the wording here.
 export const MEDICAL_DISCLAIMER =
   "เนื้อหานี้เป็นข้อมูลความรู้ทั่วไป ไม่สามารถใช้แทนคำแนะนำ การวินิจฉัย หรือการรักษาจากแพทย์ผู้ดูแลของคุณได้";
-
-// Provinces served. `label` is the short form used in copy; `name` is the
-// official province name used in structured data.
-export const PROVINCES_SERVED: { label: string; name: string }[] = [
-  { label: "กทม.", name: "กรุงเทพมหานคร" },
-  { label: "นนทบุรี", name: "นนทบุรี" },
-  { label: "สมุทรปราการ", name: "สมุทรปราการ" },
-  { label: "สมุทรสาคร", name: "สมุทรสาคร" },
-  { label: "ปทุมธานี", name: "ปทุมธานี" },
-  { label: "นครปฐม", name: "นครปฐม" },
-  { label: "เชียงใหม่", name: "เชียงใหม่" },
-  { label: "ลำพูน", name: "ลำพูน" },
-  { label: "นครสวรรค์", name: "นครสวรรค์" },
-  { label: "อยุธยา", name: "พระนครศรีอยุธยา" },
-  { label: "สุพรรณบุรี", name: "สุพรรณบุรี" },
-  { label: "สระบุรี", name: "สระบุรี" },
-  { label: "ร้อยเอ็ด", name: "ร้อยเอ็ด" },
-  { label: "ขอนแก่น", name: "ขอนแก่น" },
-  { label: "อุดรธานี", name: "อุดรธานี" },
-  { label: "นครราชสีมา", name: "นครราชสีมา" },
-  { label: "ชลบุรี", name: "ชลบุรี" },
-  { label: "ระยอง", name: "ระยอง" },
-  { label: "สงขลา", name: "สงขลา" },
-  { label: "ตรัง", name: "ตรัง" },
-  { label: "เชียงราย", name: "เชียงราย" },
-  { label: "ภูเก็ต", name: "ภูเก็ต" },
-];
