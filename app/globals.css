@@ -54,7 +54,7 @@
   /* Neutrals — softer, warmer */
   --ink: #3a2e24;
   --ink-soft: #645549;
-  --muted: #9a8a7c;
+  --muted: #70655b; /* was #9a8a7c (3.22:1 on --bg); now ≥4.5:1 on every page background */
   --line: #ebe4d4;
   --line-soft: #f2ecdf;
   --cream: #f6f0e3;
