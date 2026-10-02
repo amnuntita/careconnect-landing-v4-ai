@@ -9,7 +9,7 @@ import { Hero } from "@/components/Hero";
 import { SiteJsonLd } from "@/components/JsonLd";
 import { LeadForm } from "@/components/LeadForm";
 import { Navbar } from "@/components/Navbar";
-import { Pricing } from "@/components/Pricing";
+import { Inclusions } from "@/components/Inclusions";
 import { ProcessDiagram } from "@/components/ProcessDiagram";
 import { Programmes } from "@/components/Programmes";
 import { StickyCTA } from "@/components/StickyCTA";
@@ -54,8 +54,8 @@ export default function Home() {
         <ConcernCards />
         <ProcessDiagram />
         <Programmes />
+        <Inclusions />
         <Conditions />
-        <Pricing />
         <LeadForm />
         <Team />
         <BlogHighlights />

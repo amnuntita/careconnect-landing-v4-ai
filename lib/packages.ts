@@ -4,7 +4,6 @@
 
 export type Package = {
   name: string;
-  target: string;
   // Price in THB for the whole package.
   price: number;
   sessions: number;
@@ -16,7 +15,6 @@ export type Package = {
 export const PACKAGES: Package[] = [
   {
     name: "โปรแกรมฟื้นฟูที่บ้าน 10 ครั้ง",
-    target: "ฟื้นฟูต่อเนื่องเพื่อผลลัพธ์ที่ชัดเจน 10 ครั้ง",
     price: 15900,
     sessions: 10,
   },
@@ -34,9 +32,4 @@ export const BALANCE = MAIN_PACKAGE.price - DEPOSIT;
 // 15900 -> "15,900"
 export function formatPrice(price: number): string {
   return price.toLocaleString("en-US");
-}
-
-// "บาท / 10 ครั้ง · 1,590/ครั้ง"
-export function perSessionLabel(p: Package): string {
-  return `บาท / ${p.sessions} ครั้ง · ${formatPrice(Math.round(p.price / p.sessions))}/ครั้ง`;
 }

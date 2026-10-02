@@ -393,3 +393,22 @@ export const SitStandIcon = (p: IconProps) => (
     <path d="M4 12v8" />
   </StrokeIcon>
 );
+
+// Family / caregivers.
+export const UsersIcon = (p: IconProps) => (
+  <StrokeIcon {...p}>
+    <circle cx="9" cy="8" r="3" />
+    <path d="M3 20v-1a5 5 0 0 1 5-5h2a5 5 0 0 1 5 5v1" />
+    <path d="M16 5.5a3 3 0 0 1 0 5" />
+    <path d="M18 14a5 5 0 0 1 3 4.6V20" />
+  </StrokeIcon>
+);
+
+// Payment flexibility.
+export const WalletIcon = (p: IconProps) => (
+  <StrokeIcon {...p}>
+    <path d="M3 7a2 2 0 0 1 2-2h12v4" />
+    <rect x="3" y="7" width="18" height="13" rx="2" />
+    <path d="M16 13.5h2" />
+  </StrokeIcon>
+);

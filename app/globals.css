@@ -2353,3 +2353,117 @@ section:nth-of-type(even) .section-head .eyebrow {
   color: var(--ink);
   margin: 0 0 16px;
 }
+
+/* §6 inclusions + price. Cards are the visual weight; price is body text. */
+.inclusion-grid {
+  list-style: none;
+  margin: 0 0 20px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  align-items: start;
+}
+@media (min-width: 720px) {
+  .inclusion-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1080px) {
+  .inclusion-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+.inclusion-card {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 22px;
+}
+.inclusion-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  color: var(--brand);
+  background: var(--primary-soft);
+  margin-bottom: 12px;
+}
+.inclusion-title {
+  font-family: var(--font-heading), system-ui, sans-serif;
+  font-size: 19px;
+  font-weight: 600;
+  margin: 0 0 8px;
+  color: var(--ink);
+}
+.inclusion-list {
+  margin: 0;
+  padding-left: 1.2em;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--ink);
+}
+.inclusion-list li {
+  margin-bottom: 4px;
+}
+.inclusion-callout {
+  margin: 0 0 28px;
+  padding: 16px 20px;
+  border-radius: 14px;
+  border-left: 5px solid var(--brand);
+  background: var(--primary-soft);
+  font-family: var(--font-heading), system-ui, sans-serif;
+  font-size: 19px;
+  font-weight: 600;
+  color: var(--primary-deep);
+}
+.price-block {
+  max-width: 760px;
+}
+.price-line {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 4px;
+  color: var(--ink);
+}
+.price-note {
+  font-size: 15px;
+  color: var(--ink-soft);
+  margin: 0 0 20px;
+}
+.first-step-heading {
+  margin: 0 0 10px;
+}
+.first-step {
+  background: var(--decision-tint);
+  border: 2px solid var(--decision-border);
+  border-radius: 14px;
+  padding: 16px 20px;
+  margin-bottom: 18px;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--ink);
+}
+.first-step p {
+  margin: 0 0 8px;
+}
+.first-step ul {
+  margin: 0 0 8px;
+  padding-left: 1.2em;
+}
+.coverage-note {
+  margin-top: 24px;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--ink-soft);
+}
+.coverage-heading {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0 0 4px;
+}
+.coverage-note p {
+  margin: 0;
+}

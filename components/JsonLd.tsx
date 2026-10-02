@@ -1,4 +1,4 @@
-import { formatPrice, PACKAGES, perSessionLabel } from "@/lib/packages";
+import { formatPrice, PACKAGES } from "@/lib/packages";
 import {
   ADDRESS,
   CLINIC_NAME,
@@ -114,7 +114,8 @@ export function SiteJsonLd({
   const offers = PACKAGES.map((p) => ({
     "@type": "Offer",
     name: p.name,
-    description: `${p.target} · ${formatPrice(p.price)} ${perSessionLabel(p)}`,
+    // Whole-package price only; no per-session price anywhere.
+    description: `${p.name} · ${formatPrice(p.price)} บาท / ${p.sessions} ครั้ง`,
     url: `${SITE_URL}/#pricing`,
     price: p.price,
     priceCurrency: "THB",
