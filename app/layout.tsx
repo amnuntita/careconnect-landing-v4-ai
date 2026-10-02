@@ -6,6 +6,9 @@ import { PROVINCES_SERVED, SITE_NAME, SITE_URL } from "@/lib/site";
 
 import "./globals.css";
 
+// TODO: brand font LINE Seed Sans TH (SIL OFL). Download the official files
+// from https://seed.line.me, drop the .woff2 files in app/fonts/line-seed-sans-th/
+// and switch these to next/font/local. Not DB Heavent (web licence unconfirmed).
 const ibmPlexSansThai = IBM_Plex_Sans_Thai({
   variable: "--font-heading",
   subsets: ["latin", "thai"],

@@ -7,11 +7,28 @@
   --cc-yellow: #f2c948;
   --cc-teal: #089076;
 
-  /* Primary — warm deep sage */
-  --primary: #3d8c72;
-  --primary-deep: #2d6b5a;
+  /* Brand teal (CI #089076): accents, icons, borders, large text only —
+     3.99:1 on white, so not for small text or behind white text. */
+  --brand: var(--cc-teal);
+
+  /* Primary — backgrounds behind white text (buttons, CTA bars, badges).
+     #07836B is the AA-safe shade of the CI teal: white on it = 4.70:1. */
+  --primary: #07836b;
+  --primary-deep: #066b58; /* hover + small link text (6.24:1 on --bg) */
   --primary-soft: #e8f3ef;
   --primary-tint: #f5f0e8;
+
+  /* Role colours (process diagram / physician vs therapist only).
+     Text/tint pairs: physician 6.20:1, therapist 5.96:1, decision 6.83:1. */
+  --role-doctor-tint: #e8f8fd;
+  --role-doctor-border: var(--cc-blue);
+  --role-doctor-ink: #0b6380;
+  --role-therapist-tint: #f2f8ea;
+  --role-therapist-border: var(--cc-green); /* never as text: too light */
+  --role-therapist-ink: #066b58;
+  --decision-tint: #fef6da;
+  --decision-border: var(--cc-yellow);
+  --decision-ink: #6e5100;
 
   /* Warm accent (golden honey) */
   --accent: #e0b257;

@@ -87,9 +87,15 @@ export const SAME_AS: string[] = [
 // Public review pages linked under the reviews section. Rendered only when set.
 export const REVIEW_LINKS: { google: string | null; facebook: string | null } = {
   google: GOOGLE_BUSINESS_PROFILE_URL,
-  // TODO: supply the Facebook reviews/recommendations URL for the page.
-  facebook: null,
+  facebook: "https://www.facebook.com/bcareconnect/reviews",
 };
+
+// Caption required under every sample/stock photo (Thai advertising rules).
+export const SAMPLE_PHOTO_CAPTION =
+  "ภาพตัวอย่างที่ใช้ในการประชาสัมพันธ์ ไม่ใช่ผู้ให้บริการหรือผู้รับบริการจริง";
+
+// First assessment can usually be scheduled within this many hours of contact.
+export const FIRST_ASSESSMENT_WITHIN_HOURS = 24;
 
 // Shown at the end of every blog post. Edit the wording here.
 export const MEDICAL_DISCLAIMER =

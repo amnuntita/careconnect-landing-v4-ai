@@ -9,6 +9,9 @@ export type Physician = {
   // Medical Council licence (ใบอนุญาตประกอบวิชาชีพเวชกรรม).
   license: string;
   title: string;
+  // Practice days/hours. Thai advertising rules require these on-page
+  // wherever the physician is shown (text only; no schema property fits).
+  hours: string;
   photo: string | null;
   // CareConnect role, when confirmed. Adds affiliation → the organization.
   careConnectRole?: string;
@@ -23,6 +26,7 @@ export const DR_SUVINAI: Physician = {
   name: "สุวินัย จิระบุญศรี",
   license: "ว.78040",
   title: "แพทย์ผู้ดูแลคุณภาพ",
+  hours: "วันจันทร์–ศุกร์ เวลา 9.00–19.00 น.",
   // TODO: supply a photo (e.g. /images/staff/DR_Suvinai.jpg); the card renders text-only until then.
   photo: null,
   careConnectRole: "แพทย์ผู้ดูแลคุณภาพ",
@@ -33,9 +37,10 @@ export const DR_JIRAPORN: Physician = {
   honorificPrefix: "พญ.",
   name: "จิราภรณ์ ตั้งกฤษณขจร",
   license: "ว.56081",
-  title: "แพทย์เวชศาสตร์ฟื้นฟู",
+  title: "แพทย์เฉพาะทางเวชศาสตร์ฟื้นฟูประจำ CareConnect",
+  hours: "วันจันทร์–ศุกร์ เวลา 15.00–18.00 น.",
   photo: "/images/staff/DR_Jiraporn.jpg",
-  // TODO: confirm her role at CareConnect (title above is her specialty).
+  careConnectRole: "แพทย์เฉพาะทางเวชศาสตร์ฟื้นฟูประจำ CareConnect",
   education: [
     {
       degree: "แพทยศาสตรบัณฑิต",
