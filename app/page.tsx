@@ -11,6 +11,7 @@ import { LeadForm } from "@/components/LeadForm";
 import { Navbar } from "@/components/Navbar";
 import { Pricing } from "@/components/Pricing";
 import { ProcessDiagram } from "@/components/ProcessDiagram";
+import { Programmes } from "@/components/Programmes";
 import { StickyCTA } from "@/components/StickyCTA";
 import { Team } from "@/components/Team";
 import { TrustStrip } from "@/components/TrustStrip";
@@ -52,6 +53,7 @@ export default function Home() {
         <TrustStrip />
         <ConcernCards />
         <ProcessDiagram />
+        <Programmes />
         <Conditions />
         <Pricing />
         <LeadForm />

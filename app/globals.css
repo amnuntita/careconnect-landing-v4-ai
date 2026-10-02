@@ -2250,3 +2250,106 @@ section:nth-of-type(even) .section-head .eyebrow {
     transform: none;
   }
 }
+
+/* §5 programme cards: 1 / 2 / 3 columns. */
+.programme-grid {
+  list-style: none;
+  margin: 0 0 24px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  align-items: start;
+}
+@media (min-width: 720px) {
+  .programme-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1080px) {
+  .programme-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+.programme-card {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 22px;
+}
+.programme-head {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  margin-bottom: 14px;
+}
+.programme-icon {
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  color: var(--brand);
+  background: var(--primary-soft);
+}
+.programme-name {
+  font-family: var(--font-heading), system-ui, sans-serif;
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 1.4;
+  margin: 0;
+  color: var(--ink);
+}
+.programme-n {
+  color: var(--brand);
+}
+.programme-summary {
+  margin: 4px 0 0;
+  font-size: 15px;
+  color: var(--ink-soft);
+}
+.programme-label {
+  font-weight: 700;
+  font-size: 14px;
+  margin: 0 0 6px;
+  color: var(--ink);
+}
+.programme-list {
+  margin: 0 0 12px;
+  padding-left: 1.2em;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--ink);
+}
+.programme-list li {
+  margin-bottom: 4px;
+}
+.programme-more {
+  border-top: 1px solid var(--line-soft);
+  padding-top: 10px;
+}
+.programme-more summary {
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--primary-deep);
+  list-style: none;
+}
+.programme-more summary::-webkit-details-marker {
+  display: none;
+}
+.programme-more summary::after {
+  content: " +";
+}
+.programme-more[open] summary::after {
+  content: " −";
+}
+.programme-more[open] summary {
+  margin-bottom: 8px;
+}
+.programme-closing {
+  font-size: 17px;
+  color: var(--ink);
+  margin: 0 0 16px;
+}

@@ -372,3 +372,24 @@ export const HandIcon = (p: IconProps) => (
     <path d="M18 8a2 2 0 0 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.9-5.9-2.3L3.4 17a2 2 0 0 1 2.8-2.8L8 16" />
   </StrokeIcon>
 );
+
+// Bed (bed-bound / early mobility).
+export const BedIcon = (p: IconProps) => (
+  <StrokeIcon {...p}>
+    <path d="M2 18V6" />
+    <path d="M2 14h20v4" />
+    <path d="M22 14v-2a3 3 0 0 0-3-3h-8v5" />
+    <circle cx="6.5" cy="10.5" r="2" />
+  </StrokeIcon>
+);
+
+// Sit-to-stand (transfers, getting up).
+export const SitStandIcon = (p: IconProps) => (
+  <StrokeIcon {...p}>
+    <circle cx="13" cy="4" r="2" />
+    <path d="M13 6v6h-4l-1 8" />
+    <path d="M13 12l3 3v5" />
+    <path d="M4 12h5" />
+    <path d="M4 12v8" />
+  </StrokeIcon>
+);
