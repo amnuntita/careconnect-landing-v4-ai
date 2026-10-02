@@ -12,12 +12,12 @@ import { Pricing } from "@/components/Pricing";
 import { SocialProof } from "@/components/SocialProof";
 import { StickyCTA } from "@/components/StickyCTA";
 import { Team } from "@/components/Team";
-import { PROVINCES_SERVED, SITE_NAME } from "@/lib/site";
+import { HOME_META } from "@/lib/homepage-content";
+import { SITE_NAME } from "@/lib/site";
 
-// General home-physiotherapy framing across all six condition groups. Stroke
-// terms are owned by /stroke-rehab-at-home, so the homepage doesn't lead with them.
-const TITLE = `กายภาพบำบัดที่บ้าน วางแผนโดยแพทย์เวชศาสตร์ฟื้นฟู | ${SITE_NAME}`;
-const DESCRIPTION = `กายภาพบำบัดที่บ้านใน ${PROVINCES_SERVED.length} จังหวัด วางแผนโดยแพทย์เวชศาสตร์ฟื้นฟู ดูแลหลังผ่าตัดเข่า สะโพก อุบัติเหตุ ปวดเรื้อรัง ฝึกกลืน ผู้สูงอายุอ่อนแรง และอัมพฤกษ์ อัมพาต`;
+// Meta title/description verbatim from the BOFU homepage draft (v4).
+const TITLE = HOME_META.title;
+const DESCRIPTION = HOME_META.description;
 
 export const metadata: Metadata = {
   // `absolute` skips the layout's "%s | CareConnect" template (brand is already in the title).

@@ -1910,3 +1910,20 @@ section:nth-of-type(even) .section-head .eyebrow {
   color: inherit;
   text-decoration: none;
 }
+
+/* ============ BOFU homepage ============ */
+.hero-area {
+  font-size: 16px;
+  color: var(--ink-soft);
+  margin: 12px 0 0;
+}
+.hero-art {
+  margin: 0;
+}
+/* Caption under sample/stock photos; --ink-soft keeps it AA (6.3:1+). */
+.photo-caption {
+  margin-top: 8px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
