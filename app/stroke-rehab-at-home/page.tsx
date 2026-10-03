@@ -235,6 +235,13 @@ function renderBlock(block: StrokeBlock, key: number, blogLinkLive: boolean) {
           <Link href="/#team">{block.label}</Link>
         </p>
       );
+    case "pageLink":
+      return (
+        <p key={key}>
+          {block.text}
+          <Link href={block.href}>{block.label}</Link>
+        </p>
+      );
     case "faq":
       return <Faq key={key} />;
     case "byline":
