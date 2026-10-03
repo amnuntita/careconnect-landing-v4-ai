@@ -8,7 +8,8 @@ import { BlogPostingJsonLd } from "@/components/JsonLd";
 import { Navbar } from "@/components/Navbar";
 import { PortableTextBody } from "@/components/PortableTextBody";
 import { formatThaiDate } from "@/lib/format";
-import { MEDICAL_DISCLAIMER } from "@/lib/site";
+import { DEFAULT_OG_IMAGE } from "@/lib/page-schema";
+import { MEDICAL_DISCLAIMER, SITE_NAME } from "@/lib/site";
 import { client } from "@/sanity/lib/client";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { urlFor } from "@/sanity/lib/image";
@@ -62,18 +63,21 @@ export async function generateMetadata({
     openGraph: {
       type: "article",
       url: `/blog/${slug}`,
+      siteName: SITE_NAME,
       title,
       description,
       locale: "th_TH",
       publishedTime: post.publishedAt,
       modifiedTime: post._updatedAt,
-      ...(ogImage ? { images: [{ url: ogImage, width: 1200, height: 630 }] } : {}),
+      // A post without its own image falls back to the site's default OG
+      // image (a page-level openGraph replaces the file-based one).
+      images: ogImage ? [{ url: ogImage, width: 1200, height: 630 }] : [DEFAULT_OG_IMAGE],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      ...(ogImage ? { images: [ogImage] } : {}),
+      images: ogImage ? [ogImage] : [DEFAULT_OG_IMAGE],
     },
   };
 }

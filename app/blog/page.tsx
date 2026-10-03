@@ -4,6 +4,7 @@ import { Breadcrumb } from "@/components/Breadcrumb";
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 import { PostCard } from "@/components/PostCard";
+import { DEFAULT_OG_IMAGE } from "@/lib/page-schema";
 import { SITE_NAME } from "@/lib/site";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { POSTS_QUERY, SETTINGS_QUERY } from "@/sanity/lib/queries";
@@ -24,6 +25,13 @@ export const metadata: Metadata = {
     title: DEFAULT_TITLE,
     description: DEFAULT_DESCRIPTION,
     locale: "th_TH",
+    images: [DEFAULT_OG_IMAGE],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+    images: [DEFAULT_OG_IMAGE],
   },
 };
 
