@@ -28,6 +28,12 @@ export const MAIN_PACKAGE = PACKAGES[0];
 export const DEPOSIT = 1500;
 // Remaining balance if the family continues, payable in instalments.
 export const BALANCE = MAIN_PACKAGE.price - DEPOSIT;
+// The balance can be split into equal instalments (before sessions 2, 5, 8).
+export const INSTALMENT_COUNT = 3;
+export const INSTALMENT = BALANCE / INSTALMENT_COUNT;
+if (!Number.isInteger(INSTALMENT)) {
+  throw new Error("BALANCE must split into whole-baht instalments.");
+}
 
 // 15900 -> "15,900"
 export function formatPrice(price: number): string {

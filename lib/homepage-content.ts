@@ -9,14 +9,15 @@
 // removed from the price note; §7 link targets + cognition item; two FAQs
 // added as the first two items.
 
-import { BALANCE, DEPOSIT, formatPrice, MAIN_PACKAGE } from "@/lib/packages";
+import { BALANCE, DEPOSIT, formatPrice, INSTALMENT, MAIN_PACKAGE } from "@/lib/packages";
 
-// Replace {PRICE} / {BALANCE} / {DEPOSIT} with the live values.
+// Replace {PRICE} / {BALANCE} / {DEPOSIT} / {INSTALMENT} with the live values.
 export function fillPrices(text: string): string {
   return text
     .replaceAll("{PRICE}", formatPrice(MAIN_PACKAGE.price))
     .replaceAll("{BALANCE}", formatPrice(BALANCE))
-    .replaceAll("{DEPOSIT}", formatPrice(DEPOSIT));
+    .replaceAll("{DEPOSIT}", formatPrice(DEPOSIT))
+    .replaceAll("{INSTALMENT}", formatPrice(INSTALMENT));
 }
 
 export const HOME_META = {
