@@ -6,6 +6,7 @@ import {
   CLINIC_NAME,
   COMPANY_REGISTRATION_NUMBER,
   EMAIL,
+  FACEBOOK_URL,
   FACILITY_REGISTRATION_NUMBER,
   LEGAL_NAME,
   LINE_ID,
@@ -49,11 +50,11 @@ export async function Footer() {
                   LINE ID: {LINE_ID} (<u>คลิกเพื่อแอดไลน์</u>)
                 </a>
               </li>
-              <li>
-                <a href="https://www.facebook.com/share/r/1BEzYEYdGC/">
-                  Facebook: CareConnect กายภาพบำบัดที่บ้าน
-                </a>
-              </li>
+              {FACEBOOK_URL ? (
+                <li>
+                  <a href={FACEBOOK_URL}>Facebook: CareConnect กายภาพบำบัดที่บ้าน</a>
+                </li>
+              ) : null}
               <li>
                 <a href={`mailto:${EMAIL}`}>อีเมล: {EMAIL}</a>
               </li>
