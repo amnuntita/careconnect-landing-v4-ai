@@ -32,12 +32,19 @@ function RoleIcons({ step }: { step: ProcessStep }) {
   );
 }
 
-export function ProcessDiagram({ id = "process" }: { id?: string }) {
+// `heading` overrides the homepage §4 heading (service pages use their own H2).
+export function ProcessDiagram({
+  id = "process",
+  heading = PROCESS.heading,
+}: {
+  id?: string;
+  heading?: string;
+}) {
   return (
     <section id={id} className="process-section">
       <div className="wrap">
         <div className="section-head">
-          <h2 className="h2">{PROCESS.heading}</h2>
+          <h2 className="h2">{heading}</h2>
         </div>
 
         <ul className="process-legend" aria-label="สีตามผู้ให้บริการ">

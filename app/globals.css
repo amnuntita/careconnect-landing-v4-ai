@@ -2685,3 +2685,81 @@ section:nth-of-type(even) .section-head .eyebrow {
   height: 1px;
   overflow: hidden;
 }
+
+/* ============ Draft-generated content pages (components/ContentBlocks) ============ */
+.content-page .post-body .h2 {
+  margin-top: 1.6em;
+}
+.value-cards {
+  list-style: none;
+  padding: 0 !important;
+  margin: 0 0 1.6em !important;
+  display: grid;
+  gap: 12px;
+}
+@media (min-width: 720px) {
+  .value-cards {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.value-card {
+  margin: 0 !important;
+  background: white;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--brand);
+  border-radius: 14px;
+  padding: 16px 18px;
+}
+.value-card .h3 {
+  margin: 0 0 0.3em;
+}
+.value-card p {
+  margin: 0;
+}
+.post-body p.signature {
+  margin: 0;
+  font-weight: 600;
+}
+.post-body p.signature + p.signature {
+  font-weight: 400;
+  color: var(--ink-soft);
+  margin-bottom: 1.2em;
+}
+.facts-list {
+  margin: 0 0 1.2em;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: white;
+  padding: 6px 18px;
+}
+.facts-list > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 8px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+.facts-list > div:last-child {
+  border-bottom: 0;
+}
+.facts-list dt {
+  font-weight: 600;
+}
+.facts-list dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.content-closing {
+  background: var(--cream);
+  text-align: center;
+}
+.content-closing .hero-cta-row {
+  justify-content: center;
+}
+.content-closing a.btn {
+  color: white;
+  text-decoration: none;
+}
+.content-closing a.btn.ghost {
+  color: var(--ink);
+}
