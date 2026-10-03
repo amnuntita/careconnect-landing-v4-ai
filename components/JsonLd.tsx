@@ -1,6 +1,7 @@
 import { formatPrice, PACKAGES } from "@/lib/packages";
 import {
   ADDRESS,
+  ALTERNATE_NAMES,
   CLINIC_NAME,
   COMPANY_REGISTRATION_NUMBER,
   EMAIL,
@@ -71,6 +72,7 @@ export function SiteJsonLd({
     "@type": "Physiotherapy",
     "@id": ORGANIZATION_ID,
     name: SITE_NAME,
+    alternateName: ALTERNATE_NAMES,
     legalName: LEGAL_NAME,
     url: SITE_URL,
     logo: LOGO_URL,

@@ -8,6 +8,13 @@ import { LINE_URL } from "@/lib/public-facts";
 
 export const SITE_NAME = "CareConnect";
 
+// Other names the organisation is known by (JSON-LD `alternateName`).
+export const ALTERNATE_NAMES = [
+  "CareConnect กายภาพบำบัดที่บ้าน",
+  "แคร์คอนเน็ค",
+  "เวชการคลีนิกเวชกรรม",
+];
+
 const LOCAL_SITE_URL = "http://localhost:3000";
 
 // Canonical origin (no trailing slash). Sitemap URLs, canonicals, OG URLs and
@@ -80,6 +87,8 @@ export const GOOGLE_BUSINESS_PROFILE_URL: string | null =
   "https://maps.app.goo.gl/oHrjV8fQV5unRYXw6";
 
 // Profiles that represent CareConnect elsewhere (JSON-LD `sameAs`).
+// TODO: replace the GBP short link with the full Google Maps place URL
+// (https://www.google.com/maps/place/...) once it is supplied.
 export const SAME_AS: string[] = [
   FACEBOOK_URL,
   GOOGLE_BUSINESS_PROFILE_URL,
