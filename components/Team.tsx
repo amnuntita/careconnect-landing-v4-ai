@@ -44,7 +44,7 @@ const PTS: PT[] = [
     name: "ชัยอนันต์ บังจันทร์",
     license: "ก.9473",
     expYears: 11,
-    provinces: ["ชลบุรี", "ระยอง"],
+    provinces: ["ชลบุรี"],
     photo: "PT_Chaianan.jpeg",
   },
 ];
