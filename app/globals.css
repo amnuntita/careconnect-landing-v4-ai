@@ -2890,3 +2890,32 @@ section:nth-of-type(even) .section-head .eyebrow {
   padding-top: 32px;
   padding-bottom: 32px;
 }
+/* Province / district / service lists on the service-area pages. */
+.post-body ul.chip-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.4em;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.post-body ul.chip-list li {
+  margin: 0;
+  padding: 6px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: white;
+  font-size: 15px;
+}
+.post-body ul.chip-list--links li {
+  padding: 0;
+}
+.post-body ul.chip-list--links li:not(:has(a)) {
+  padding: 8px 14px;
+}
+.post-body ul.chip-list--links a {
+  display: inline-block;
+  padding: 8px 14px;
+  min-height: 44px;
+  box-sizing: border-box;
+}
