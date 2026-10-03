@@ -9,29 +9,38 @@ export const TELEPHONE_DISPLAY = "02-114-7168";
 export const LINE_ID = "@careconnect";
 export const LINE_URL = "https://line.me/R/ti/p/@careconnect";
 
-// Provinces served. `label` is the short form used in copy; `name` is the
-// official province name used in structured data.
+// Provinces served (22), ordered by the number of active physiotherapists.
+// `label` is the short form used in copy and as the lead-form / Sheet value;
+// `name` is the official province name used in structured data.
 export const PROVINCES_SERVED: { label: string; name: string }[] = [
   { label: "กทม.", name: "กรุงเทพมหานคร" },
   { label: "นนทบุรี", name: "นนทบุรี" },
-  { label: "สมุทรปราการ", name: "สมุทรปราการ" },
-  { label: "สมุทรสาคร", name: "สมุทรสาคร" },
   { label: "ปทุมธานี", name: "ปทุมธานี" },
   { label: "นครปฐม", name: "นครปฐม" },
-  { label: "เชียงใหม่", name: "เชียงใหม่" },
-  { label: "ลำพูน", name: "ลำพูน" },
-  { label: "นครสวรรค์", name: "นครสวรรค์" },
-  { label: "อยุธยา", name: "พระนครศรีอยุธยา" },
-  { label: "สุพรรณบุรี", name: "สุพรรณบุรี" },
-  { label: "สระบุรี", name: "สระบุรี" },
-  { label: "ร้อยเอ็ด", name: "ร้อยเอ็ด" },
-  { label: "ขอนแก่น", name: "ขอนแก่น" },
-  { label: "อุดรธานี", name: "อุดรธานี" },
-  { label: "นครราชสีมา", name: "นครราชสีมา" },
+  { label: "สมุทรปราการ", name: "สมุทรปราการ" },
+  { label: "ราชบุรี", name: "ราชบุรี" },
+  { label: "นครนายก", name: "นครนายก" },
   { label: "ชลบุรี", name: "ชลบุรี" },
-  { label: "ระยอง", name: "ระยอง" },
-  { label: "สงขลา", name: "สงขลา" },
-  { label: "ตรัง", name: "ตรัง" },
-  { label: "เชียงราย", name: "เชียงราย" },
-  { label: "ภูเก็ต", name: "ภูเก็ต" },
+  { label: "อยุธยา", name: "พระนครศรีอยุธยา" },
+  { label: "ฉะเชิงเทรา", name: "ฉะเชิงเทรา" },
+  { label: "ขอนแก่น", name: "ขอนแก่น" },
+  { label: "สมุทรสาคร", name: "สมุทรสาคร" },
+  { label: "สระบุรี", name: "สระบุรี" },
+  { label: "ปราจีนบุรี", name: "ปราจีนบุรี" },
+  { label: "มหาสารคาม", name: "มหาสารคาม" },
+  { label: "สมุทรสงคราม", name: "สมุทรสงคราม" },
+  { label: "นครราชสีมา", name: "นครราชสีมา" },
+  { label: "ลพบุรี", name: "ลพบุรี" },
+  { label: "เชียงใหม่", name: "เชียงใหม่" },
+  { label: "นครศรีธรรมราช", name: "นครศรีธรรมราช" },
+  { label: "ชัยภูมิ", name: "ชัยภูมิ" },
+  { label: "ลำพูน", name: "ลำพูน" },
 ];
+
+// Guard: exactly 22 unique provinces (copy across the site says "22 จังหวัด").
+if (
+  PROVINCES_SERVED.length !== 22 ||
+  new Set(PROVINCES_SERVED.map((p) => p.name)).size !== 22
+) {
+  throw new Error("PROVINCES_SERVED must list exactly 22 unique provinces.");
+}
