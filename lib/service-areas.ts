@@ -4,6 +4,11 @@
 // they became structure (links, CTA buttons, form, …). Prices are {TOKENS}
 // filled from lib/packages.ts and site facts are {TOKENS} filled from
 // lib/site.ts (see fillTokens in lib/content-blocks.ts), so they can't drift.
+//
+// Approved edits after generation:
+// - link text names the destination page: the hub's Bangkok / Nonthaburi lines
+//   link "กายภาพบำบัดที่บ้าน กรุงเทพมหานคร" / "กายภาพบำบัดที่บ้าน นนทบุรี"
+//   (were "ดูเขตที่ให้บริการ" / "ดูรายละเอียด").
 
 import type { ContentPage } from "@/lib/content-blocks";
 
@@ -37,14 +42,14 @@ export const SERVICE_AREA_PAGE: ContentPage = {
         [
           "กรุงเทพฯ เราดูแลครบทั้ง 50 เขต → ",
           {
-            "text": "ดูเขตที่ให้บริการ",
+            "text": "กายภาพบำบัดที่บ้าน กรุงเทพมหานคร",
             "href": "/service-area/bangkok"
           }
         ],
         [
           "นนทบุรี ซึ่งเป็นที่ตั้งสำนักงานของเรา → ",
           {
-            "text": "ดูรายละเอียด",
+            "text": "กายภาพบำบัดที่บ้าน นนทบุรี",
             "href": "/service-area/nonthaburi"
           }
         ]

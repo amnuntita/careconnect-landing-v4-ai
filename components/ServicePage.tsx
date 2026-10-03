@@ -10,7 +10,7 @@ import {
   siteStubs,
   webPageNode,
 } from "@/lib/page-schema";
-import { getPublishedSlugs } from "@/sanity/lib/posts";
+import { getPublishedTitles } from "@/sanity/lib/posts";
 
 // Shared layout for the service landing pages (/bedbound-rehab-at-home, …).
 // Everything comes from the page data in lib/service-pages.ts: Breadcrumb, one
@@ -19,7 +19,7 @@ import { getPublishedSlugs } from "@/sanity/lib/posts";
 // Service, FAQPage (same FAQ data) and BreadcrumbList. No Offer.
 export async function ServicePage({ page }: { page: ContentPage }) {
   const blogSlugs = page.blocks.flatMap((b) => (b.t === "blogLink" ? [b.slug] : []));
-  const published = await getPublishedSlugs(blogSlugs);
+  const published = await getPublishedTitles(blogSlugs);
 
   const jsonLd = graph(
     webPageNode(page, "WebPage", { about: { "@id": `${pageUrl(page)}#service` } }),

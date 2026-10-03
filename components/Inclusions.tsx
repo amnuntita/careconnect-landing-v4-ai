@@ -70,9 +70,8 @@ export function Inclusions() {
         <div className="price-block">
           <p className="price-line">{fillPrices(s.price)}</p>
           <p className="price-link">
-            <Link href={s.pricingLink.href}>
-              {s.pricingLink.text} <ArrowIcon />
-            </Link>
+            <Link href={s.pricingLink.href}>{s.pricingLink.text}</Link>
+            {s.pricingLink.rest}
           </p>
           <p className="price-note">{s.priceNote}</p>
 

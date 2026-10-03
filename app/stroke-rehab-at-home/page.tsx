@@ -9,6 +9,7 @@ import { LeadForm } from "@/components/LeadForm";
 import { Navbar } from "@/components/Navbar";
 import { StickyCTABar } from "@/components/StickyCTABar";
 import { Team } from "@/components/Team";
+import { ABOUT_PAGE } from "@/lib/about-page";
 import { DEFAULT_OG_IMAGE } from "@/lib/page-schema";
 import { DR_JIRAPORN, DR_SUVINAI, physicianJsonLd } from "@/lib/physicians";
 import {
@@ -58,17 +59,18 @@ export const metadata: Metadata = {
 };
 
 // The guide post lives in Sanity. Link to it only once it's published, so the
-// page never points at a 404. The "post" tag revalidates this on publish.
-async function postExists(slug: string): Promise<boolean> {
+// page never points at a 404; its title is the link text. The "post" tag
+// revalidates this on publish.
+async function postTitle(slug: string): Promise<string | null> {
   try {
-    const id = await sanityFetch<string | null>({
-      query: `*[_type == "post" && slug.current == $slug][0]._id`,
+    const title = await sanityFetch<string | null>({
+      query: `*[_type == "post" && slug.current == $slug][0].title`,
       params: { slug },
       tags: ["post"],
     });
-    return Boolean(id);
+    return title || null;
   } catch {
-    return false;
+    return null;
   }
 }
 
@@ -128,7 +130,7 @@ function Faq() {
 
 // Renders the prose blocks. Team and the lead form are full-width sections,
 // so the prose is split into chunks around them.
-function renderBlock(block: StrokeBlock, key: number, blogLinkLive: boolean) {
+function renderBlock(block: StrokeBlock, key: number, blogTitle: string | null) {
   switch (block.t) {
     case "h2":
       return (
@@ -227,15 +229,18 @@ function renderBlock(block: StrokeBlock, key: number, blogLinkLive: boolean) {
         </div>
       );
     case "blogLink":
-      return blogLinkLive ? (
+      // Link text = the post's title (never the whole sentence).
+      return blogTitle ? (
         <p key={key}>
-          <Link href={`/blog/${block.slug}#${block.hash}`}>{block.label}</Link>
+          {block.label} ได้ที่{" "}
+          <Link href={`/blog/${block.slug}#${block.hash}`}>{blogTitle}</Link>
         </p>
       ) : null;
     case "teamLink":
       return (
+        // Link text = the destination page's name (/about, which has the team).
         <p key={key}>
-          <Link href="/#team">{block.label}</Link>
+          {block.label} ได้ที่ <Link href="/about#team">{ABOUT_PAGE.h1}</Link>
         </p>
       );
     case "pageLink":
@@ -308,7 +313,7 @@ function pageJsonLd() {
 }
 
 export default async function StrokeRehabPage() {
-  const blogLinkLive = await postExists("stroke-after-discharge-guide");
+  const blogTitle = await postTitle("stroke-after-discharge-guide");
 
   // Split blocks into prose chunks around the full-width Team / form sections.
   const chunks: (StrokeBlock[] | "team" | "form")[] = [[]];
@@ -351,7 +356,7 @@ export default async function StrokeRehabPage() {
                     <h1 className="h1">{STROKE_META.h1}</h1>
                   </>
                 ) : null}
-                {chunk.map((block) => renderBlock(block, key++, blogLinkLive))}
+                {chunk.map((block) => renderBlock(block, key++, blogTitle))}
               </div>
             );
           })}

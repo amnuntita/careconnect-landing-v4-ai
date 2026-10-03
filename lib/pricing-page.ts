@@ -4,6 +4,10 @@
 // they became structure (links, CTA buttons, form, …). Prices are {TOKENS}
 // filled from lib/packages.ts and site facts are {TOKENS} filled from
 // lib/site.ts (see fillTokens in lib/content-blocks.ts), so they can't drift.
+//
+// Approved edits after generation:
+// - link text names the destination page: "คอร์สฝึกกลืนและการขับเสมหะ" is plain
+//   text followed by "(ดูรายละเอียดได้ที่ ฝึกกลืนที่บ้าน)", the page name linked.
 
 import type { ContentPage } from "@/lib/content-blocks";
 
@@ -66,10 +70,12 @@ export const PRICING_PAGE: ContentPage = {
           "programmes": true
         },
         " รวมถึง",
+        "คอร์สฝึกกลืนและการขับเสมหะ (ดูรายละเอียดได้ที่ ",
         {
-          "text": "คอร์สฝึกกลืนและการขับเสมหะ",
+          "text": "ฝึกกลืนที่บ้าน",
           "href": "/swallowing-therapy-at-home"
-        }
+        },
+        ")"
       ]
     },
     {

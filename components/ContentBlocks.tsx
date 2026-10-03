@@ -51,7 +51,8 @@ function ProseBlock({
   index,
 }: {
   block: Block;
-  published: Set<string>;
+  // Published blog posts among this page's blogLink slugs: slug → title.
+  published: Map<string, string>;
   custom?: CustomRender;
   index: number;
 }) {
@@ -118,10 +119,17 @@ function ProseBlock({
         </section>
       );
     case "blogLink":
-      // Link only to a published post, never to a 404.
+      // Link only to a published post, never to a 404. The link text is the
+      // post's own title, so it always names the page it points to.
       return published.has(block.slug) ? (
         <p>
-          <Segs segs={block.segs} />
+          <Segs
+            segs={block.segs.map((seg) =>
+              typeof seg === "object" && "href" in seg && seg.href === `/blog/${block.slug}`
+                ? { ...seg, text: published.get(block.slug) || seg.text }
+                : seg,
+            )}
+          />
         </p>
       ) : null;
     default:
@@ -157,12 +165,12 @@ function FullWidthBlock({ block, custom, index }: { block: Block; custom?: Custo
 // Footer, and the sticky CTA bar when the page has a lead form.
 export function ContentPageView({
   page,
-  published = new Set(),
+  published = new Map(),
   custom,
   jsonLd,
 }: {
   page: ContentPage;
-  published?: Set<string>;
+  published?: Map<string, string>;
   custom?: CustomRender;
   jsonLd?: ReactNode;
 }) {
@@ -227,7 +235,7 @@ export function ProseBlocks({ blocks }: { blocks: Block[] }) {
   return (
     <>
       {blocks.map((block, i) => (
-        <ProseBlock key={i} block={block} published={new Set()} index={i} />
+        <ProseBlock key={i} block={block} published={new Map()} index={i} />
       ))}
     </>
   );

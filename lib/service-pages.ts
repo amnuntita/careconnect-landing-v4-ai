@@ -8,6 +8,11 @@
 // Approved edits after generation:
 // - post-surgery hip section: "ให้อยู่ในท่าที่ปลอดภัยต่อข้อสะโพกใหม่" →
 //   "ให้อยู่ในท่าที่เป็นไปตามข้อควรระวังหลังผ่าตัด"
+// - link text names the destination page: the post-surgery, Parkinson's,
+//   cognitive and swallowing price lines are plain text followed by a
+//   separate "ดูรายละเอียดค่าบริการ" link to /pricing; the Parkinson's
+//   swallowing FAQ answer reads "…มีปัญหาการกลืนร่วมด้วย ดูรายละเอียดได้ที่
+//   ฝึกกลืนที่บ้าน" with "ฝึกกลืนที่บ้าน" linked.
 
 import type { ContentPage } from "@/lib/content-blocks";
 
@@ -338,8 +343,14 @@ export const POST_SURGERY_PAGE: ContentPage = {
     {
       "t": "p",
       "segs": [
+        "ส่วนใหญ่คนไข้กลุ่มนี้ใช้โปรแกรมฝึกเดินที่บ้าน ประเมินและฝึกครั้งแรก {DEPOSIT} บาท โปรแกรม 10 ครั้ง {PRICE} บาท รวมค่าเดินทางและอุปกรณ์แล้ว"
+      ]
+    },
+    {
+      "t": "p",
+      "segs": [
         {
-          "text": "ส่วนใหญ่คนไข้กลุ่มนี้ใช้โปรแกรมฝึกเดินที่บ้าน ประเมินและฝึกครั้งแรก {DEPOSIT} บาท โปรแกรม 10 ครั้ง {PRICE} บาท รวมค่าเดินทางและอุปกรณ์แล้ว",
+          "text": "ดูรายละเอียดค่าบริการ",
           "href": "/pricing"
         }
       ]
@@ -463,8 +474,14 @@ export const PARKINSONS_PAGE: ContentPage = {
     {
       "t": "p",
       "segs": [
+        "ประเมินและฝึกครั้งแรก {DEPOSIT} บาท โปรแกรม 10 ครั้ง {PRICE} บาท รวมค่าเดินทางและอุปกรณ์แล้ว"
+      ]
+    },
+    {
+      "t": "p",
+      "segs": [
         {
-          "text": "ประเมินและฝึกครั้งแรก {DEPOSIT} บาท โปรแกรม 10 ครั้ง {PRICE} บาท รวมค่าเดินทางและอุปกรณ์แล้ว",
+          "text": "ดูรายละเอียดค่าบริการ",
           "href": "/pricing"
         }
       ]
@@ -494,12 +511,11 @@ export const PARKINSONS_PAGE: ContentPage = {
           "q": "ผู้ป่วยกลืนลำบากด้วย ทำอย่างไร?",
           "a": [
             [
-              "ผู้ป่วยพาร์กินสันบางรายมีปัญหาการกลืน ดู",
+              "ผู้ป่วยพาร์กินสันบางรายมีปัญหาการกลืนร่วมด้วย ดูรายละเอียดได้ที่ ",
               {
-                "text": "บริการฝึกกลืนที่บ้าน",
+                "text": "ฝึกกลืนที่บ้าน",
                 "href": "/swallowing-therapy-at-home"
-              },
-              "ได้ที่"
+              }
             ]
           ]
         }
@@ -624,8 +640,14 @@ export const COGNITIVE_PAGE: ContentPage = {
     {
       "t": "p",
       "segs": [
+        "ประเมินและฝึกครั้งแรก {DEPOSIT} บาท โปรแกรม 10 ครั้ง {PRICE} บาท รวมค่าเดินทางและอุปกรณ์แล้ว"
+      ]
+    },
+    {
+      "t": "p",
+      "segs": [
         {
-          "text": "ประเมินและฝึกครั้งแรก {DEPOSIT} บาท โปรแกรม 10 ครั้ง {PRICE} บาท รวมค่าเดินทางและอุปกรณ์แล้ว",
+          "text": "ดูรายละเอียดค่าบริการ",
           "href": "/pricing"
         }
       ]
@@ -782,8 +804,14 @@ export const SWALLOWING_PAGE: ContentPage = {
     {
       "t": "p",
       "segs": [
+        "คอร์สฝึกกลืนใช้ราคาเดียวกับโปรแกรมฟื้นฟูอื่น ประเมินและฝึกครั้งแรก {DEPOSIT} บาท โปรแกรม 10 ครั้ง {PRICE} บาท รวมค่าเดินทางและอุปกรณ์แล้ว"
+      ]
+    },
+    {
+      "t": "p",
+      "segs": [
         {
-          "text": "คอร์สฝึกกลืนใช้ราคาเดียวกับโปรแกรมฟื้นฟูอื่น ประเมินและฝึกครั้งแรก {DEPOSIT} บาท โปรแกรม 10 ครั้ง {PRICE} บาท รวมค่าเดินทางและอุปกรณ์แล้ว",
+          "text": "ดูรายละเอียดค่าบริการ",
           "href": "/pricing"
         }
       ]

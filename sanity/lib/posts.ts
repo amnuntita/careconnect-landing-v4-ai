@@ -18,3 +18,19 @@ export async function getPublishedSlugs(slugs: string[]): Promise<Set<string>> {
     return new Set();
   }
 }
+
+// Titles of the published posts among these slugs (slug → title). Used as
+// link text, so a link always names the post it points to. Fails soft.
+export async function getPublishedTitles(slugs: string[]): Promise<Map<string, string>> {
+  if (!slugs.length) return new Map();
+  try {
+    const found = await sanityFetch<{ slug: string; title: string }[]>({
+      query: `*[_type == "post" && slug.current in $slugs]{ "slug": slug.current, title }`,
+      params: { slugs },
+      tags: ["post"],
+    });
+    return new Map((found ?? []).map((p) => [p.slug, p.title]));
+  } catch {
+    return new Map();
+  }
+}
