@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import {
   ADDRESS_TEXT,
@@ -11,14 +12,17 @@ import {
   LINE_URL,
   PROVINCES_SERVED,
 } from "@/lib/site";
+import { getServiceLinks } from "@/lib/service-links";
 
-export function Footer() {
+export async function Footer() {
+  // Same service links as the Navbar; unpublished blog posts are left out.
+  const services = (await getServiceLinks()).filter((l) => l.live);
   return (
     <footer className="site-footer">
       <div className="wrap">
         <div className="top">
           <div>
-            <a href="#top" className="logo" aria-label="CareConnect">
+            <Link href="/" className="logo" aria-label="CareConnect">
               <Image
                 src="/images/CareConnect Logo.png"
                 alt="CareConnect"
@@ -26,7 +30,7 @@ export function Footer() {
                 height={2000}
                 className="brand-logo brand-logo--footer"
               />
-            </a>
+            </Link>
             <p className="blurb">
               บริการกายภาพบำบัดและกิจกรรมบำบัดที่บ้าน
                ครอบคลุม {PROVINCES_SERVED.length} จังหวัดทั่วประเทศ ดูแลโดยนักกายภาพบำบัดวิชาชีพ
@@ -62,19 +66,30 @@ export function Footer() {
           </div>
 
           <div>
+            <h3 className="col-h">บริการ</h3>
+            <ul>
+              {services.map((l) => (
+                <li key={l.href}>
+                  <Link href={l.href}>{l.label}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
             <h3 className="col-h">ข้อมูล</h3>
             <ul>
               <li>
-                <a href="#pricing">แพ็กเกจและราคา</a>
+                <Link href="/pricing">แพ็กเกจและราคา</Link>
               </li>
               <li>
-                <a href="#team">ทีมของเรา</a>
+                <Link href="/about#team">ทีมของเรา</Link>
               </li>
               <li>
-                <a href="/terms">เงื่อนไขการใช้บริการ</a>
+                <Link href="/terms">เงื่อนไขการใช้บริการ</Link>
               </li>
               <li>
-                <a href="/privacy">นโยบายความเป็นส่วนตัว</a>
+                <Link href="/privacy">นโยบายความเป็นส่วนตัว</Link>
               </li>
             </ul>
           </div>

@@ -412,3 +412,38 @@ export const WalletIcon = (p: IconProps) => (
     <path d="M16 13.5h2" />
   </StrokeIcon>
 );
+
+export const ChevronDownIcon = (p: IconProps) => (
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+    {...p}
+  >
+    <polyline points="6 9 12 15 18 9" />
+  </svg>
+);
+
+export const MenuIcon = (p: IconProps) => (
+  <svg
+    width="22"
+    height="22"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    aria-hidden="true"
+    {...p}
+  >
+    <line x1="4" y1="7" x2="20" y2="7" />
+    <line x1="4" y1="12" x2="20" y2="12" />
+    <line x1="4" y1="17" x2="20" y2="17" />
+  </svg>
+);
