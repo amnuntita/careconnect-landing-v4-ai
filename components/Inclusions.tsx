@@ -21,6 +21,31 @@ const GROUP_ICONS: ComponentType<SVGProps<SVGSVGElement>>[] = [
   WalletIcon, // ความยืดหยุ่น
 ];
 
+// The five "what's included" groups. Shared by homepage §6 and /pricing, so
+// the copy exists once (INCLUSIONS in lib/homepage-content.ts).
+export function InclusionGroups() {
+  return (
+    <ul className="inclusion-grid">
+      {INCLUSIONS.groups.map((g, i) => {
+        const Icon = GROUP_ICONS[i];
+        return (
+          <li className="inclusion-card" key={g.title}>
+            <span className="inclusion-icon" aria-hidden="true">
+              <Icon />
+            </span>
+            <h3 className="inclusion-title">{g.title}</h3>
+            <ul className="inclusion-list">
+              {g.items.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
+
 // §6. The inclusion cards are the prominent element; the price is a normal
 // sentence read from lib/packages.ts (via fillPrices), not a headline number,
 // and there is no per-session price.
@@ -38,24 +63,7 @@ export function Inclusions() {
           </div>
         </div>
 
-        <ul className="inclusion-grid">
-          {s.groups.map((g, i) => {
-            const Icon = GROUP_ICONS[i];
-            return (
-              <li className="inclusion-card" key={g.title}>
-                <span className="inclusion-icon" aria-hidden="true">
-                  <Icon />
-                </span>
-                <h3 className="inclusion-title">{g.title}</h3>
-                <ul className="inclusion-list">
-                  {g.items.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </li>
-            );
-          })}
-        </ul>
+        <InclusionGroups />
 
         <p className="inclusion-callout">{s.callout}</p>
 

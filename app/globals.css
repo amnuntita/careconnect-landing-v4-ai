@@ -2886,3 +2886,7 @@ section:nth-of-type(even) .section-head .eyebrow {
 .content-closing a.btn.ghost {
   color: var(--ink);
 }
+.content-inclusions {
+  padding-top: 32px;
+  padding-bottom: 32px;
+}
