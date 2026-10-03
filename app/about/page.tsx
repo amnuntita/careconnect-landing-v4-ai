@@ -13,7 +13,9 @@ import {
 import { DR_JIRAPORN, DR_SUVINAI, physicianJsonLd } from "@/lib/physicians";
 import { ORGANIZATION_ID } from "@/lib/site";
 
-const PAGE = ABOUT_PAGE;
+// The draft's closing CTA ("ทดลองทำกายภาพ") points at the lead form, which
+// draft A doesn't place; it goes at the end of the page, as on the others.
+const PAGE = { ...ABOUT_PAGE, blocks: [...ABOUT_PAGE.blocks, { t: "form" as const }] };
 
 export const metadata: Metadata = contentPageMetadata(PAGE);
 
