@@ -1,4 +1,19 @@
+import Link from "next/link";
+
 import { FAQ_SECTION, fillPrices, HOME_FAQS } from "@/lib/homepage-content";
+
+// Render an answer paragraph, linking `link.text` where it occurs.
+function answer(text: string, link?: { text: string; href: string }) {
+  const i = link ? text.lastIndexOf(link.text) : -1;
+  if (!link || i < 0) return text;
+  return (
+    <>
+      {text.slice(0, i)}
+      <Link href={link.href}>{link.text}</Link>
+      {text.slice(i + link.text.length)}
+    </>
+  );
+}
 
 // §9 FAQ. Native <details>: collapsed, but every answer is in the server
 // HTML. The FAQPage JSON-LD (SiteJsonLd) is built from the same HOME_FAQS.
@@ -17,7 +32,7 @@ export function HomeFaq() {
               </summary>
               <div className="faq-answer">
                 {faq.a.map((para) => (
-                  <p key={para}>{fillPrices(para)}</p>
+                  <p key={para}>{answer(fillPrices(para), faq.link)}</p>
                 ))}
               </div>
             </details>

@@ -2532,6 +2532,20 @@ section:nth-of-type(even) .section-head .eyebrow {
   margin: 0 0 4px;
   color: var(--ink);
 }
+.price-link {
+  margin: 0 0 6px;
+}
+.price-link a {
+  color: var(--primary-deep);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.price-link svg {
+  width: 16px;
+  height: 16px;
+}
 .price-note {
   font-size: 15px;
   color: var(--ink-soft);

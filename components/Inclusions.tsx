@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { ComponentType, SVGProps } from "react";
 
 import { fillPrices, INCLUSIONS } from "@/lib/homepage-content";
@@ -60,6 +61,11 @@ export function Inclusions() {
 
         <div className="price-block">
           <p className="price-line">{fillPrices(s.price)}</p>
+          <p className="price-link">
+            <Link href={s.pricingLink.href}>
+              {s.pricingLink.text} <ArrowIcon />
+            </Link>
+          </p>
           <p className="price-note">{s.priceNote}</p>
 
           <h3 className="h3 first-step-heading">{s.firstStepHeading}</h3>

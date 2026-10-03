@@ -20,9 +20,9 @@ import { TrustStrip } from "@/components/TrustStrip";
 import { fillPrices, HERO, HOME_FAQS, HOME_META } from "@/lib/homepage-content";
 import { LINE_URL, SITE_NAME } from "@/lib/site";
 
-// Meta title/description verbatim from the BOFU homepage draft (v4).
+// Meta title from the BOFU homepage draft (v4); description from batch-2 §B.
 const TITLE = HOME_META.title;
-const DESCRIPTION = HOME_META.description;
+const DESCRIPTION = fillPrices(HOME_META.description);
 
 export const metadata: Metadata = {
   // `absolute` skips the layout's "%s | CareConnect" template (brand is already in the title).

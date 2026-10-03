@@ -3,6 +3,11 @@
 // and the notes section (หมายเหตุสำหรับการแก้ไข) are not included. Prices are
 // tokens filled from lib/packages.ts by fillPrices(), so they can't drift.
 // Post-generation additions are marked inline with a comment.
+//
+// Batch-2 edits (content-drafts/careconnect-batch2-drafts.txt §B, verbatim):
+// new meta description; §4/§5/§8 headings; §6 /pricing link and VAT wording
+// removed from the price note; §7 link targets + cognition item; two FAQs
+// added as the first two items.
 
 import { BALANCE, DEPOSIT, formatPrice, MAIN_PACKAGE } from "@/lib/packages";
 
@@ -16,7 +21,7 @@ export function fillPrices(text: string): string {
 
 export const HOME_META = {
   "title": "กายภาพบำบัดที่บ้าน วางแผนโดยแพทย์เวชศาสตร์ฟื้นฟู | CareConnect",
-  "description": "บริการกายภาพบำบัดที่บ้านสำหรับผู้สูงอายุ ผู้ป่วยหลังผ่าตัด ผู้ป่วยติดเตียง และผู้ป่วยโรคหลอดเลือดสมอง วางแผนโดยแพทย์เวชศาสตร์ฟื้นฟู ให้บริการ 22 จังหวัด"
+  "description": "บริการกายภาพบำบัดที่บ้าน นักกายภาพบำบัดถึงบ้านสำหรับผู้สูงอายุ ผู้ป่วยหลังผ่าตัด ผู้ป่วยติดเตียง และผู้ป่วยโรคหลอดเลือดสมอง วางแผนโดยแพทย์เวชศาสตร์ฟื้นฟู ประเมินและฝึกครั้งแรก {DEPOSIT} บาท"
 };
 
 export const HERO = {
@@ -99,13 +104,13 @@ export const CONCERNS = {
 };
 
 export const PROCESS = {
-  "heading": "การฟื้นฟูที่บ้านกับ CareConnect ทำงานอย่างไร",
+  "heading": "กายภาพบำบัดที่บ้านกับ CareConnect ทำงานอย่างไร",
   "bracket": "ประเมินและฝึกครั้งแรก {DEPOSIT} บาท",
   "decision": "ครอบครัวตัดสินใจว่าจะฝึกต่อหรือไม่ ณ จุดนี้"
 };
 
 export const PROGRAMMES_SECTION = {
-  "heading": "โปรแกรมฟื้นฟูตามเป้าหมาย",
+  "heading": "โปรแกรมกายภาพบำบัดถึงบ้านตามเป้าหมาย",
   "intro": "เราไม่ได้มีคอร์สเดียวสำหรับทุกคน ผู้ป่วยแต่ละคนอยู่ในระยะการฟื้นตัวที่ต่างกัน เราจึงออกแบบโปรแกรมตามเป้าหมายไว้ 5 แบบ ทุกโปรแกรม 10 ครั้ง แพทย์เวชศาสตร์ฟื้นฟูจะช่วยเลือกโปรแกรมที่เหมาะกับคนไข้ร่วมกับครอบครัว และปรับแผนตลอดคอร์สตามการประเมิน",
   "fitLabel": "เหมาะสำหรับ",
   "trainLabel": "ฝึกอะไรบ้าง",
@@ -162,7 +167,8 @@ export const INCLUSIONS = {
   ],
   "callout": "นักกายภาพเข้าบ้าน 10 ครั้ง แต่คนไข้ได้ฝึกต่อเนื่องทุกวัน",
   "price": "ค่าบริการทุกโปรแกรม {PRICE} บาท",
-  "priceNote": "รวมทุกรายการข้างต้น ค่าเดินทางของนักกายภาพ และภาษีมูลค่าเพิ่มแล้ว ไม่มีค่าใช้จ่ายอื่นเพิ่มเติม เว้นแต่ได้แจ้งและได้รับความยินยอมจากครอบครัวก่อน",
+  "pricingLink": { "text": "ดูรายละเอียดค่าบริการ การชำระเงิน และการคืนเงิน", "href": "/pricing" },
+  "priceNote": "รวมทุกรายการข้างต้นและค่าเดินทางของนักกายภาพแล้ว ไม่มีค่าใช้จ่ายอื่นเพิ่มเติม เว้นแต่ได้แจ้งและได้รับความยินยอมจากครอบครัวก่อน",
   "firstStepHeading": "ก่อนตัดสินใจซื้อโปรแกรม ให้แพทย์ประเมินก่อนได้",
   "firstStepIntro": "ประเมินและฝึกครั้งแรก {DEPOSIT} บาท ประกอบด้วย",
   "firstStepItems": [
@@ -188,19 +194,23 @@ export const CONDITION_LINKS = {
     },
     {
       "label": "ผู้ป่วยหลังผ่าตัดสะโพกหรือข้อเข่า",
-      "href": "/blog/home-physiotherapy-elderly"
+      "href": "/post-surgery-rehab-at-home"
     },
     {
       "label": "ผู้ป่วยโรคพาร์กินสัน",
-      "href": "/blog/home-physiotherapy-elderly"
+      "href": "/parkinsons-rehab-at-home"
     },
     {
       "label": "ผู้ป่วยติดเตียง",
-      "href": "/blog/bedbound-stroke-care-at-home"
+      "href": "/bedbound-rehab-at-home"
     },
     {
       "label": "ผู้ป่วยที่มีปัญหาการกลืน",
-      "href": null
+      "href": "/swallowing-therapy-at-home"
+    },
+    {
+      "label": "ปัญหาความจำหรือสมาธิ",
+      "href": "/cognitive-rehab-at-home"
     }
   ]
 };
@@ -208,7 +218,7 @@ export const CONDITION_LINKS = {
 // Doctor lines as the draft prints them; the Team cards render the same text
 // from lib/physicians.ts (checked by the fidelity test).
 export const TEAM_COPY = {
-  "heading": "ทีมของเรา",
+  "heading": "ทีมแพทย์และนักกายภาพบำบัดที่บ้านของเรา",
   "doctorLines": [
     "พญ.จิราภรณ์ ตั้งกฤษณขจร (เลข ว.56081)",
     "แพทย์เฉพาะทางเวชศาสตร์ฟื้นฟูประจำ CareConnect",
@@ -226,7 +236,21 @@ export const FAQ_SECTION = {
 };
 
 // Rendered as the accordion AND used for FAQPage JSON-LD, so they can't drift.
-export const HOME_FAQS: { q: string; a: string[] }[] = [
+// `link` turns that phrase of the answer into a link.
+export const HOME_FAQS: { q: string; a: string[]; link?: { text: string; href: string } }[] = [
+  {
+    "q": "หานักกายภาพบำบัดมาที่บ้าน ต้องทำอย่างไร?",
+    "a": [
+      "CareConnect ให้บริการกายภาพบำบัดถึงบ้านหรือนอกสถานที่ใน 22 จังหวัด เริ่มจากกรอกแบบฟอร์มจองวันนัดฝึกครั้งแรก ทีมงานจะติดต่อกลับภายใน 24 ชั่วโมงเพื่อชำระเงินและยืนยันการจอง จากนั้นแพทย์เวชศาสตร์ฟื้นฟูจะประเมินผ่าน telemedicine และเลือกโปรแกรมร่วมกับครอบครัว ก่อนนักกายภาพเข้าประเมินและฝึกครั้งแรกที่บ้าน"
+    ]
+  },
+  {
+    "q": "กายภาพบำบัดที่บ้าน ราคาเท่าไร?",
+    "a": [
+      "การประเมินโดยแพทย์และฝึกครั้งแรกที่บ้าน {DEPOSIT} บาท ถ้าเห็นว่าเหมาะจึงฝึกต่อจนครบโปรแกรม 10 ครั้ง ค่าบริการรวมทั้งโปรแกรม {PRICE} บาท ซึ่งรวมการประเมินโดยแพทย์ ค่าเดินทางของนักกายภาพ และอุปกรณ์ทางการแพทย์ที่ใช้ระหว่างฝึกแล้ว ดูรายละเอียดได้ที่หน้าค่าบริการ"
+    ],
+    "link": { "text": "หน้าค่าบริการ", "href": "/pricing" }
+  },
   {
     "q": "ให้บริการพื้นที่ไหนบ้าง?",
     "a": [
