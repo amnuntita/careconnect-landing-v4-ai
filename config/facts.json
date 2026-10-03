@@ -1,0 +1,19 @@
+{
+  "name": "CareConnect",
+  "website": "https://www.careconnectth.org",
+  "service": "Home physiotherapy and occupational therapy, planned by a rehabilitation medicine (PM&R) physician via telemedicine; therapists visit the patient's home",
+  "home_visits_only": true,
+  "facility": "Operates under เวชการคลีนิกเวชกรรม, licence 12101007245, Nonthaburi",
+  "first_step_price_thb": 1500,
+  "first_step_includes": "PM&R physician telemedicine assessment + first home session (10–15 min assessment + 60 min training)",
+  "program_price_thb": 15900,
+  "program_sessions": 10,
+  "travel_included": true,
+  "vat": "No VAT charged",
+  "provinces_served": 22,
+  "bangkok_districts": "All 50",
+  "line_id": "@careconnect",
+  "phone": "02-114-7168",
+  "programmes": ["เริ่มต้นฟื้นฟู", "ฝึกการช่วยเหลือตัวเองเบื้องต้น", "ฝึกเดินที่บ้าน", "ฝึกการช่วยเหลือตัวเองขั้นต่อเนื่อง", "ฟื้นทักษะสมอง", "ฝึกกลืนและการขับเสมหะ"],
+  "does_not_claim": ["guaranteed results", "per-session pricing", "branches in provinces"]
+}

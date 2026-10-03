@@ -1,0 +1,11 @@
+{
+  "brand_patterns": ["careconnect", "care connect", "careconnectth", "แคร์คอนเน็ค"],
+  "own_domains": ["careconnectth.org"],
+  "competitors": ["Kin Rehab", "VRP Home Rehab", "Premier Home Health Care",
+                  "Khayap", "ขยับ", "OLDK", "MyNurz", "HDmall",
+                  "Thanaphat", "NTK Good Health", "Fastwork"],
+  "competitor_aliases": {
+    "Khayap": ["ขยับ"],
+    "Thanaphat": ["ธนภัทร"]
+  }
+}

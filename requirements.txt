@@ -1,0 +1,7 @@
+# AEO tracker (Python 3.12). Pinned so monthly runs are reproducible.
+anthropic==1.11.0
+openai==3.24.0
+google-genai==2.28.0
+perplexityai==0.43.7
+httpx>=0.28,<1
+pytest>=8,<10

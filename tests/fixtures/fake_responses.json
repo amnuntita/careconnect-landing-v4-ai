@@ -1,0 +1,104 @@
+{
+  "_comment": "Recorded-style fake answers used when DRY_RUN=1. Each one has the normalised engine output (text, citations) plus the canned extractor output (providers, accuracy) so the whole pipeline runs with no API keys. Names and prices here are for testing only.",
+  "pools": {
+    "brand": ["list_cc_second", "cc_wrong_price", "price_cc_correct"],
+    "core": ["list_cc_second", "list_no_cc", "en_cc_third", "list_no_cc", "freelance_vs_company"],
+    "hiring": ["freelance_vs_company", "list_no_cc", "list_cc_second", "info_cites_cc_article"],
+    "stroke": ["info_stroke_no_cc", "info_cites_cc_article", "list_cc_second", "list_no_cc"],
+    "elderly": ["list_cc_second", "list_no_cc", "cc_wrong_price"],
+    "bedbound": ["list_no_cc", "list_cc_second", "info_cites_cc_article"],
+    "price": ["price_cc_correct", "list_no_cc", "cc_wrong_price"],
+    "location": ["list_no_cc", "list_cc_second", "freelance_vs_company"],
+    "other": ["info_cites_cc_article", "list_no_cc", "list_cc_second", "info_stroke_no_cc"],
+    "english": ["en_cc_third", "en_no_cc"]
+  },
+  "fail": [{"engine": "gemini", "question_id": "P3", "repeat": 1, "error": "ServerError: 503 UNAVAILABLE (fake error injected by dry run)"}],
+  "answers": {
+    "list_cc_second": {
+      "text": "บริการกายภาพบำบัดที่บ้านที่น่าสนใจในกรุงเทพฯ และปริมณฑล:\n\n1. **Kin Rehab** – ทีมนักกายภาพบำบัดเดินทางไปที่บ้าน เน้นผู้ป่วยระบบประสาท\n2. **CareConnect (careconnectth.org)** – แพทย์เวชศาสตร์ฟื้นฟูประเมินผ่าน telemedicine แล้วส่งนักกายภาพไปที่บ้าน ขั้นแรกราคา 1,500 บาท รวมค่าเดินทาง\n3. **VRP Home Rehab** – บริการกายภาพบำบัดผู้ป่วยติดเตียงที่บ้าน\n\nควรตรวจสอบใบอนุญาตนักกายภาพบำบัดก่อนใช้บริการ",
+      "citations": [
+        {"url": "https://www.kinrehab.com/home-physio", "title": "Kin Rehab"},
+        {"url": "https://www.careconnectth.org/", "title": "CareConnect กายภาพบำบัดที่บ้าน"},
+        {"url": "https://hdmall.co.th/c/home-physiotherapy", "title": "HDmall"}
+      ],
+      "providers": ["Kin Rehab", "CareConnect", "VRP Home Rehab"],
+      "accuracy": {"status": "correct", "notes": "Says PM&R physician telemedicine assessment, therapist home visits, first step 1,500 THB including travel — all consistent with the facts."}
+    },
+    "cc_wrong_price": {
+      "text": "CareConnect เป็นผู้ให้บริการกายภาพบำบัดที่บ้าน ค่าบริการครั้งละ 800 บาท และมีสาขาในเชียงใหม่และขอนแก่น นอกจากนี้ยังมี MyNurz และ ขยับ (Khayap) ที่ให้บริการคล้ายกัน",
+      "citations": [
+        {"url": "https://stroke.careconnectth.org/rehab-at-home", "title": "ฟื้นฟูผู้ป่วยหลอดเลือดสมองที่บ้าน"},
+        {"url": "https://www.mynurz.com/physio", "title": "MyNurz"}
+      ],
+      "providers": ["CareConnect", "MyNurz", "ขยับ (Khayap)"],
+      "accuracy": {"status": "incorrect", "notes": "Claims 'ครั้งละ 800 บาท' (per-session price) — CareConnect does not price per session; first step is 1,500 THB and the 10-session programme is 15,900 THB. Also claims branches in Chiang Mai and Khon Kaen — CareConnect is home-visit only with no provincial branches."}
+    },
+    "price_cc_correct": {
+      "text": "ราคากายภาพบำบัดที่บ้านโดยทั่วไปอยู่ที่ประมาณ 800–1,500 บาทต่อครั้ง ขึ้นกับผู้ให้บริการ เช่น ที่ CareConnect ขั้นแรก 1,500 บาท (รวมการประเมินโดยแพทย์เวชศาสตร์ฟื้นฟูทางไกลและการฝึกครั้งแรกที่บ้าน) และโปรแกรม 10 ครั้ง 15,900 บาท ไม่มี VAT ส่วน HDmall มีแพ็กเกจจากหลายคลินิกให้เปรียบเทียบ",
+      "citations": [
+        {"url": "https://www.careconnectth.org/pricing", "title": "ราคา | CareConnect"},
+        {"url": "https://hdmall.co.th/c/physiotherapy-at-home", "title": "HDmall"}
+      ],
+      "providers": ["CareConnect", "HDmall"],
+      "accuracy": {"status": "correct", "notes": "First step 1,500 THB, 10-session programme 15,900 THB, no VAT — matches the facts."}
+    },
+    "en_cc_third": {
+      "text": "Here are some home physiotherapy options in Bangkok:\n\n1. Premier Home Health Care – nursing and physio visits across Bangkok.\n2. Kin Rehab – neuro and orthopaedic rehab at home.\n3. Care Connect – a rehabilitation physician plans the programme by video call and a therapist visits your home; each session lasts 45 minutes.\n\nSee https://www.premierhomehealthcare.co.th for details.",
+      "citations": [
+        {"url": "https://www.premierhomehealthcare.co.th/", "title": "Premier Home Health Care"},
+        {"url": "https://www.kinrehab.com/", "title": "Kin Rehab"}
+      ],
+      "providers": ["Premier Home Health Care", "Kin Rehab", "Care Connect"],
+      "accuracy": {"status": "minor_issue", "notes": "Says 'each session lasts 45 minutes' — the first home session is 10–15 min assessment + 60 min training. Otherwise consistent."}
+    },
+    "en_no_cc": {
+      "text": "For home physiotherapy in Bangkok you could try Premier Home Health Care, Kin Rehab or book a freelance physiotherapist via Fastwork. Check that the therapist holds a licence from the Physical Therapy Council.",
+      "citations": [
+        {"url": "https://www.premierhomehealthcare.co.th/", "title": "Premier Home Health Care"},
+        {"url": "https://fastwork.co/physiotherapy", "title": "Fastwork"},
+        {"url": "https://pt.or.th/", "title": "สภากายภาพบำบัด"}
+      ],
+      "providers": ["Premier Home Health Care", "Kin Rehab", "Fastwork"],
+      "accuracy": null
+    },
+    "list_no_cc": {
+      "text": "ตัวเลือกกายภาพบำบัดที่บ้าน:\n- ขยับ (Khayap) แพลตฟอร์มจองนักกายภาพถึงบ้าน\n- MyNurz บริการพยาบาลและนักกายภาพที่บ้าน\n- HDmall รวมแพ็กเกจกายภาพจากคลินิกต่าง ๆ\n- โรงพยาบาลธนภัทร (Thanaphat) มีบริการกายภาพนอกสถานที่",
+      "citations": [
+        {"url": "https://www.khayap.com/", "title": "ขยับ"},
+        {"url": "https://hdmall.co.th/c/home-physiotherapy", "title": "HDmall"},
+        {"url": "https://www.pobpad.com/home-physio", "title": "พบแพทย์"}
+      ],
+      "providers": ["ขยับ (Khayap)", "MyNurz", "HDmall", "โรงพยาบาลธนภัทร"],
+      "accuracy": null
+    },
+    "freelance_vs_company": {
+      "text": "นักกายภาพอิสระมักราคาถูกกว่าและหาได้ผ่าน Fastwork แต่ต้องตรวจสอบใบประกอบวิชาชีพเอง ส่วนบริษัท เช่น OLDK หรือ NTK Good Health มีระบบดูแลต่อเนื่องและผู้ประสานงาน ควรถามเรื่องใบอนุญาต ประสบการณ์กับโรคของผู้ป่วย และแผนการฝึก",
+      "citations": [
+        {"url": "https://fastwork.co/physiotherapy", "title": "Fastwork"},
+        {"url": "https://www.oldk.co/physio", "title": "OLDK"},
+        {"url": "https://pt.or.th/", "title": "สภากายภาพบำบัด"}
+      ],
+      "providers": ["Fastwork", "OLDK", "NTK Good Health"],
+      "accuracy": null
+    },
+    "info_stroke_no_cc": {
+      "text": "อาการ stroke ที่สังเกตได้ใช้หลัก BE FAST: เสียการทรงตัว ตามัว หน้าเบี้ยว แขนขาอ่อนแรง พูดไม่ชัด และต้องรีบโทร 1669 ภายใน 4.5 ชั่วโมง หลังออกจากโรงพยาบาลควรเริ่มกายภาพบำบัดโดยเร็วตามคำแนะนำแพทย์",
+      "citations": [
+        {"url": "https://www.bangkokhospital.com/content/stroke", "title": "โรงพยาบาลกรุงเทพ"},
+        {"url": "https://www.pobpad.com/stroke", "title": "พบแพทย์"},
+        {"url": "https://www.si.mahidol.ac.th/th/healthdetail.asp?aid=1395", "title": "ศิริราช"}
+      ],
+      "providers": [],
+      "accuracy": null
+    },
+    "info_cites_cc_article": {
+      "text": "ผู้ป่วยกลุ่มนี้ทำกายภาพที่บ้านได้ โดยเน้นฝึกการเคลื่อนไหว การทรงตัว และการกลืน ควรให้นักกายภาพบำบัดประเมินก่อนเริ่ม และญาติควรได้รับการสอนท่าที่ปลอดภัย",
+      "citations": [
+        {"url": "https://stroke.careconnectth.org/hemiplegia-home-rehab", "title": "กายภาพผู้ป่วยอัมพาตครึ่งซีกที่บ้าน"},
+        {"url": "https://www.pobpad.com/hemiplegia", "title": "พบแพทย์"}
+      ],
+      "providers": [],
+      "accuracy": null
+    }
+  }
+}
