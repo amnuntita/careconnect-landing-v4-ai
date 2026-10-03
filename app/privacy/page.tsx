@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import { LegalPage } from "@/components/LegalPage";
 import { POLICY_BLOCKS, POLICY_META, type PolicyBlock } from "@/lib/privacy-policy";
+import { DEFAULT_OG_IMAGE } from "@/lib/page-schema";
 import { EMAIL, SITE_NAME, TELEPHONE_DISPLAY } from "@/lib/site";
 
 // The real customer privacy policy (content in lib/privacy-policy.ts, verbatim
@@ -23,7 +24,9 @@ export const metadata: Metadata = {
     title: TITLE,
     description: DESCRIPTION,
     locale: "th_TH",
+    images: [DEFAULT_OG_IMAGE],
   },
+  twitter: { card: "summary_large_image", title: TITLE, description: DESCRIPTION, images: [DEFAULT_OG_IMAGE] },
   // TODO: remove noindex once legal review is done, then add /privacy to app/sitemap.ts.
   robots: { index: false, follow: true },
 };

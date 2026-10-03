@@ -9,6 +9,7 @@ import { LeadForm } from "@/components/LeadForm";
 import { Navbar } from "@/components/Navbar";
 import { StickyCTABar } from "@/components/StickyCTABar";
 import { Team } from "@/components/Team";
+import { DEFAULT_OG_IMAGE } from "@/lib/page-schema";
 import { DR_JIRAPORN, DR_SUVINAI, physicianJsonLd } from "@/lib/physicians";
 import {
   LINE_URL,
@@ -46,11 +47,13 @@ export const metadata: Metadata = {
     title: STROKE_META.title,
     description: STROKE_META.description,
     locale: "th_TH",
+    images: [DEFAULT_OG_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
     title: STROKE_META.title,
     description: STROKE_META.description,
+    images: [DEFAULT_OG_IMAGE],
   },
 };
 

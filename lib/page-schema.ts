@@ -4,6 +4,7 @@ import { faqAnswerText, fillTokens, type ContentPage, type Faq } from "@/lib/con
 import {
   ORGANIZATION_ID,
   PROVINCES_SERVED,
+  SAMPLE_PHOTO_CAPTION,
   SITE_NAME,
   SITE_URL,
   WEBSITE_ID,
@@ -12,6 +13,16 @@ import {
 // Metadata and JSON-LD for the draft-generated content pages.
 
 export const pageUrl = (page: ContentPage) => `${SITE_URL}${page.path}`;
+
+// The site-wide OG image (app/opengraph-image.jpg). A page that sets its own
+// `openGraph` replaces the file-based image, so pages must list it again.
+// Alt text matches app/opengraph-image.alt.txt (stock photo: caption required).
+export const DEFAULT_OG_IMAGE = {
+  url: "/opengraph-image.jpg",
+  width: 3750,
+  height: 1969,
+  alt: `CareConnect บริการกายภาพบำบัดที่บ้าน โดยแพทย์และนักกายภาพบำบัดวิชาชีพ — ${SAMPLE_PHOTO_CAPTION}`,
+};
 
 // Full metadata (Next merges metadata shallowly, so openGraph and twitter must
 // be complete here). Pages with an unresolved placeholder are noindex.
@@ -32,8 +43,9 @@ export function contentPageMetadata(
       title,
       description,
       locale: "th_TH",
+      images: [DEFAULT_OG_IMAGE],
     },
-    twitter: { card: "summary_large_image", title, description },
+    twitter: { card: "summary_large_image", title, description, images: [DEFAULT_OG_IMAGE] },
     ...(page.hasPlaceholder || forceNoindex ? { robots: { index: false, follow: true } } : {}),
   };
 }
