@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 
 import { BlogHighlights } from "@/components/BlogHighlights";
-import { BottomCTA } from "@/components/BottomCTA";
 import { ConcernCards } from "@/components/ConcernCards";
 import { Closing } from "@/components/Closing";
 import { ConditionLinks } from "@/components/ConditionLinks";
@@ -67,7 +66,6 @@ export default function Home() {
         <BlogHighlights />
         <Closing />
         <LeadForm />
-        {/* <BottomCTA /> */}
       </main>
       <Footer />
       {/* Hides over the lead form and the footer, on every viewport. */}
