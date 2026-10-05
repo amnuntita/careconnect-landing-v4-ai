@@ -59,8 +59,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority,
   }));
 
-  // TODO: add /privacy and /terms here once their `robots: { index: false }`
-  // is removed after legal sign-off (sitemaps must not list noindex pages).
   return [
     {
       url: SITE_URL,
@@ -81,6 +79,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     },
     ...contentEntries,
+    // Approved by legal (launch round).
+    {
+      url: `${SITE_URL}/privacy`,
+      lastModified: new Date(),
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
     ...postEntries,
   ];
 }

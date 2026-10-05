@@ -5,16 +5,15 @@ import { POLICY_BLOCKS, POLICY_META, type PolicyBlock } from "@/lib/privacy-poli
 import { DEFAULT_OG_IMAGE } from "@/lib/page-schema";
 import { EMAIL, SITE_NAME, TELEPHONE_DISPLAY } from "@/lib/site";
 
-// The real customer privacy policy (content in lib/privacy-policy.ts, verbatim
-// from the draft). TODO: legal review — the draft must be approved by legal
-// counsel before publishing. Unresolved [..] values render as placeholders.
+// Customer privacy policy, approved by legal. Content is in
+// lib/privacy-policy.ts, generated verbatim from
+// content-drafts/privacy-policy-web.txt (meta title and description too).
 
-const TITLE = POLICY_META.h1;
-const DESCRIPTION =
-  "นโยบายคุ้มครองข้อมูลส่วนบุคคลสำหรับลูกค้าของ CareConnect ตามพระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562";
+const TITLE = POLICY_META.title;
+const DESCRIPTION = POLICY_META.description;
 
 export const metadata: Metadata = {
-  title: TITLE,
+  title: { absolute: TITLE },
   description: DESCRIPTION,
   alternates: { canonical: "/privacy" },
   openGraph: {
@@ -27,22 +26,7 @@ export const metadata: Metadata = {
     images: [DEFAULT_OG_IMAGE],
   },
   twitter: { card: "summary_large_image", title: TITLE, description: DESCRIPTION, images: [DEFAULT_OG_IMAGE] },
-  // TODO: remove noindex once legal review is done, then add /privacy to app/sitemap.ts.
-  robots: { index: false, follow: true },
 };
-
-// Wrap unresolved "[...]" values so they stand out as placeholders.
-function withPlaceholders(text: string) {
-  return text.split(/(\[[^\]]+\])/).map((part, i) =>
-    part.startsWith("[") && part.endsWith("]") ? (
-      <mark key={i} className="todo-placeholder">
-        {part}
-      </mark>
-    ) : (
-      part
-    ),
-  );
-}
 
 // Make the phone number and email in the contact lines clickable.
 function contactLine(line: string) {
@@ -72,7 +56,7 @@ function renderBlock(block: PolicyBlock, key: number) {
     case "updated":
       return (
         <p key={key} className="small">
-          {withPlaceholders(block.text)}
+          {block.text}
         </p>
       );
     case "h2":
@@ -88,12 +72,12 @@ function renderBlock(block: PolicyBlock, key: number) {
         </h3>
       );
     case "p":
-      return <p key={key}>{withPlaceholders(block.text)}</p>;
+      return <p key={key}>{block.text}</p>;
     case "ul":
       return (
         <ul key={key}>
           {block.items.map((item) => (
-            <li key={item}>{withPlaceholders(item)}</li>
+            <li key={item}>{item}</li>
           ))}
         </ul>
       );
@@ -144,7 +128,7 @@ function renderBlock(block: PolicyBlock, key: number) {
 
 export default function PrivacyPage() {
   return (
-    <LegalPage title={TITLE}>
+    <LegalPage title={POLICY_META.h1}>
       {POLICY_BLOCKS.map((block, i) => renderBlock(block, i))}
     </LegalPage>
   );
