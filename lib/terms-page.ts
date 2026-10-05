@@ -1,24 +1,23 @@
-// GENERATED from content-drafts/careconnect-batch2-drafts.txt (main @ 4431deb)
-// by a one-off script: every string is copied verbatim from the reviewed draft.
-// Bracketed instructions, "(ลิงก์…)" markers and หมายเหตุ notes are not copy;
-// they became structure (links, CTA buttons, form, …). Prices are {TOKENS}
-// filled from lib/packages.ts and site facts are {TOKENS} filled from
-// lib/site.ts (see fillTokens in lib/content-blocks.ts), so they can't drift.
+// GENERATED from content-drafts/terms-web.txt (main @ 4268132), the version
+// approved by legal: every string is copied verbatim. Prices are {TOKENS}
+// filled from lib/packages.ts and contact facts are {TOKENS} filled from
+// lib/site.ts (fillTokens in lib/content-blocks.ts), so they can't drift.
+// Added by request after generation: in section 11, after the LINE line,
+// "ขอดูข้อตกลงในการรับบริการทางการแพทย์ฉบับเต็มได้ทาง LINE @careconnect".
 
 import type { ContentPage } from "@/lib/content-blocks";
 
-// Draft section E
 export const TERMS_PAGE: ContentPage = {
   "path": "/terms",
   "title": "เงื่อนไขการใช้บริการ | CareConnect",
-  "description": "",
+  "description": "เงื่อนไขการใช้บริการกายภาพบำบัดที่บ้านของ CareConnect ค่าบริการ การชำระเงิน การเลื่อนและยกเลิกนัด การคืนเงิน และช่องทางติดต่อ",
   "h1": "เงื่อนไขการใช้บริการ",
   "parents": [],
   "blocks": [
     {
       "t": "p",
       "segs": [
-        "ปรับปรุงล่าสุด: [วันที่]"
+        "ปรับปรุงล่าสุด: 5 ตุลาคม 2569"
       ],
       "style": "small"
     },
@@ -45,7 +44,7 @@ export const TERMS_PAGE: ContentPage = {
     {
       "t": "p",
       "segs": [
-        "บริการประกอบด้วยการประเมินและวางแผนโดยแพทย์เวชศาสตร์ฟื้นฟูผ่าน telemedicine และการฝึกที่บ้านโดยนักกายภาพบำบัดและ/หรือนักกิจกรรมบำบัด ตามโปรแกรมที่แพทย์เลือกร่วมกับครอบครัว"
+        "บริการประกอบด้วยการประเมินและวางแผนโดยแพทย์เวชศาสตร์ฟื้นฟูผ่าน telemedicine และการฝึกที่บ้านโดยนักกายภาพบำบัดและ/หรือนักกิจกรรมบำบัด ตามโปรแกรมที่แพทย์เลือกร่วมกับครอบครัว บริการทั้งหมดเป็นการให้บริการที่บ้านของผู้ป่วย"
       ]
     },
     {
@@ -88,6 +87,12 @@ export const TERMS_PAGE: ContentPage = {
       "t": "p",
       "segs": [
         "หากผู้รับบริการตัดสินใจฝึกต่อจนครบโปรแกรม 10 ครั้ง ค่าบริการรวมทั้งโปรแกรม {PRICE} บาท โดยชำระส่วนที่เหลือ {BALANCE} บาท แบ่งชำระได้ 3 งวด งวดละ {INSTALMENT} บาท ชำระก่อนการฝึกครั้งที่ 2, 5 และ 8 หรือผ่อนชำระผ่านบัตรเครดิตตามเงื่อนไขของธนาคาร"
+      ]
+    },
+    {
+      "t": "p",
+      "segs": [
+        "ค่าบริการรวมค่าเดินทางของผู้ให้บริการ และอุปกรณ์ทางการแพทย์ที่ใช้ระหว่างการฝึกแล้ว"
       ]
     },
     {
@@ -159,7 +164,7 @@ export const TERMS_PAGE: ContentPage = {
       "segs": [
         "การเก็บและใช้ข้อมูลส่วนบุคคลเป็นไปตาม",
         {
-          "text": "นโยบายความเป็นส่วนตัว",
+          "text": "นโยบายคุ้มครองข้อมูลส่วนบุคคล",
           "href": "/privacy"
         }
       ]
@@ -179,25 +184,37 @@ export const TERMS_PAGE: ContentPage = {
       "text": "11. ติดต่อและร้องเรียน"
     },
     {
+      "t": "dl",
+      "items": []
+    },
+    {
       "t": "p",
       "segs": [
-        "โทร ",
+        "ขอดูข้อตกลงในการรับบริการทางการแพทย์ฉบับเต็มได้ทาง ",
         {
-          "text": "{TEL}",
-          "href": "tel:{TEL}"
-        },
-        " อีเมล ",
-        {
-          "text": "{EMAIL}",
-          "href": "mailto:{EMAIL}"
-        },
-        " หรือ LINE ",
-        {
-          "text": "{LINE_ID}",
+          "text": "LINE {LINE_ID}",
           "href": "{LINE_URL}"
         }
       ]
+    },
+    {
+      "t": "p",
+      "segs": [
+        "โทรศัพท์: {TEL}"
+      ]
+    },
+    {
+      "t": "p",
+      "segs": [
+        "อีเมล: {EMAIL}"
+      ]
+    },
+    {
+      "t": "p",
+      "segs": [
+        "LINE: {LINE_ID}"
+      ]
     }
   ],
-  "hasPlaceholder": true
+  "hasPlaceholder": false
 };

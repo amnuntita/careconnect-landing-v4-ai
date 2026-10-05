@@ -97,11 +97,13 @@ function Faq() {
   return (
     <div className="faq-list">
       {STROKE_FAQS.map((faq) => {
-        // [อ่านเงื่อนไขการเลื่อนนัด…] → /terms is not rendered: the draft says
-        // to wait for legal review. TODO: link it once /terms is published.
-        const href = faq.link?.raw.includes("ต้องการ URL")
-          ? REVIEW_LINKS.google
-          : null;
+        // Draft link targets: the terms link goes to /terms (approved by legal);
+        // the reviews link to the Google Business Profile.
+        const href = faq.link?.raw.includes("→ /terms")
+          ? "/terms"
+          : faq.link?.raw.includes("ต้องการ URL")
+            ? REVIEW_LINKS.google
+            : null;
         return (
           // Native <details>: collapsed by default, but the answer is in the
           // server HTML for crawlers.
@@ -115,9 +117,13 @@ function Faq() {
               ))}
               {faq.link && href ? (
                 <p>
-                  <a href={href} target="_blank" rel="noopener noreferrer">
-                    {faq.link.label}
-                  </a>
+                  {href.startsWith("/") ? (
+                    <Link href={href}>{faq.link.label}</Link>
+                  ) : (
+                    <a href={href} target="_blank" rel="noopener noreferrer">
+                      {faq.link.label}
+                    </a>
+                  )}
                 </p>
               ) : null}
             </div>
