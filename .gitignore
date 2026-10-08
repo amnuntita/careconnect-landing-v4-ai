@@ -1,0 +1,10 @@
+
+# blog content source files
+/blog-content-json/
+
+# env files (secrets)
+.env*
+!.env.example*
+
+# dependencies
+/node_modules/
