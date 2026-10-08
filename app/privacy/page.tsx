@@ -1,0 +1,135 @@
+import type { Metadata } from "next";
+
+import { LegalPage } from "@/components/LegalPage";
+import { POLICY_BLOCKS, POLICY_META, type PolicyBlock } from "@/lib/privacy-policy";
+import { DEFAULT_OG_IMAGE } from "@/lib/page-schema";
+import { EMAIL, SITE_NAME, TELEPHONE_DISPLAY } from "@/lib/site";
+
+// Customer privacy policy, approved by legal. Content is in
+// lib/privacy-policy.ts, generated verbatim from
+// content-drafts/privacy-policy-web.txt (meta title and description too).
+
+const TITLE = POLICY_META.title;
+const DESCRIPTION = POLICY_META.description;
+
+export const metadata: Metadata = {
+  title: { absolute: TITLE },
+  description: DESCRIPTION,
+  alternates: { canonical: "/privacy" },
+  openGraph: {
+    type: "website",
+    url: "/privacy",
+    siteName: SITE_NAME,
+    title: TITLE,
+    description: DESCRIPTION,
+    locale: "th_TH",
+    images: [DEFAULT_OG_IMAGE],
+  },
+  twitter: { card: "summary_large_image", title: TITLE, description: DESCRIPTION, images: [DEFAULT_OG_IMAGE] },
+};
+
+// Make the phone number and email in the contact lines clickable.
+function contactLine(line: string) {
+  if (line.endsWith(TELEPHONE_DISPLAY)) {
+    const label = line.slice(0, -TELEPHONE_DISPLAY.length);
+    return (
+      <>
+        {label}
+        <a href={`tel:${TELEPHONE_DISPLAY}`}>{TELEPHONE_DISPLAY}</a>
+      </>
+    );
+  }
+  if (line.endsWith(EMAIL)) {
+    const label = line.slice(0, -EMAIL.length);
+    return (
+      <>
+        {label}
+        <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+      </>
+    );
+  }
+  return line;
+}
+
+function renderBlock(block: PolicyBlock, key: number) {
+  switch (block.t) {
+    case "updated":
+      return (
+        <p key={key} className="small">
+          {block.text}
+        </p>
+      );
+    case "h2":
+      return (
+        <h2 key={key} className="h2">
+          {block.text}
+        </h2>
+      );
+    case "h3":
+      return (
+        <h3 key={key} className="h3">
+          {block.text}
+        </h3>
+      );
+    case "p":
+      return <p key={key}>{block.text}</p>;
+    case "ul":
+      return (
+        <ul key={key}>
+          {block.items.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+      );
+    case "table":
+      return (
+        <div key={key} className="scroll-table" tabIndex={0} role="region" aria-label={block.head.join(" / ")}>
+          <table className="data-table">
+            <thead>
+              <tr>
+                {block.head.map((h) => (
+                  <th key={h} scope="col">
+                    {h}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {block.rows.map((row) => (
+                <tr key={row[0]}>
+                  {row.map((cell, i) =>
+                    i === 0 ? (
+                      <th key={i} scope="row">
+                        {cell}
+                      </th>
+                    ) : (
+                      <td key={i}>{cell}</td>
+                    ),
+                  )}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      );
+    case "contact":
+      return (
+        <p key={key}>
+          {block.lines.map((line, i) => (
+            <span key={line}>
+              {i > 0 ? <br /> : null}
+              {contactLine(line)}
+            </span>
+          ))}
+        </p>
+      );
+  }
+}
+
+export default function PrivacyPage() {
+  return (
+    <LegalPage title={POLICY_META.h1}>
+      {POLICY_BLOCKS.map((block, i) => renderBlock(block, i))}
+    </LegalPage>
+  );
+}

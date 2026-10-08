@@ -1,5 +1,15 @@
 import Image from "next/image";
 
+import { JsonLdScript } from "@/components/JsonLd";
+import { TEAM_COPY } from "@/lib/homepage-content";
+import {
+  displayName,
+  PHYSICIANS,
+  physicianJsonLd,
+  type Physician,
+} from "@/lib/physicians";
+import { SITE_URL } from "@/lib/site";
+
 type PT = {
   name: string;
   license: string;
@@ -34,49 +44,90 @@ const PTS: PT[] = [
     name: "ชัยอนันต์ บังจันทร์",
     license: "ก.9473",
     expYears: 11,
-    provinces: ["ชลบุรี", "ระยอง"],
+    provinces: ["ชลบุรี"],
     photo: "PT_Chaianan.jpeg",
   },
 ];
 
-export function Team() {
+// Doctor JSON-LD comes from lib/physicians.ts (shared with other pages).
+const ptJsonLd = PTS.map((p) => ({
+  "@type": "Person",
+  name: p.name,
+  jobTitle: "นักกายภาพบำบัด",
+  image: `${SITE_URL}/images/staff/${p.photo}`,
+  hasCredential: {
+    "@type": "EducationalOccupationalCredential",
+    credentialCategory: "license",
+    identifier: p.license,
+  },
+}));
+
+// Card bullets as shown on the page (only for doctors that have them).
+const CARD_DETAILS: Record<string, React.ReactNode> = {
+  "dr-jiraporn": (
+    <ul>
+      <li><b>แพทยศาสตร์บัณฑิต</b>, มศว</li>
+      <li><b>เวชศาสตร์ฟื้นฟู</b>, จุฬาลงกรณ์มหาวิทยาลัย</li>
+      <li>ปัจจุบันทำงานที่โรงพยาบาลสมเด็จพระบรมราชเทวี ณ ศรีราชา</li>
+    </ul>
+  ),
+};
+
+function DoctorCard({ doc }: { doc: Physician }) {
+  return (
+    <article className={`doctor-card${doc.photo ? "" : " doctor-card--no-photo"}`}>
+      {/* Missing photo (TODO in lib/physicians.ts): text-only card, no empty box. */}
+      {doc.photo ? (
+        <Image
+          className="doctor-photo"
+          src={doc.photo}
+          alt={displayName(doc)}
+          width={440}
+          height={440}
+          sizes="(max-width: 720px) 100vw, 220px"
+        />
+      ) : null}
+      <div>
+        <h3 className="dname">
+          {displayName(doc)} (เลข {doc.license})
+        </h3>
+        <p className="dtitle">{doc.title}</p>
+        {/* Practice days/hours: required on-page wherever a physician is shown. */}
+        <p className="dhours">ให้บริการ{doc.hours}</p>
+        {CARD_DETAILS[doc.id] ?? null}
+      </div>
+    </article>
+  );
+}
+
+export function Team({
+  showHeading = true,
+  showQualityNote = true,
+}: {
+  showHeading?: boolean;
+  // Hide the Care Quality Assurance line where the page copy already has one.
+  showQualityNote?: boolean;
+} = {}) {
   return (
     <section id="team" className="cream">
+      <JsonLdScript
+        data={{
+          "@context": "https://schema.org",
+          "@graph": [...PHYSICIANS.map(physicianJsonLd), ...ptJsonLd],
+        }}
+      />
       <div className="wrap">
-        <div className="section-head">
-          <div>
-            <span className="eyebrow">ทีมของเรา</span>
-            <h2 className="h2" style={{ marginTop: 10 }}>
-              นำโดยแพทย์เวชศาสตร์ฟื้นฟู
-              <br />
-              ดูแลโดยทีมมืออาชีพ
-            </h2>
+        {showHeading ? (
+          <div className="section-head">
+            <h2 className="h2">{TEAM_COPY.heading}</h2>
           </div>
-        </div>
+        ) : null}
 
-        <article className="doctor-card">
-          <Image
-            className="doctor-photo"
-            src="/images/staff/DR_Jiraporn.jpg"
-            alt="พญ. จิราภรณ์ ตั้งกฤษณขจร"
-            width={440}
-            height={440}
-            sizes="(max-width: 720px) 100vw, 220px"
-          />
-          <div>
-            <p className="role">แพทย์</p>
-            <h3 className="dname">พญ. จิราภรณ์ ตั้งกฤษณขจร</h3>
-           
-              <ul>
-                <li><b>แพทยศาสตร์บัณฑิต</b>, มศว</li>
-                <li><b>เวชศาสตร์ฟื้นฟู</b>, จุฬาลงกรณ์มหาวิทยาลัย</li>
-                <li>ปัจจุบันทำงานที่โรงพยาบาลสมเด็จพระบรมราชเทวี ณ ศรีราชา</li>
-              </ul>
-            
-          </div>
-        </article>
+        {PHYSICIANS.map((doc) => (
+          <DoctorCard key={doc.id} doc={doc} />
+        ))}
 
-        <h3 className="h3">ตัวอย่าง Profile นักกายภาพของเรา</h3>
+        <h3 className="h3">{TEAM_COPY.ptHeading}</h3>
         <ul className="pt-grid">
           {PTS.map((p) => (
             <li className="pt-card" key={p.name}>
@@ -104,6 +155,7 @@ export function Team() {
             </li>
           ))}
         </ul>
+        {showQualityNote ? <p className="team-quality">{TEAM_COPY.quality}</p> : null}
       </div>
     </section>
   );

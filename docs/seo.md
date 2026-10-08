@@ -10,9 +10,20 @@ What's already wired up and what to remember when adding pages or content.
 - **JSON-LD** Organization + WebSite in [components/JsonLd.tsx](../components/JsonLd.tsx), rendered from [app/page.tsx](../app/page.tsx).
 - **Static rendering** — every route is prerendered at build time, so crawlers get full HTML on first request.
 
-## Required env var
+## Site facts and the site URL
 
-Set `NEXT_PUBLIC_SITE_URL` in Vercel (and `.env.local` for dev). Sitemap URLs, OG image URLs, and canonicals all derive from it. Without it, everything points at `https://example.com`.
+Site-wide facts (site URL, name, families served, registration numbers, social profile URLs, provinces served) live in [lib/site.ts](../lib/site.ts). Import from there instead of repeating values in components, metadata or JSON-LD. Values that aren't confirmed yet are `null` with a `// TODO`, and nothing renders them until they're filled in.
+
+### Required env var: `NEXT_PUBLIC_SITE_URL`
+
+Set `NEXT_PUBLIC_SITE_URL` to the canonical origin, e.g. `https://www.example.com` (no trailing path). Sitemap URLs, canonicals, Open Graph URLs and JSON-LD `@id`s all derive from it via `SITE_URL` in `lib/site.ts`.
+
+| Environment | Missing `NEXT_PUBLIC_SITE_URL` |
+| --- | --- |
+| `VERCEL_ENV=production` | **Build fails** with an error naming the variable. |
+| Preview / local dev | Logs a warning and falls back to `http://localhost:3000`. |
+
+An invalid (non-absolute) value fails in every environment. Set it in Vercel → Project → Settings → Environment Variables (Production at minimum), and in `.env.local` for local work if you want real URLs.
 
 ## When adding a new page
 
@@ -70,3 +81,8 @@ Check both with `pnpm build && pnpm start`, then run Lighthouse in Chrome DevToo
 - [ ] URL added to [app/sitemap.ts](../app/sitemap.ts)
 - [ ] Relevant JSON-LD added if applicable
 - [ ] Lighthouse run, LCP < 2.5s and CLS < 0.1
+
+## Lead form data
+
+The booking form's Google Sheet columns (A–S), the range env var and the
+analytics rules are documented in [leads.md](./leads.md).

@@ -326,3 +326,124 @@ export const AlertIcon = (p: IconProps) => (
     <line x1="12" y1="16" x2="12.01" y2="16" />
   </svg>
 );
+
+// Shared stroke-icon frame for the icons below (same style as the set above).
+const StrokeIcon = ({ children, ...p }: IconProps) => (
+  <svg
+    width="22"
+    height="22"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+    {...p}
+  >
+    {children}
+  </svg>
+);
+
+// Telemedicine (video call).
+export const VideoIcon = (p: IconProps) => (
+  <StrokeIcon {...p}>
+    <rect x="2" y="6" width="14" height="12" rx="2" />
+    <path d="M16 10l6-3v10l-6-3" />
+  </StrokeIcon>
+);
+
+// Loop / plan can be adjusted.
+export const RefreshIcon = (p: IconProps) => (
+  <StrokeIcon {...p}>
+    <path d="M20 11a8 8 0 0 0-14.3-4.9L4 8" />
+    <path d="M4 3v5h5" />
+    <path d="M4 13a8 8 0 0 0 14.3 4.9L20 16" />
+    <path d="M20 21v-5h-5" />
+  </StrokeIcon>
+);
+
+// Hand / fine motor (occupational therapy).
+export const HandIcon = (p: IconProps) => (
+  <StrokeIcon {...p}>
+    <path d="M18 11V6a2 2 0 0 0-4 0v5" />
+    <path d="M14 10V4a2 2 0 0 0-4 0v6" />
+    <path d="M10 10.5V6a2 2 0 0 0-4 0v8" />
+    <path d="M18 8a2 2 0 0 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.9-5.9-2.3L3.4 17a2 2 0 0 1 2.8-2.8L8 16" />
+  </StrokeIcon>
+);
+
+// Bed (bed-bound / early mobility).
+export const BedIcon = (p: IconProps) => (
+  <StrokeIcon {...p}>
+    <path d="M2 18V6" />
+    <path d="M2 14h20v4" />
+    <path d="M22 14v-2a3 3 0 0 0-3-3h-8v5" />
+    <circle cx="6.5" cy="10.5" r="2" />
+  </StrokeIcon>
+);
+
+// Sit-to-stand (transfers, getting up).
+export const SitStandIcon = (p: IconProps) => (
+  <StrokeIcon {...p}>
+    <circle cx="13" cy="4" r="2" />
+    <path d="M13 6v6h-4l-1 8" />
+    <path d="M13 12l3 3v5" />
+    <path d="M4 12h5" />
+    <path d="M4 12v8" />
+  </StrokeIcon>
+);
+
+// Family / caregivers.
+export const UsersIcon = (p: IconProps) => (
+  <StrokeIcon {...p}>
+    <circle cx="9" cy="8" r="3" />
+    <path d="M3 20v-1a5 5 0 0 1 5-5h2a5 5 0 0 1 5 5v1" />
+    <path d="M16 5.5a3 3 0 0 1 0 5" />
+    <path d="M18 14a5 5 0 0 1 3 4.6V20" />
+  </StrokeIcon>
+);
+
+// Payment flexibility.
+export const WalletIcon = (p: IconProps) => (
+  <StrokeIcon {...p}>
+    <path d="M3 7a2 2 0 0 1 2-2h12v4" />
+    <rect x="3" y="7" width="18" height="13" rx="2" />
+    <path d="M16 13.5h2" />
+  </StrokeIcon>
+);
+
+export const ChevronDownIcon = (p: IconProps) => (
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+    {...p}
+  >
+    <polyline points="6 9 12 15 18 9" />
+  </svg>
+);
+
+export const MenuIcon = (p: IconProps) => (
+  <svg
+    width="22"
+    height="22"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    aria-hidden="true"
+    {...p}
+  >
+    <line x1="4" y1="7" x2="20" y2="7" />
+    <line x1="4" y1="12" x2="20" y2="12" />
+    <line x1="4" y1="17" x2="20" y2="17" />
+  </svg>
+);

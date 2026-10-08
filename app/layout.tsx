@@ -1,8 +1,14 @@
 import type { Metadata, Viewport } from "next";
 import { IBM_Plex_Sans_Thai, Sarabun } from "next/font/google";
 import { GoogleTagManager } from "@next/third-parties/google";
+
+import { PROVINCES_SERVED, SITE_NAME, SITE_URL } from "@/lib/site";
+
 import "./globals.css";
 
+// TODO: brand font LINE Seed Sans TH (SIL OFL). Download the official files
+// from https://seed.line.me, drop the .woff2 files in app/fonts/line-seed-sans-th/
+// and switch these to next/font/local. Not DB Heavent (web licence unconfirmed).
 const ibmPlexSansThai = IBM_Plex_Sans_Thai({
   variable: "--font-heading",
   subsets: ["latin", "thai"],
@@ -17,11 +23,8 @@ const sarabun = Sarabun({
   display: "swap",
 });
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com";
-const SITE_NAME = "CareConnect";
 const SITE_TAGLINE = "CareConnect — กายภาพบำบัดที่บ้าน";
-const SITE_DESCRIPTION =
-  "บริการกายภาพบำบัดและกิจกรรมบำบัดที่บ้านใน &gt;10 จังหวัดทั่วประเทศ ดูแลโดยทีมสหสาขาวิชาชีพ วางแผนรายเคสโดยแพทย์เวชศาสตร์ฟื้นฟู";
+const SITE_DESCRIPTION = `บริการกายภาพบำบัดและกิจกรรมบำบัดที่บ้านครอบคลุม ${PROVINCES_SERVED.length} จังหวัดทั่วประเทศ ดูแลโดยทีมสหสาขาวิชาชีพ วางแผนรายเคสโดยแพทย์เวชศาสตร์ฟื้นฟู`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -31,19 +34,22 @@ export const metadata: Metadata = {
   },
   description: SITE_DESCRIPTION,
   applicationName: SITE_NAME,
-  alternates: { canonical: "/" },
+  // No `alternates.canonical` or `openGraph.url` here: they would be inherited
+  // by every page that forgets to set its own. Each page sets its canonical.
+  //
+  // The social share image is app/opengraph-image.jpg (+ .alt.txt); Next.js
+  // detects it and emits og:image, and twitter:image is filled from it.
   openGraph: {
     type: "website",
-    url: "/",
     siteName: SITE_NAME,
     title: SITE_TAGLINE,
     description: SITE_DESCRIPTION,
     locale: "th_TH",
   },
+  // Only the card type: Next.js fills twitter:title/description/image from
+  // each page's openGraph, so pages don't inherit the homepage tagline.
   twitter: {
     card: "summary_large_image",
-    title: SITE_TAGLINE,
-    description: SITE_DESCRIPTION,
   },
   robots: {
     index: true,

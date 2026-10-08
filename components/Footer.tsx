@@ -1,12 +1,29 @@
 import Image from "next/image";
+import Link from "next/link";
 
-export function Footer() {
+import {
+  ADDRESS_TEXT,
+  CLINIC_NAME,
+  COMPANY_REGISTRATION_NUMBER,
+  EMAIL,
+  FACEBOOK_URL,
+  FACILITY_REGISTRATION_NUMBER,
+  LEGAL_NAME,
+  LINE_ID,
+  LINE_URL,
+  PROVINCES_SERVED,
+} from "@/lib/site";
+import { getServiceLinks } from "@/lib/service-links";
+
+export async function Footer() {
+  // Same service links as the Navbar; unpublished blog posts are left out.
+  const services = (await getServiceLinks()).filter((l) => l.live);
   return (
     <footer className="site-footer">
       <div className="wrap">
         <div className="top">
           <div>
-            <a href="#top" className="logo" aria-label="CareConnect">
+            <Link href="/" className="logo" aria-label="CareConnect">
               <Image
                 src="/images/CareConnect Logo.png"
                 alt="CareConnect"
@@ -14,10 +31,10 @@ export function Footer() {
                 height={2000}
                 className="brand-logo brand-logo--footer"
               />
-            </a>
+            </Link>
             <p className="blurb">
               บริการกายภาพบำบัดและกิจกรรมบำบัดที่บ้าน
-               &gt;10 จังหวัดทั่วประเทศ ดูแลโดยนักกายภาพบำบัดวิชาชีพ
+               ครอบคลุม {PROVINCES_SERVED.length} จังหวัดทั่วประเทศ ดูแลโดยนักกายภาพบำบัดวิชาชีพ
               ภายใต้การกำกับของแพทย์เวชศาสตร์ฟื้นฟู
             </p>
           </div>
@@ -29,15 +46,34 @@ export function Footer() {
                 <a href="tel:02-114-7168">โทร: 02-114-7168</a>
               </li>
               <li>
-                <a href="https://lin.ee/S8VPTxqA">
-                  LINE ID: @careconnect (<u>คลิกเพื่อแอดไลน์</u>)
+                <a href={LINE_URL}>
+                  LINE ID: {LINE_ID} (<u>คลิกเพื่อแอดไลน์</u>)
                 </a>
+              </li>
+              {FACEBOOK_URL ? (
+                <li>
+                  <a href={FACEBOOK_URL}>Facebook: CareConnect กายภาพบำบัดที่บ้าน</a>
+                </li>
+              ) : null}
+              <li>
+                <a href={`mailto:${EMAIL}`}>อีเมล: {EMAIL}</a>
               </li>
               <li>
-                <a href="https://www.facebook.com/share/r/1BEzYEYdGC/">
-                  Facebook: CareConnect กายภาพบำบัดที่บ้าน
-                </a>
+                {LEGAL_NAME}
+                <br />
+                {ADDRESS_TEXT}
               </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="col-h">บริการ</h3>
+            <ul>
+              {services.map((l) => (
+                <li key={l.href}>
+                  <Link href={l.href}>{l.label}</Link>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -45,24 +81,28 @@ export function Footer() {
             <h3 className="col-h">ข้อมูล</h3>
             <ul>
               <li>
-                <a href="#pricing">แพ็กเกจและราคา</a>
+                <Link href="/pricing">แพ็กเกจและราคา</Link>
               </li>
               <li>
-                <a href="#team">ทีมของเรา</a>
+                <Link href="/about#team">ทีมของเรา</Link>
               </li>
               <li>
-                <a href="/terms">เงื่อนไขการใช้บริการ</a>
+                <Link href="/terms">เงื่อนไขการใช้บริการ</Link>
               </li>
               <li>
-                <a href="/privacy">นโยบายความเป็นส่วนตัว</a>
+                <Link href="/privacy">นโยบายความเป็นส่วนตัว</Link>
               </li>
             </ul>
           </div>
         </div>
 
         <div className="bottom">
-          <p>© {new Date().getFullYear()} CareConnect Co., Ltd. — สงวนสิทธิ์ทุกประการ</p>
-          <p>เลขทะเบียนนิติบุคคล: 0125567028210</p>
+          <p>© {new Date().getFullYear()} {LEGAL_NAME} — สงวนสิทธิ์ทุกประการ</p>
+          <p>เลขทะเบียนนิติบุคคล: {COMPANY_REGISTRATION_NUMBER}</p>
+          <p>
+            {CLINIC_NAME} ใบอนุญาตประกอบกิจการสถานพยาบาลเลขที่{" "}
+            {FACILITY_REGISTRATION_NUMBER}
+          </p>
         </div>
       </div>
     </footer>

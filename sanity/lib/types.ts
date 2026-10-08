@@ -3,7 +3,7 @@ import type { Image } from "sanity";
 
 export type SanityImage = Image & { alt?: string };
 
-// Shape returned by POSTS_QUERY / HIGHLIGHTS_QUERY (card projection).
+// Shape returned by POSTS_QUERY / HIGHLIGHTS_QUERY / PINNED_POSTS_QUERY (card projection).
 export type PostCardData = {
   _id: string;
   title: string;
@@ -14,9 +14,22 @@ export type PostCardData = {
   category?: string;
 };
 
+// Author / medical reviewer (dereferenced in POST_QUERY).
+export type Author = {
+  name: string;
+  credentials?: string;
+  licenseNumber?: string;
+  photo?: SanityImage;
+  bio?: string;
+};
+
 // Shape returned by POST_QUERY (full article).
 export type PostData = PostCardData & {
   _updatedAt: string;
+  author?: Author | null;
+  reviewedBy?: Author | null;
+  // YYYY-MM-DD
+  reviewedAt?: string | null;
   body?: PortableTextBlock[];
   seo?: {
     metaTitle?: string;

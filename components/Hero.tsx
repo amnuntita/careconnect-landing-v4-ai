@@ -1,68 +1,40 @@
-import {
-  ArrowIcon,
-  HomeIcon,
-  LineIcon,
-  StethoscopeIcon,
-} from "./Icons";
+import { fillPrices, HERO } from "@/lib/homepage-content";
+import { LINE_URL } from "@/lib/site";
+
+import { ArrowIcon, LineIcon } from "./Icons";
 import { HeroSlideshow } from "./HeroSlideshow";
 
+// §1 of the BOFU homepage draft. The only <h1> on the homepage.
 export function Hero() {
+  const [lede, offer, area] = HERO.body.map(fillPrices);
   return (
     <section className="hero" id="top">
       <div className="wrap hero-split">
         <div className="hero-copy">
-          <p className="badge">
-            <span className="dot" aria-hidden="true"></span>
-            <span>เปิดให้บริการใน &gt;10 จังหวัดทั่วประเทศ</span>
-          </p>
+          <h1 className="h1">{fillPrices(HERO.h1)}</h1>
 
-          <h1 className="h1">
-            กายภาพบำบัด<span className="accent">ที่บ้าน</span>
-          </h1>
+          <p className="lede">{lede}</p>
 
-          <p className="hero-subhead">
-            ฟื้นฟูเต็มศักยภาพจากบ้านของคุณเอง
-          </p>
+          <p className="hero-subhead">{offer}</p>
 
-          <p className="lede">
-            ดูแลโดยทีมสหสาขาวิชาชีพ ออกแบบโปรแกรมเฉพาะบุคคล
-            โดย<b>แพทย์เวชศาสตร์ฟื้นฟู</b> ร่วมกับนักกายภาพบำบัด
-            และนักกิจกรรมบำบัดมืออาชีพ
-          </p>
+          <p className="hero-area">{area}</p>
 
-          <div className="hero-cta-row">
+          {/* The sticky CTA bar stays hidden while these buttons are on screen. */}
+          <div className="hero-cta-row" data-sticky-hide>
             <a className="btn" href="#form">
-              ทดลองทำกายภาพ <ArrowIcon />
+              {HERO.ctaPrimary} <ArrowIcon />
             </a>
-            <a className="btn text-xs ghost" href="https://lin.ee/S8VPTxqA">
+            <a className="btn ghost" href={LINE_URL}>
               <LineIcon />
-              ติดต่อผ่าน LINE
+              {HERO.ctaLine}
             </a>
           </div>
-
-         
         </div>
 
+        {/* Real CareConnect home visits, published with written consent, so no
+            sample-photo caption (that applies to the stock OG image only). */}
         <div className="hero-art">
           <HeroSlideshow />
-          <div className="floater top" aria-hidden="true">
-            <div className="float-icon">
-              <StethoscopeIcon />
-            </div>
-            <div className="float-text">
-              <strong>ติดตามผลอย่างเป็นระบบ</strong>
-              <span>รายงานผลระหว่างคอร์ส</span>
-            </div>
-          </div>
-          <div className="floater bottom" aria-hidden="true">
-            <div className="float-icon">
-              <HomeIcon />
-            </div>
-            <div className="float-text">
-              <strong>ที่บ้านคุณ</strong>
-              <span>ไม่ต้องเข้าศูนย์ ไม่ต้องเดินทาง</span>
-            </div>
-          </div>
         </div>
       </div>
     </section>

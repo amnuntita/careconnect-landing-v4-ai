@@ -8,6 +8,8 @@ import { BlogPostingJsonLd } from "@/components/JsonLd";
 import { Navbar } from "@/components/Navbar";
 import { PortableTextBody } from "@/components/PortableTextBody";
 import { formatThaiDate } from "@/lib/format";
+import { DEFAULT_OG_IMAGE } from "@/lib/page-schema";
+import { MEDICAL_DISCLAIMER, SITE_NAME } from "@/lib/site";
 import { client } from "@/sanity/lib/client";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { urlFor } from "@/sanity/lib/image";
@@ -61,18 +63,21 @@ export async function generateMetadata({
     openGraph: {
       type: "article",
       url: `/blog/${slug}`,
+      siteName: SITE_NAME,
       title,
       description,
       locale: "th_TH",
       publishedTime: post.publishedAt,
       modifiedTime: post._updatedAt,
-      ...(ogImage ? { images: [{ url: ogImage, width: 1200, height: 630 }] } : {}),
+      // A post without its own image falls back to the site's default OG
+      // image (a page-level openGraph replaces the file-based one).
+      images: ogImage ? [{ url: ogImage, width: 1200, height: 630 }] : [DEFAULT_OG_IMAGE],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      ...(ogImage ? { images: [ogImage] } : {}),
+      images: ogImage ? [ogImage] : [DEFAULT_OG_IMAGE],
     },
   };
 }
@@ -100,6 +105,9 @@ export default async function PostPage({
         datePublished={post.publishedAt}
         dateModified={post._updatedAt}
         imageUrl={ogImage}
+        author={post.author}
+        reviewedBy={post.reviewedBy}
+        reviewedAt={post.reviewedAt}
       />
       <Navbar />
       <main>
@@ -123,6 +131,28 @@ export default async function PostPage({
                 </time>
               </div>
               <h1 className="h1">{post.title}</h1>
+              {post.author ? (
+                <p className="small" style={{ marginTop: 12 }}>
+                  โดย {post.author.name}
+                  {post.author.credentials ? `, ${post.author.credentials}` : null}
+                </p>
+              ) : null}
+              {post.reviewedBy ? (
+                <p className="small" style={{ marginTop: 4 }}>
+                  ตรวจสอบเนื้อหาโดย {post.reviewedBy.name}
+                  {post.reviewedBy.credentials
+                    ? `, ${post.reviewedBy.credentials}`
+                    : null}
+                  {post.reviewedAt ? (
+                    <>
+                      {" "}เมื่อ{" "}
+                      <time dateTime={post.reviewedAt}>
+                        {formatThaiDate(post.reviewedAt)}
+                      </time>
+                    </>
+                  ) : null}
+                </p>
+              ) : null}
               {post.excerpt ? (
                 <p className="lede" style={{ marginTop: 16 }}>
                   {post.excerpt}
@@ -148,6 +178,10 @@ export default async function PostPage({
             ) : null}
 
             {post.body?.length ? <PortableTextBody value={post.body} /> : null}
+
+            <p className="small" style={{ marginTop: 40 }}>
+              {MEDICAL_DISCLAIMER}
+            </p>
           </div>
         </article>
       </main>
