@@ -2538,11 +2538,6 @@ section:nth-of-type(even) .section-head .eyebrow {
   color: var(--ink-soft);
 }
 
-/* §11 closing. */
-.closing-section {
-  padding-bottom: 0;
-}
-
 /* ============ Reservation lead form ============ */
 .form-step {
   border: 0;

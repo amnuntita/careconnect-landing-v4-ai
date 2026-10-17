@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 
 import { BlogHighlights } from "@/components/BlogHighlights";
 // import { ConcernCards } from "@/components/ConcernCards";
-import { Closing } from "@/components/Closing";
 import { ConditionLinks } from "@/components/ConditionLinks";
 import { Footer } from "@/components/Footer";
 import { Hero } from "@/components/Hero";
@@ -65,7 +64,6 @@ export default function Home() {
         <Team />
         <HomeFaq />
         <BlogHighlights />
-        <Closing />
         <LeadForm />
       </main>
       <Footer />
