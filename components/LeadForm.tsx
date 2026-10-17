@@ -4,13 +4,10 @@ import { useId, useState, useSyncExternalStore } from "react";
 
 import {
   CONDITION_OPTIONS,
-  CONTACT_OPTIONS,
   formatThaiFullDate,
   isIsoDate,
   isValidThaiPhone,
   minFirstSessionDate,
-  MOBILITY_OPTIONS,
-  ONSET_OPTIONS,
   OTHER_PROVINCE,
   PROVINCE_OPTIONS,
   TIME_OPTIONS,
@@ -231,7 +228,6 @@ export function LeadForm() {
   const scheduleHelpId = useId();
   const nameId = useId();
   const telId = useId();
-  const noteId = useId();
 
   return (
     <section className="form-section" id="form">
@@ -259,18 +255,21 @@ export function LeadForm() {
                 const form = e.currentTarget;
                 const data = new FormData(form);
                 const get = (k: string) => String(data.get(k) ?? "");
+                // The optional fields (mobility, onset, contact preference,
+                // note) were removed to shorten the form; they are sent empty
+                // so the API and the sheet's columns stay unchanged.
                 const payload: LeadValues = {
                   condition: get("condition"),
-                  mobility: get("mobility"),
-                  onset: get("onset"),
+                  mobility: "",
+                  onset: "",
                   province: get("province"),
                   district: get("district").trim(),
                   firstSessionDate: get("firstSessionDate"),
                   firstSessionTime: get("firstSessionTime"),
                   name: get("name").trim(),
                   tel: get("tel").trim(),
-                  contactPref: get("contactPref"),
-                  note: get("note").trim(),
+                  contactPref: "",
+                  note: "",
                 };
 
                 const errors = validate(payload, minDate || minFirstSessionDate());
@@ -346,16 +345,6 @@ export function LeadForm() {
                   <FieldError id={`${condId}-err`} message={fieldErrors.condition} />
                 </div>
 
-                <ChipGroup
-                  name="mobility"
-                  legend="ตอนนี้คนไข้เคลื่อนไหวได้แค่ไหน (ไม่บังคับ)"
-                  options={MOBILITY_OPTIONS}
-                />
-                <ChipGroup
-                  name="onset"
-                  legend="เป็นมานานเท่าไร (ไม่บังคับ)"
-                  options={ONSET_OPTIONS}
-                />
               </fieldset>
 
               {/* Step 2 */}
@@ -505,21 +494,6 @@ export function LeadForm() {
                   </div>
                 </div>
 
-                <ChipGroup
-                  name="contactPref"
-                  legend="สะดวกให้ติดต่อกลับทาง (ไม่บังคับ)"
-                  options={CONTACT_OPTIONS}
-                />
-
-                <div className="field">
-                  <label htmlFor={noteId}>เล่าอาการเพิ่มเติม (ไม่บังคับ)</label>
-                  <textarea
-                    id={noteId}
-                    name="note"
-                    className="ctrl"
-                    placeholder="เช่น อ่อนแรงครึ่งซีกหลัง stroke 3 เดือน ฝึกเดินด้วย walker"
-                  />
-                </div>
               </fieldset>
 
               {/* Honeypot (spam trap): hidden from people and assistive tech. */}
