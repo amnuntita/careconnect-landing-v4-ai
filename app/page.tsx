@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 import { BlogHighlights } from "@/components/BlogHighlights";
-import { ConcernCards } from "@/components/ConcernCards";
+// import { ConcernCards } from "@/components/ConcernCards";
 import { Closing } from "@/components/Closing";
 import { ConditionLinks } from "@/components/ConditionLinks";
 import { Footer } from "@/components/Footer";
@@ -13,10 +13,10 @@ import { Navbar } from "@/components/Navbar";
 import { Inclusions } from "@/components/Inclusions";
 import { ProcessDiagram } from "@/components/ProcessDiagram";
 import { Programmes } from "@/components/Programmes";
+import { ReviewStrip } from "@/components/ReviewStrip";
 import { StickyCTABar } from "@/components/StickyCTABar";
 import { Team } from "@/components/Team";
-import { TrustStrip } from "@/components/TrustStrip";
-import { fillPrices, HERO, HOME_FAQS, HOME_META } from "@/lib/homepage-content";
+import { fillPrices, HERO, HERO_OFFER, HOME_FAQS, HOME_META } from "@/lib/homepage-content";
 import { LINE_URL, SITE_NAME } from "@/lib/site";
 
 // Meta title from the BOFU homepage draft (v4); description from batch-2 §B.
@@ -55,8 +55,9 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
-        <TrustStrip />
-        <ConcernCards />
+        <ReviewStrip />
+        {/* Hidden for now; restore by uncommenting (and its import). */}
+        {/* <ConcernCards /> */}
         <ProcessDiagram />
         <Programmes />
         <Inclusions />
@@ -70,7 +71,7 @@ export default function Home() {
       <Footer />
       {/* Hides over the lead form and the footer, on every viewport. */}
       <StickyCTABar
-        primaryLabel={HERO.ctaPrimary}
+        primaryLabel={`${HERO.ctaPrimary} ${fillPrices(HERO_OFFER.ctaPrice)}`}
         lineLabel={HERO.ctaLine}
         lineHref={LINE_URL}
       />

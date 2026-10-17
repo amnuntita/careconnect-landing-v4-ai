@@ -37,6 +37,18 @@ export const HERO = {
   "caption": "ภาพตัวอย่างที่ใช้ในการประชาสัมพันธ์ ไม่ใช่ผู้ให้บริการหรือผู้รับบริการจริง"
 };
 
+// Post-generation addition: the hero shows HERO.body[0] condensed into three
+// points, and HERO.body[1] as one plain line plus the price in the CTA.
+export const HERO_POINTS = [
+  "แพทย์เวชศาสตร์ฟื้นฟูตั้งเป้าหมายให้ทุกเคส",
+  "ทบทวนและปรับแผนร่วมกับนักกายภาพตลอดคอร์ส",
+  "ทีมรายงานผลระหว่างคอร์ส ให้ครอบครัวได้เห็นพัฒนาการที่จับต้องได้",
+];
+export const HERO_OFFER = {
+  "line": "ให้แพทย์ประเมินก่อนตัดสินใจ — ไม่มีข้อผูกมัดในการซื้อคอร์สต่อ",
+  "ctaPrice": "{DEPOSIT} บาท"
+};
+
 export const TRUST = {
   "items": [
     [
@@ -105,7 +117,10 @@ export const CONCERNS = {
 };
 
 export const PROCESS = {
-  "heading": "กายภาพบำบัดที่บ้านกับ CareConnect ทำงานอย่างไร",
+  // Post-generation edit: shorter heading for the step slider.
+  "heading": "ขั้นตอนการรับบริการ",
+  // Post-generation addition: one-line summary for the step slider.
+  "subtitle": "แพทย์วางแผน นักกายภาพฝึกที่บ้าน และทบทวนผลด้วยกันตลอดคอร์ส",
   "bracket": "ประเมินและฝึกครั้งแรก {DEPOSIT} บาท",
   "decision": "ครอบครัวตัดสินใจว่าจะฝึกต่อหรือไม่ ณ จุดนี้"
 };

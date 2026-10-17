@@ -100,7 +100,8 @@ export async function Footer() {
           <p>© {new Date().getFullYear()} {LEGAL_NAME} — สงวนสิทธิ์ทุกประการ</p>
           <p>เลขทะเบียนนิติบุคคล: {COMPANY_REGISTRATION_NUMBER}</p>
           <p>
-            {CLINIC_NAME} ใบอนุญาตประกอบกิจการสถานพยาบาลเลขที่{" "}
+            สถานพยาบาลขึ้นทะเบียนกับกระทรวงสาธารณสุข ภายใต้{CLINIC_NAME}{" "}
+            ใบอนุญาตประกอบกิจการสถานพยาบาลเลขที่{" "}
             {FACILITY_REGISTRATION_NUMBER}
           </p>
         </div>

@@ -57,3 +57,31 @@ export const PROCESS_STEPS: ProcessStep[] = [
     "description": "แพทย์ประเมินว่าคนไข้ไปถึงเป้าหมายแค่ไหน และแนะนำขั้นต่อไป"
   }
 ];
+
+// Post-generation addition: short captions for the step slider in
+// components/ProcessDiagram.tsx, summarised from PROCESS_STEPS above.
+export const PROCESS_STEP_SUMMARIES: { title: string; subtitle: string }[] = [
+  {
+    title: "ประเมินและเลือกโปรแกรม",
+    subtitle: "แพทย์คุยกับครอบครัวทางวิดีโอคอล และตั้งเป้าหมายร่วมกัน",
+  },
+  {
+    title: "ประเมินและฝึกครั้งแรกที่บ้าน",
+    subtitle: "{DEPOSIT} บาท แล้วครอบครัวค่อยตัดสินใจว่าจะฝึกต่อหรือไม่",
+  },
+  {
+    title: "ทบทวนและปรับแผน",
+    subtitle: "แพทย์ปรับแผนจากสิ่งที่นักกายภาพพบที่บ้าน",
+  },
+  {
+    title: "ฝึกต่อเนื่อง",
+    subtitle: "ฝึกตามเป้าหมาย พร้อมสอนครอบครัวให้ฝึกต่อเองได้",
+  },
+  {
+    title: "ประเมินผลช่วงท้ายคอร์ส",
+    subtitle: "แพทย์ดูว่าไปถึงเป้าหมายแค่ไหน และแนะนำขั้นต่อไป",
+  },
+];
+if (PROCESS_STEP_SUMMARIES.length !== PROCESS_STEPS.length) {
+  throw new Error("PROCESS_STEP_SUMMARIES must have one entry per step.");
+}
