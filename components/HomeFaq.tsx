@@ -20,10 +20,12 @@ function answer(text: string, link?: { text: string; href: string }) {
 export function HomeFaq() {
   return (
     <section id="faq">
-      <div className="wrap post-wrap">
-        <h2 className="h2" style={{ marginBottom: 20 }}>
-          {FAQ_SECTION.heading}
-        </h2>
+      {/* Full-width wrap like the other sections, so the heading lines up with
+          them; the list itself is capped in CSS (#faq .faq-list). */}
+      <div className="wrap">
+        <div className="section-head">
+          <h2 className="h2">{FAQ_SECTION.heading}</h2>
+        </div>
         <div className="faq-list">
           {HOME_FAQS.map((faq) => (
             <details key={faq.q} className="faq-item">

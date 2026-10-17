@@ -679,6 +679,18 @@ section:nth-of-type(even) .section-head .eyebrow {
   border-left: 1.5px solid color-mix(in srgb, white 45%, transparent);
   font-weight: 700;
 }
+/* Desktop hero: the price makes the primary CTA too wide to sit beside the
+   LINE button, so stack them at one shared width instead of ragged widths. */
+@media (min-width: 561px) {
+  .hero .hero-cta-row {
+    display: inline-grid;
+    grid-template-columns: max-content;
+    gap: 12px;
+  }
+  .hero .hero-cta-row .btn {
+    justify-content: center;
+  }
+}
 /* Phones: keep "label | price" on one line in the hero CTA and the sticky bar. */
 @media (max-width: 560px) {
   .hero-cta-row {
@@ -1700,6 +1712,10 @@ section:nth-of-type(even) .section-head .eyebrow {
 }
 .faq-answer {
   padding: 0 20px 4px;
+}
+/* Homepage FAQ: same readable width as the programmes accordion. */
+#faq .faq-list {
+  max-width: 820px;
 }
 
 /* Always-on sticky CTA bar (desktop too). Page reserves room for it. */
@@ -2820,4 +2836,114 @@ section:nth-of-type(even) .section-head .eyebrow {
   padding: 8px 14px;
   min-height: 44px;
   box-sizing: border-box;
+}
+
+/* ============ Desktop: reviews + process fit one screen ============ */
+/* Both sections go side by side on desktop (text and controls left, visual
+   right) so each fits between the navbar and the sticky CTA bar, even on a
+   short (~630px) window. Mobile keeps the stacked layout above. */
+@media (min-width: 880px) {
+  .review-strip,
+  .process-section {
+    padding: clamp(36px, 6vh, 72px) 0;
+  }
+
+  /* Reviews: title / arrows / review links left; two cards right. */
+  .review-strip {
+    text-align: left;
+  }
+  .review-strip .wrap {
+    display: grid;
+    grid-template-columns: minmax(300px, 0.9fr) minmax(0, 2fr);
+    grid-template-rows: 1fr auto auto auto 1fr;
+    grid-template-areas:
+      ". slides"
+      "title slides"
+      "controls slides"
+      "links slides"
+      ". slides";
+    column-gap: 40px;
+  }
+  .review-strip-title {
+    grid-area: title;
+    font-size: 24px;
+  }
+  .review-slideshow {
+    display: contents;
+  }
+  .review-slideshow__viewport {
+    grid-area: slides;
+    min-width: 0;
+  }
+  .review-slideshow__controls {
+    grid-area: controls;
+    justify-content: flex-start;
+    margin-top: 20px;
+  }
+  .review-links {
+    grid-area: links;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 20px;
+  }
+  /* Cards never taller than the space left between navbar and sticky bar. */
+  .review-card {
+    align-items: flex-start;
+  }
+  .review-card img {
+    width: auto;
+    max-width: 100%;
+    max-height: calc(100svh - 300px);
+    object-fit: contain;
+  }
+
+  /* Process: heading / stepper / caption left; illustration right. */
+  .process-section {
+    text-align: left;
+  }
+  .process-section .wrap {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-rows: 1fr auto auto auto 1fr;
+    grid-template-areas:
+      ". art"
+      "head art"
+      "stepper art"
+      "captions art"
+      ". art";
+    column-gap: 48px;
+  }
+  .process-head {
+    grid-area: head;
+  }
+  .process-sub {
+    margin-left: 0;
+  }
+  .process-viewport {
+    grid-area: art;
+    width: 100%;
+    margin: 0;
+    align-self: center;
+  }
+  .process-stepper {
+    grid-area: stepper;
+    justify-content: flex-start;
+    margin: 24px 0 0 -10px;
+  }
+  .process-captions {
+    grid-area: captions;
+    margin: 12px 0 0;
+  }
+  .process-caption .process-step-title {
+    font-size: 24px;
+  }
+  .process-caption .process-step-sub {
+    font-size: 17px;
+  }
+}
+/* Tall desktop windows: let the process illustration grow. */
+@media (min-width: 880px) and (min-height: 820px) {
+  .process-art {
+    zoom: 1.25;
+  }
 }
