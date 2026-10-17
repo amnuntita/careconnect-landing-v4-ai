@@ -135,7 +135,26 @@ export const PROGRAMMES_SECTION = {
 };
 
 export const INCLUSIONS = {
-  "heading": "สิ่งที่รวมอยู่ในทุกโปรแกรม",
+  // Post-generation edit: heading changed by request.
+  "heading": "รายละเอียดคอร์สและค่าใช้จ่าย",
+  // Post-generation additions: the homepage shows the groups below as one
+  // bullet each, and the price as a three-row breakdown. The full groups
+  // still render on /pricing.
+  "includedLabel": "สิ่งที่รวมอยู่ในคอร์ส",
+  "summary": [
+    "แพทย์เวชศาสตร์ฟื้นฟูวางแผน ทบทวน และประเมินผลตลอดคอร์ส",
+    "นักกายภาพเข้าฝึกที่บ้าน 10 ครั้ง ครั้งละ 60 นาที",
+    "อุปกรณ์ทางการแพทย์ที่ใช้ระหว่างฝึก ไม่มีค่าใช้จ่ายเพิ่มเติม",
+    "โปรแกรมฝึกต่อเองที่บ้าน และสอนครอบครัวช่วยฝึก",
+    "แบ่งชำระได้ เปลี่ยนนักกายภาพได้ ครั้งที่ยังไม่ใช้ไม่ถูกริบ"
+  ],
+  "priceLabel": "ค่าใช้จ่าย",
+  "priceRows": [
+    { "label": "ครั้งแรก: แพทย์ประเมิน + ฝึกที่บ้าน", "note": "ไม่มีข้อผูกมัดในการซื้อคอร์สต่อ", "amount": "{DEPOSIT}" },
+    { "label": "ถ้าฝึกต่อ: อีก 9 ครั้ง", "note": "แบ่งชำระได้ 3 งวด งวดละ {INSTALMENT} บาท", "amount": "{BALANCE}" }
+  ],
+  "priceTotal": { "label": "รวมทั้งคอร์ส 10 ครั้ง", "amount": "{PRICE}" },
+  "priceIncludes": "รวมค่าเดินทางและอุปกรณ์แล้ว ไม่มีค่าใช้จ่ายอื่นเพิ่มเติม",
   "intro": "ฝึกที่บ้าน ไม่ต้องเดินทาง ไม่ต้องรอคิว และไม่ต้องมีคนในบ้านลางานพาไป",
   "groups": [
     {

@@ -2260,63 +2260,53 @@ section:nth-of-type(even) .section-head .eyebrow {
   color: rgba(255, 255, 255, 0.85);
 }
 
-/* §5 programme cards: 1 / 2 / 3 columns. */
-.programme-grid {
+/* §5 programmes: a plain accordion (divider lines, no boxes). */
+.programme-list-accordion {
   list-style: none;
-  margin: 0 0 24px;
+  margin: 0 0 28px;
   padding: 0;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
-  align-items: start;
+  max-width: 820px;
+  border-top: 1px solid var(--line);
 }
-@media (min-width: 720px) {
-  .programme-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+.programme-list-accordion > li {
+  border-bottom: 1px solid var(--line);
 }
-@media (min-width: 1080px) {
-  .programme-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-.programme-card {
-  background: white;
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  padding: 22px;
-}
-.programme-head {
+.programme-item summary {
   display: flex;
+  align-items: center;
   gap: 14px;
-  align-items: flex-start;
-  margin-bottom: 14px;
+  padding: 18px 40px 18px 0;
+  position: relative;
+  cursor: pointer;
+  list-style: none;
 }
-.programme-icon {
-  flex: 0 0 44px;
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  display: grid;
-  place-items: center;
-  color: var(--brand);
-  background: var(--primary-soft);
+.programme-item summary::-webkit-details-marker {
+  display: none;
+}
+.programme-item summary::after {
+  content: "+";
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 24px;
+  line-height: 1;
+  color: var(--primary-deep);
+}
+.programme-item[open] summary::after {
+  content: "−";
 }
 .programme-name {
   font-family: var(--font-heading), system-ui, sans-serif;
-  font-size: 19px;
+  font-size: clamp(18px, 1.8vw, 21px);
   font-weight: 600;
-  line-height: 1.4;
+  line-height: 1.45;
   margin: 0;
   color: var(--ink);
+  text-wrap: pretty;
 }
-.programme-n {
-  color: var(--primary-deep); /* 19px/600 isn't "large text": brand teal fails AA */
-}
-.programme-summary {
-  margin: 4px 0 0;
-  font-size: 15px;
-  color: var(--ink-soft);
+.programme-body {
+  padding: 0 0 20px;
 }
 .programme-label {
   font-weight: 700;
@@ -2325,37 +2315,18 @@ section:nth-of-type(even) .section-head .eyebrow {
   color: var(--ink);
 }
 .programme-list {
-  margin: 0 0 12px;
+  margin: 0;
   padding-left: 1.2em;
-  font-size: 15px;
+  list-style: disc;
+  font-size: 16px;
   line-height: 1.65;
-  color: var(--ink);
+  color: var(--ink-soft);
 }
 .programme-list li {
   margin-bottom: 4px;
 }
-.programme-more {
-  border-top: 1px solid var(--line-soft);
-  padding-top: 10px;
-}
-.programme-more summary {
-  cursor: pointer;
-  font-weight: 700;
-  font-size: 14px;
-  color: var(--primary-deep);
-  list-style: none;
-}
-.programme-more summary::-webkit-details-marker {
-  display: none;
-}
-.programme-more summary::after {
-  content: " +";
-}
-.programme-more[open] summary::after {
-  content: " −";
-}
-.programme-more[open] summary {
-  margin-bottom: 8px;
+.programme-list li::marker {
+  color: var(--primary);
 }
 .programme-closing {
   font-size: 17px;
@@ -2416,26 +2387,6 @@ section:nth-of-type(even) .section-head .eyebrow {
 .inclusion-list li {
   margin-bottom: 4px;
 }
-.inclusion-callout {
-  margin: 0 0 28px;
-  padding: 16px 20px;
-  border-radius: 14px;
-  border-left: 5px solid var(--brand);
-  background: var(--primary-soft);
-  font-family: var(--font-heading), system-ui, sans-serif;
-  font-size: 19px;
-  font-weight: 600;
-  color: var(--primary-deep);
-}
-.price-block {
-  max-width: 760px;
-}
-.price-line {
-  font-size: 18px;
-  font-weight: 600;
-  margin: 0 0 4px;
-  color: var(--ink);
-}
 .price-link {
   margin: 0 0 6px;
 }
@@ -2450,45 +2401,92 @@ section:nth-of-type(even) .section-head .eyebrow {
   width: 16px;
   height: 16px;
 }
-.price-note {
+/* Homepage §6: included bullets + price breakdown, side by side on desktop. */
+.course-split {
+  display: grid;
+  gap: 36px;
+  margin-bottom: 28px;
+}
+@media (min-width: 880px) {
+  .course-split {
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+  }
+}
+.course-label {
+  margin: 0 0 14px;
   font-size: 15px;
-  color: var(--ink-soft);
-  margin: 0 0 20px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--primary-deep);
 }
-.first-step-heading {
-  margin: 0 0 10px;
+.course-included {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
 }
-.first-step {
-  background: var(--decision-tint);
-  border: 2px solid var(--decision-border);
-  border-radius: 14px;
-  padding: 16px 20px;
-  margin-bottom: 18px;
-  font-size: 16px;
-  line-height: 1.7;
+.course-included li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 17px;
+  line-height: 1.6;
   color: var(--ink);
 }
-.first-step p {
-  margin: 0 0 8px;
+.course-included svg {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  margin-top: 4px;
+  color: var(--primary);
 }
-.first-step ul {
-  margin: 0 0 8px;
-  padding-left: 1.2em;
+.course-price {
+  margin: 0;
+  border-top: 1px solid var(--line);
 }
-.coverage-note {
-  margin-top: 24px;
-  font-size: 15px;
-  line-height: 1.7;
+.course-price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+}
+.course-price-row dt {
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--ink);
+}
+.course-price-note {
+  display: block;
+  margin-top: 2px;
+  font-size: 14px;
+  font-weight: 400;
   color: var(--ink-soft);
 }
-.coverage-heading {
-  font-size: 16px;
+.course-price-row dd {
+  margin: 0;
+  flex: none;
+  font-size: 20px;
   font-weight: 700;
   color: var(--ink);
-  margin: 0 0 4px;
+  white-space: nowrap;
 }
-.coverage-note p {
-  margin: 0;
+.course-price-row.is-total {
+  border-bottom-width: 2px;
+  border-bottom-color: var(--ink);
+}
+.course-price-row.is-total dd {
+  font-size: 26px;
+  color: var(--primary);
+}
+.course-price-includes {
+  margin: 12px 0 6px;
+  font-size: 15px;
+  color: var(--ink-soft);
 }
 
 /* §7 compact condition links. */

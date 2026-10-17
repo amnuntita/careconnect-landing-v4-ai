@@ -1,64 +1,51 @@
-import type { ComponentType, SVGProps } from "react";
-
 import { PROGRAMMES_SECTION } from "@/lib/homepage-content";
-import { PROGRAMMES, type ProgrammeIcon } from "@/lib/programmes";
+import { PROGRAMMES } from "@/lib/programmes";
 
-import { ArrowIcon, BedIcon, BrainIcon, HandIcon, SitStandIcon, WalkerIcon } from "./Icons";
-
-const ICONS: Record<ProgrammeIcon, ComponentType<SVGProps<SVGSVGElement>>> = {
-  bed: BedIcon,
-  sitStand: SitStandIcon,
-  walk: WalkerIcon,
-  hand: HandIcon,
-  brain: BrainIcon,
-};
-
-// §5 goal-based programmes. No price on the cards (it's once, in §6), and no
-// per-programme Offer: all share the single package in lib/packages.ts.
+// §5 goal-based programmes as an accordion: each row shows the programme
+// name; opening it shows who it suits. Native <details>, so the lists stay in
+// the server HTML. No price here (it's once, in §6), and no per-programme
+// Offer: all share the single package in lib/packages.ts.
 export function Programmes() {
   const s = PROGRAMMES_SECTION;
   return (
     <section id="programmes">
       <div className="wrap">
         <div className="section-head">
-          <div>
-            <h2 className="h2">{s.heading}</h2>
-            <p className="lede" style={{ marginTop: 14 }}>
-              {s.intro}
-            </p>
-          </div>
+          <h2 className="h2">{s.heading}</h2>
+          {/* Intro hidden for now; text kept in PROGRAMMES_SECTION.intro.
+          <p className="lede" style={{ marginTop: 14 }}>
+            {s.intro}
+          </p> */}
         </div>
 
-        <ul className="programme-grid">
+        <ul className="programme-list-accordion">
           {PROGRAMMES.map((p) => {
-            const Icon = ICONS[p.icon];
             return (
-              <li className="programme-card" key={p.name}>
-                <div className="programme-head">
-                  <span className="programme-icon" aria-hidden="true">
-                    <Icon />
-                  </span>
-                  <div>
-                    <h3 className="programme-name">
-                      <span className="programme-n">{p.n})</span> {p.name}
-                    </h3>
-                    <p className="programme-summary">{p.summary}</p>
+              <li key={p.name}>
+                <details className="programme-item">
+                  <summary>
+                    <h3 className="programme-name">{p.name}</h3>
+                  </summary>
+                  <div className="programme-body">
+                    {/* Summary hidden for now; kept in lib/programmes.ts.
+                    <p className="programme-summary">{p.summary}</p> */}
+                    <p className="programme-label">{s.fitLabel}</p>
+                    <ul className="programme-list">
+                      {p.suitableFor.map((t) => (
+                        <li key={t}>{t}</li>
+                      ))}
+                    </ul>
+                    {/* "ฝึกอะไรบ้าง" hidden for now: the content (p.training,
+                        s.trainLabel) is kept to move to other pages later.
+                    <details className="programme-more">
+                      <summary>{s.trainLabel}</summary>
+                      <ul className="programme-list">
+                        {p.training.map((t) => (
+                          <li key={t}>{t}</li>
+                        ))}
+                      </ul>
+                    </details> */}
                   </div>
-                </div>
-                <p className="programme-label">{s.fitLabel}</p>
-                <ul className="programme-list">
-                  {p.suitableFor.map((t) => (
-                    <li key={t}>{t}</li>
-                  ))}
-                </ul>
-                {/* Collapsed by default; the list is in the server HTML. */}
-                <details className="programme-more">
-                  <summary>{s.trainLabel}</summary>
-                  <ul className="programme-list">
-                    {p.training.map((t) => (
-                      <li key={t}>{t}</li>
-                    ))}
-                  </ul>
                 </details>
               </li>
             );
@@ -66,11 +53,7 @@ export function Programmes() {
         </ul>
 
         <p className="programme-closing">{s.closing}</p>
-        <div className="hero-cta-row">
-          <a className="btn" href="#form">
-            {s.cta} <ArrowIcon />
-          </a>
-        </div>
+        {/* No CTA here: the sticky bottom bar already carries it. */}
       </div>
     </section>
   );

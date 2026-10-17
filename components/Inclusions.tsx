@@ -5,7 +5,7 @@ import { fillPrices, INCLUSIONS } from "@/lib/homepage-content";
 
 import {
   ActivityIcon,
-  ArrowIcon,
+  CheckIcon,
   StethoscopeIcon,
   UsersIcon,
   WalkerIcon,
@@ -46,57 +46,59 @@ export function InclusionGroups() {
   );
 }
 
-// §6. The inclusion cards are the prominent element; the price is a normal
-// sentence read from lib/packages.ts (via fillPrices), not a headline number,
-// and there is no per-session price.
+// §6 on the homepage: what every programme includes as five one-line bullets
+// (the full groups are on /pricing via InclusionGroups) and the price as a
+// plain breakdown: first visit, the rest, total. Amounts come from
+// lib/packages.ts via fillPrices.
 export function Inclusions() {
   const s = INCLUSIONS;
   return (
     <section id="pricing" className="cream">
       <div className="wrap">
         <div className="section-head">
+          <h2 className="h2">{s.heading}</h2>
+        </div>
+
+        <div className="course-split">
           <div>
-            <h2 className="h2">{s.heading}</h2>
-            <p className="lede" style={{ marginTop: 14 }}>
-              {s.intro}
+            <h3 className="course-label">{s.includedLabel}</h3>
+            <ul className="course-included">
+              {s.summary.map((item) => (
+                <li key={item}>
+                  <CheckIcon aria-hidden="true" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="course-label">{s.priceLabel}</h3>
+            <dl className="course-price">
+              {s.priceRows.map((row) => (
+                <div className="course-price-row" key={row.label}>
+                  <dt>
+                    {row.label}
+                    <span className="course-price-note">{fillPrices(row.note)}</span>
+                  </dt>
+                  <dd>{fillPrices(row.amount)} บาท</dd>
+                </div>
+              ))}
+              <div className="course-price-row is-total">
+                <dt>{s.priceTotal.label}</dt>
+                <dd>{fillPrices(s.priceTotal.amount)} บาท</dd>
+              </div>
+            </dl>
+            <p className="course-price-includes">{s.priceIncludes}</p>
+            <p className="price-link">
+              <Link href={s.pricingLink.href}>{s.pricingLink.text}</Link>
+              {s.pricingLink.rest}
             </p>
           </div>
         </div>
 
-        <InclusionGroups />
-
-        <p className="inclusion-callout">{s.callout}</p>
-
-        <div className="price-block">
-          <p className="price-line">{fillPrices(s.price)}</p>
-          <p className="price-link">
-            <Link href={s.pricingLink.href}>{s.pricingLink.text}</Link>
-            {s.pricingLink.rest}
-          </p>
-          <p className="price-note">{s.priceNote}</p>
-
-          <h3 className="h3 first-step-heading">{s.firstStepHeading}</h3>
-          <div className="first-step">
-            <p>{fillPrices(s.firstStepIntro)}</p>
-            <ul>
-              {s.firstStepItems.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-            <p>{fillPrices(s.balance)}</p>
-          </div>
-
-          <div className="hero-cta-row">
-            <a className="btn" href="#form">
-              {s.cta} <ArrowIcon />
-            </a>
-          </div>
-
-          <div className="coverage-note">
-            <h3 className="coverage-heading">{s.coverageHeading}</h3>
-            <p>{s.coverage}</p>
-          </div>
-        </div>
+        {/* No CTA here (the sticky bottom bar carries it), and no insurance
+            coverage note: that is covered on /pricing. */}
       </div>
     </section>
   );
