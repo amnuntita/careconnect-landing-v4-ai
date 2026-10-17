@@ -48,7 +48,10 @@ export async function BlogHighlights() {
     <section id="blog" className="cream">
       <div className="wrap">
         <div className="section-head">
-          <h2 className="h2">{BLOG_SECTION.heading}</h2>
+          <div>
+            <h2 className="h2">{BLOG_SECTION.heading}</h2>
+            <p className="section-sub">{BLOG_SECTION.subtitle}</p>
+          </div>
           <Link href="/blog" className="btn ghost">
             ดูบทความทั้งหมด
           </Link>

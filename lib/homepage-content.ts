@@ -360,7 +360,9 @@ export const HOME_FAQS: { q: string; a: string[]; link?: { text: string; href: s
 
 // Draft's article titles, for reference; posts are pinned by slug in BlogHighlights.
 export const BLOG_SECTION = {
-  "heading": "บทความสำหรับครอบครัว",
+  // Post-generation edit: heading and subtitle changed by request.
+  "heading": "บทความ",
+  "subtitle": "โดย น.พ. สุวินัย แพทย์เจ้าของบริษัท",
   "draftTitles": [
     "เพิ่งออกจากโรงพยาบาลหลังเป็นโรคหลอดเลือดสมอง ต้องทำอะไรบ้าง",
     "อาการ Stroke และสิ่งที่ต้องทำเมื่อสงสัยว่าเป็น",

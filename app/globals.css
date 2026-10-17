@@ -316,6 +316,11 @@ section.tint {
   flex-wrap: wrap;
   margin-bottom: clamp(28px, 4vw, 48px);
 }
+.section-sub {
+  margin: -0.2em 0 0;
+  font-size: clamp(16px, 1.5vw, 18px);
+  color: var(--ink-soft);
+}
 .section-head .meta {
   font-family: var(--font-mono);
   font-size: 13px;
